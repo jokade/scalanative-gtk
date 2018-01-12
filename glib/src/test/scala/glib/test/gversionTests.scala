@@ -9,10 +9,11 @@ object gversionTests extends TestSuite {
   val tests = Tests {
     'checkVersion-{
       'succes-{
-        GLib.checkVersion(GLib.majorVersion,GLib.minorVerison,GLib.microVersion)
+        assert( GLib.checkVersion(GLib.majorVersion,GLib.minorVersion,GLib.microVersion) == null )
       }
       'fail-{
-        assert( GLib.checkVersion(5.toUInt,GLib.minorVerison,GLib.microVersion).isFailure )
+        assert( GLib.checkVersion(5.toUInt,GLib.minorVersion,GLib.microVersion) != null )
+//        GLib.checkVersion(5.toUInt,GLib.minorVersion,GLib.microVersion)
       }
     }
   }

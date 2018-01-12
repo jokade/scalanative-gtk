@@ -2,25 +2,29 @@
 package gtk
 
 import de.surfice.smacrotools.debug
-import gobj.GObj
 
 import scala.scalanative.native._
 
+@CObj
 class GtkWindow extends GtkWidget {
 
 }
 
 object GtkWindow {
-//  def apply(topLevel: Boolean): Window = ext.gtk_window_new(if())
 
-  def apply(windowType: GtkWindowType): GtkWindow = ext.gtk_window_new(windowType)
+  /**
+   * Creates a new window.
+   *
+   * @param topLevel if true, a new window of type [[GTK_WINDOW_TOPLEVEL]] is created, otherwise a [[GTK_WINDOW_POPUP]]
+   */
+  def apply(topLevel: Boolean = true): GtkWindow =
+    if(topLevel) apply(GTK_WINDOW_TOPLEVEL)
+    else apply(GTK_WINDOW_POPUP)
 
-  @extern
-  object ext {
-    def gtk_window_new(windowType: GtkWindowType): GtkWindow = extern
-  }
+  /**
+   * Creates a new window
+   * @param windowType window type
+   */
+  def apply(windowType: GtkWindowType): GtkWindow = extern
 
-  type GtkWindowType = UInt
-  val GTK_WINDOW_TOPLEVEL: GtkWindowType = 0.toUInt
-  val GTK_WINDOW_POPUP: GtkWindowType = 1.toUInt
 }

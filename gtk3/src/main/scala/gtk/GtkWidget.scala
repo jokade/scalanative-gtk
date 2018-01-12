@@ -2,19 +2,12 @@
 package gtk
 
 import de.surfice.smacrotools.debug
-import gobj.GObj
+import gobject.GSignalReceiver
 
 import scalanative.native._
 
-@GObj
-@debug
-class GtkWidget {
+@CObj
+abstract class GtkWidget {
   def showAll(): Unit = extern
 }
 
-object GtkWidget {
-//  @extern
-//  object __ext {
-//    def gtk_widget_show_all(self: GtkWidget) : Unit = extern
-//  }
-}

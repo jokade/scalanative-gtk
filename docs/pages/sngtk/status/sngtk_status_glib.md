@@ -5,10 +5,13 @@ summary:
 sidebar: sngtk_sidebar
 permalink: sngtk_status_glib.html
 folder: sngtk
+datatable: true
 missing: <i class="fa fa-close" style="color:red"></i>
 ok: <i class="fa fa-check" style="color:green"></i>
 partial: <i class="fa fa-adjust" style="color:orange"></i>
 ---
+
+<div class="datatable-begin"></div>
 
 | Header              | Status           | Scala modules | Notes |
 |---------------------|------------------|---------------|-------|
@@ -87,5 +90,6 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gversionmacros.h    | {{page.missing}} |               |       |
 | gwin32.h            | {{page.missing}} |               |       |
 
+<div class="datatable-end"></div>
 
 {% include links.html %}

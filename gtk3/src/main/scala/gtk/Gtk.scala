@@ -13,11 +13,14 @@ object Gtk {
     args
   }
 
+  def quit(): Unit = __ext.gtk_main_quit()
+
   @inline def main(): Unit = gtk_main()
 
   @extern
   private object __ext {
     def gtk_main(): Unit = extern
+    def gtk_main_quit(): Unit = extern
     def gtk_init(argc: Ptr[CInt], argv: Ptr[Ptr[CString]]): Unit = extern
   }
 }

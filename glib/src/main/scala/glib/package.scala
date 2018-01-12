@@ -15,6 +15,8 @@ package object glib {
   type guint    = CUnsignedInt
   type gfloat   = CFloat
   type gdouble  = CDouble
+  type gpointer = Ptr[Byte]
+  type gconstpointer = gpointer
 
   // TODO: ensure that these types have the specified width on all supported targets
   type gint8    = CChar
@@ -31,4 +33,8 @@ package object glib {
   type goffset  = gint64
   type gintptr  = CLong
   type guintptr = CUnsignedLong
+
+  type GQuark   = guint32
+
+  trait GSeq[T] extends Seq[T] with GAllocated
 }
