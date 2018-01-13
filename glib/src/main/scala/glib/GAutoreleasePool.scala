@@ -1,7 +1,7 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package glib
 
-class GAutoreleasePool(private var _allocated: List[GAllocated]) {
+class GAutoreleasePool private (private var _allocated: List[GAllocated]) {
   def register(obj: GAllocated): Unit = _allocated = obj::_allocated
   def releaseAll(): Unit = {
     _allocated.foreach(_.free())
@@ -17,4 +17,5 @@ object GAutoreleasePool {
     res
   }
 
+  def apply(): GAutoreleasePool = new GAutoreleasePool(Nil)
 }

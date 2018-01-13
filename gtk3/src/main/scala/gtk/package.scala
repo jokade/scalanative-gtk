@@ -5,6 +5,8 @@ import scalanative.native._
 package object gtk {
   /* gtkwindow.h */
   type GtkWindowType = UInt
-  val GTK_WINDOW_TOPLEVEL: GtkWindowType = 0.toUInt
-  val GTK_WINDOW_POPUP: GtkWindowType = 1.toUInt
+  object GtkWindowType {
+    val TOPLEVEL: GtkWindowType = 0.toUInt
+    val POPUP: GtkWindowType = 1.toUInt
+  }
 }

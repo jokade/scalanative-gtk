@@ -2,29 +2,48 @@
 package gtk
 
 import de.surfice.smacrotools.debug
+import glib.gboolean
 
 import scala.scalanative.native._
 
+/**
+ * Toplevel which can conatin other widgets.
+ *
+ * @see [[https://developer.gnome.org/gtk3/stable/GtkWindow.html]]
+ * @constructor
+ * @param windowType type of window
+ */
 @CObj
-class GtkWindow extends GtkWidget {
+//@debug
+class GtkWindow(windowType: GtkWindowType) extends GtkBin {
 
+  /**
+   * Creates a new toplevel window.
+   */
+  def this() = this(GtkWindowType.TOPLEVEL)
+
+  /**
+   * Sets the title of the window.
+   *
+   * @param title title of the window
+   */
+  @inline def setTitle(title: CString): Unit = extern
+
+  /**
+   * Sets whether the user can resize this window.
+   * Windows are user resizable by default.
+   *
+   * @param resizable true, if the user can resize the window
+   */
+  @inline def setResizable(resizable: gboolean): Unit = extern
+
+  /**
+   * Returns true if this window is resizable by the user.
+   */
+  @inline def getResizable(): gboolean = extern
 }
 
 object GtkWindow {
 
-  /**
-   * Creates a new window.
-   *
-   * @param topLevel if true, a new window of type [[GTK_WINDOW_TOPLEVEL]] is created, otherwise a [[GTK_WINDOW_POPUP]]
-   */
-  def apply(topLevel: Boolean = true): GtkWindow =
-    if(topLevel) apply(GTK_WINDOW_TOPLEVEL)
-    else apply(GTK_WINDOW_POPUP)
-
-  /**
-   * Creates a new window
-   * @param windowType window type
-   */
-  def apply(windowType: GtkWindowType): GtkWindow = extern
 
 }

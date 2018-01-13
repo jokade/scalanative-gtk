@@ -17,7 +17,6 @@ import scalanative.native._
  *       [[GAutoreleasePool]] for allocation.
  */
 @CObj
-@debug
 final class GKeyFile extends GAllocated {
   import GKeyFile._
 

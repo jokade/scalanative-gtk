@@ -12,7 +12,6 @@ object Wrappers {
     def apply(idx: Int): CString = array(idx)
     override def free(): Unit = {
       GLib.strfreev(array)
-      println(s"I'm free: $this")
     }
   }
 }

@@ -8,10 +8,15 @@ import scalanative.native._
 
 object Main {
   def main(args: Array[String]): Unit = {
+    Gtk.init(args)
 
-    val i = 1
-    scalanative.native.
-    stdio.printf(c"%x\n",i)
+    val win = new GtkWindow
+    win.setTitle(c"Hello!")
+    win.showAll()
+
+    win.connect(c"destroy",CFunctionPtr.fromFunction0(destroy),null)
+
+    Gtk.main()
 //    val keyfile = new GKeyFile
 //    implicit val err = GError.NULL
 //    keyfile.getValue(c"group",c"key")(err)
@@ -19,4 +24,16 @@ object Main {
 
   }
 
+  def destroy(): Unit = {
+    Gtk.mainQuit()
+  }
+}
+
+@extern
+object ext {
+  def gtk_window_new(t: Int): Ptr[Byte] = extern
+}
+
+class Foo(ref: Ptr[Byte]) {
+  def this(i: Int) = this(ext.gtk_window_new(i))
 }

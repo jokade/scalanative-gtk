@@ -6,8 +6,7 @@ import glib.{gpointer, gulong}
 
 import scala.scalanative.native._
 
-//@CObj("g_signal_")
-@debug
+@CObj("g_signal_")
 trait GSignalReceiver {
 
   /**
