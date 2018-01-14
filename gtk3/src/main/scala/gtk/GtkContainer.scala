@@ -2,6 +2,7 @@
 package gtk
 
 import de.surfice.smacrotools.debug
+import glib.{gint, guint}
 
 import scalanative.native._
 
@@ -36,4 +37,19 @@ class GtkContainer extends GtkWidget {
    */
   @inline def remove(widget: GtkWidget): Unit = extern
 
+  /**
+   * Sets the border width of this container.
+   * The border width of a container is the amount of space to leave around the outside of the container.
+   * The only exception to this is [[GtkWindow]]; because toplevel windows can’t leave space outside, they leave the space inside.
+   * The border is added on all sides of the container. To add space to only one side, use a specific “margin” property
+   * on the child widget, for example “margin-top”.
+   *
+   * @param borderWidth amount of blank space to leave outside the container. Valid values are in the range (0-65535 pixels)
+   */
+  @inline def setBorderWidth(borderWidth: guint): Unit = extern
+
+  /**
+   * Retrieves the border width of this conatiner.
+   */
+  @inline def getBorderWidth(): guint = extern
 }

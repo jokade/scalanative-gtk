@@ -6,11 +6,22 @@ import scala.scalanative.native._
 @CObj
 object Gtk {
 
-  def init(args: Array[String]): Array[String] = {
-    val argc = stackalloc[CInt]
-    !argc = 0
-    init(argc,null)
-    args
+  def init(args: Array[String]): Array[String] = Zone{ implicit z: Zone =>
+    val argc = alloc[CInt]
+    !argc = args.length
+    val argv = alloc[CString](args.length)
+    val argvPtr = alloc[Ptr[CString]]
+    !argvPtr = argv
+    for(i <- 0 until args.length) {
+      !(argv+i) = toCString(args(i))
+    }
+    init(argc,argvPtr)
+    val newArgs = new Array[String](!argc)
+    for(i <- 0 until !argc) {
+      newArgs(i) = fromCString(!((!argvPtr)+i))
+    }
+    // TODO: update returned args
+    newArgs
   }
 
   @inline def main(): Unit = extern

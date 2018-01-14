@@ -2,7 +2,7 @@
 package gtk
 
 import de.surfice.smacrotools.debug
-import glib.gboolean
+import glib.{gboolean, gint}
 import gobject.{GObject, GSignalReceiver}
 
 import scalanative.native._
@@ -13,7 +13,7 @@ import scalanative.native._
  * @see [[https://developer.gnome.org/gtk3/stable/GtkWidget.html]]
  */
 @CObj
-class GtkWidget extends GObject {
+class GtkWidget extends GObject with GtkBuildable {
   /**
    * Destroys a widget.
    *
@@ -126,6 +126,16 @@ class GtkWidget extends GObject {
    */
   @inline def setSensitive(sensitive: gboolean): Unit = extern
 
+  /**
+   * Sets the minimum size of this widget; that is the widget’s size request will be at least width by height.
+   *
+   * @param width requested width, or -1 to unset
+   * @param height requested height, or -1 to unset
+   */
+  @inline def setSizeRequest(width: gint, height: gint): Unit = extern
 }
 
+object GtkWidget {
+  @inline def destroy: CFunctionPtr1[CObj.Ref[Byte],Unit] = CFunctionPtr.fromFunction1(__ext.gtk_widget_destroy)
+}
 

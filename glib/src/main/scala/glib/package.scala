@@ -8,7 +8,7 @@ package object glib {
   type gshort   = CShort
   type glong    = CLong
   type gint     = CInt
-  type gboolean = gint
+  type gboolean = Boolean //gint
   type guchar   = CUnsignedChar
   type gushort  = CUnsignedShort
   type gulong   = CUnsignedLong
@@ -36,5 +36,4 @@ package object glib {
 
   type GQuark   = guint32
 
-  trait GSeq[T] extends Seq[T] with GAllocated
 }

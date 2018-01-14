@@ -7,20 +7,79 @@ permalink: index.html
 summary:
 toc: false
 ---
-Experimental [scala-native](https://github.com/scala-native/scala-native) bindings for Glib / Gtk+.
+Experimental [scala-native](https://github.com/scala-native/scala-native) bindings for [Glib / Gtk+](http://www.gtk.org).
 
 {% include warning.html content="This project is in an early experimental stage. Most of the bindings
 are still missing. The API and especially the semantics for GObject access in Scala may change any time!" %}
 
 ## Introduction
-SNCocoa is a bridge for writing Cocoa (and possibly Cocoa Touch) applications with Scala Native.
-To this end it provides:
-  * a set of macros that transform the message-passing style of Objective-C in idiomatic Scala (method calls on objects)
-    and support defining Objective-C classes in Scala,
-  * bindings to Cocoa (Foundation, AppKit) and other core frameworks,
-  * wrappers and decorators for fundamental Cocoa classes (strings, collections, ...) for seamless integration between Scala and Cocoa. 
+SNGtk+ provides object-oriented Scala Native bindings for Gtk+ (and GLib, ...).
+Here's a simple example:
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col col-md-4 col-md-offset-4 text-center">
+    {% include image.html file="index/hello.png" %}
+    </div>
+  </div>
+</div>
+
+{% highlight scala %}
+import scalanative.native._
+import gtk._
+
+object Main {
+
+  var entry: GtkEntry = _
+  var greeting: GtkLabel = _
+
+  def main(args: Array[String]): Unit = {
+
+    Gtk.init(args)
+
+    val win = new GtkWindow
+    win.setTitle(c"Greetings")
+    win.setBorderWidth(10.toUInt)
+    win.connect(c"destroy",CFunctionPtr.fromFunction0(destroy),null)
+
+    val grid = new GtkGrid
+    grid.setColumnSpacing(5.toUInt)
+    grid.setRowSpacing(10.toUInt)
+
+    val label = new GtkLabel(c"Name:")
+    grid.attach(label,0,0,1,1)
+
+    entry = new GtkEntry
+    grid.attach(entry,1,0,1,1)
+
+    val button = GtkButton.withLabel(c"Greet!")
+    grid.attach(button,0,1,2,1)
+
+    greeting = new GtkLabel(c"")
+    greeting.setSizeRequest(-1,30)
+    grid.attach(greeting,0,2,2,1)
+
+    button.connect(c"clicked",CFunctionPtr.fromFunction0(greet),null)
+
+    win.add(grid)
+    win.showAll()
 
 
+    Gtk.main()
+
+  }
+
+  def destroy(): Unit = {
+    Gtk.mainQuit()
+  }
+
+  def greet(): Unit = {
+    greeting.setMarkup(s"<span size='large'>Hello ${entry.text}!</span>")
+  }
+}
+
+{% endhighlight %}
+{::comment}
 Here's a comparison of Objective-C syntax with the corresponding SNCocoa idiom:
 
 <div class="container-fluid comparison">
@@ -137,5 +196,5 @@ Here's a comparison of Objective-C syntax with the corresponding SNCocoa idiom:
   </div>
   
 </div>
-
+{:/comment}
 {% include links.html %}

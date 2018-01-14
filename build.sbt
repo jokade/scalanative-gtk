@@ -5,7 +5,7 @@ version in ThisBuild := "0.0.1-SNAPSHOT"
 scalaVersion in ThisBuild := "2.11.12"
 
 val Version = new {
-  val obj_interop = "0.0.2-SNAPSHOT"
+  val obj_interop = "0.0.2"
   val slogging    = "0.5.3"
   val utest       = "0.6.3"
 }
@@ -31,7 +31,7 @@ lazy val scalanativeGtk = project.in(file("."))
   .aggregate(gobj,glib,gtk3)
   .settings(commonSettings ++ dontPublish:_*)
   .settings(
-    name := "scalanative-gtk"
+    name := "scalanative-gtk-bindings"
     )
 
 lazy val glib = project
@@ -57,7 +57,7 @@ lazy val gtk3 = project
   .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings:_*)
   .settings(
-    name := "scalanative-gtk-gtk3"
+    name := "scalanative-gtk3"
   )
 
 

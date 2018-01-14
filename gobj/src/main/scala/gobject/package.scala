@@ -45,7 +45,9 @@ package object gobject {
 
   /* gsignal.h */
   type GConnectFlags = UInt
-  val G_CONNECT_AFTER: GConnectFlags   = (1 << 0).toUInt
-  val G_CONNECT_SWAPPED: GConnectFlags = (1 << 1).toUInt
+  object GConnectFlags {
+    val AFTER: GConnectFlags = (1 << 0).toUInt
+    val SWAPPED: GConnectFlags = (1 << 1).toUInt
+  }
 
 }
