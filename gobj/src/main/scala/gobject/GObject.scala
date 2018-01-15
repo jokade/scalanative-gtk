@@ -6,7 +6,7 @@ import glib.{GAllocated, GRefCounter}
 import scalanative.native._
 
 @CObj
-abstract class GObject extends GAllocated with GRefCounter with GSignalReceiver with CObj.CObjWrapper {
+class GObject extends GAllocated with GRefCounter with GSignalReceiver with CObj.CObjWrapper {
   @inline def ref(): Unit = extern
   @inline def unref(): Unit = extern
   @inline def free(): Unit = unref()

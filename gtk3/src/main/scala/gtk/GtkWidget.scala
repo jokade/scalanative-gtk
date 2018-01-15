@@ -136,6 +136,6 @@ class GtkWidget extends GObject with GtkBuildable {
 }
 
 object GtkWidget {
-  @inline def destroy: CFunctionPtr1[CObj.Ref[Byte],Unit] = CFunctionPtr.fromFunction1(__ext.gtk_widget_destroy)
+//  @inline def destroy: CFunctionPtr1[CObj.Ref[Byte],Unit] = CFunctionPtr.fromFunction1(__ext.gtk_widget_destroy)
 }
 
