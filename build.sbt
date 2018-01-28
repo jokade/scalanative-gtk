@@ -5,7 +5,7 @@ version in ThisBuild := "0.0.1-SNAPSHOT"
 scalaVersion in ThisBuild := "2.11.12"
 
 val Version = new {
-  val obj_interop = "0.0.2"
+  val obj_interop = "0.0.3-SNAPSHOT"
   val slogging    = "0.5.3"
   val utest       = "0.6.3"
 }
@@ -15,7 +15,7 @@ lazy val commonSettings = Seq(
   scalacOptions ++= Seq("-deprecation","-unchecked","-feature","-language:implicitConversions","-Xlint"),
   addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
   libraryDependencies ++= Seq(
-    "de.surfice" %%% "scalanative-obj-interop" % Version.obj_interop % "provided",
+    "de.surfice" %%% "scalanative-interop-cobj" % Version.obj_interop % "provided",
     "com.lihaoyi" %%% "utest" % Version.utest % "test"
     ),
   testFrameworks += new TestFramework("utest.runner.Framework")

@@ -23,7 +23,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gbase64.h           | {{page.missing}} |               |       |
 | gbitlock.h          | {{page.missing}} |               |       |
 | gbookmarkfile.h     | {{page.missing}} |               |       |
-| gbytes.h            | {{page.missing}} |               |       |
+| gbytes.h            | {{page.partial}} |               |       |
 | gcharset.h          | {{page.missing}} |               |       |
 | gchecksum.h         | {{page.missing}} |               |       |
 | gconvert.h          | {{page.missing}} |               |       |
@@ -32,7 +32,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gdatetime.h         | {{page.missing}} |               |       |
 | gdir.h              | {{page.missing}} |               |       |
 | genviron.h          | {{page.missing}} |               |       |
-| gerror.h            | {{page.missing}} |               |       |
+| gerror.h            | {{page.partial}} |               |       |
 | gfileutils.h        | {{page.missing}} |               |       |
 | ggettext.h          | {{page.missing}} |               |       |
 | ghash.h             | {{page.missing}} |               |       |
@@ -42,9 +42,9 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gi18n-lib.h         | {{page.missing}} |               |       |
 | gi18n.h             | {{page.missing}} |               |       |
 | giochannel.h        | {{page.missing}} |               |       |
-| gkeyfile.h          | {{page.missing}} |               |       |
+| gkeyfile.h          | {{page.partial}} |               |       |
 | glib-autocleanups.h | {{page.missing}} |               |       |
-| glist.h             | {{page.missing}} |               |       |
+| glist.h             | {{page.partial}} |               |       |
 | gmacros.h           | {{page.missing}} |               |       |
 | gmain.h             | {{page.missing}} |               |       |
 | gmappedfile.h       | {{page.missing}} |               |       |
@@ -66,7 +66,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gsequence.h         | {{page.missing}} |               |       |
 | gshell.h            | {{page.missing}} |               |       |
 | gslice.h            | {{page.missing}} |               |       |
-| gslist.h            | {{page.missing}} |               |       |
+| gslist.h            | {{page.partial}} |               |       |
 | gspawn.h            | {{page.missing}} |               |       |
 | gstdio.h            | {{page.missing}} |               |       |
 | gstrfuncs.h         | {{page.missing}} |               |       |
@@ -84,8 +84,8 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gurifuncs.h         | {{page.missing}} |               |       |
 | gutils.h            | {{page.missing}} |               |       |
 | guuid.h             | {{page.missing}} |               |       |
-| gvariant.h          | {{page.missing}} |               |       |
-| gvarianttype.h      | {{page.missing}} |               |       |
+| gvariant.h          | {{page.partial}} | `GVariant`    | vararg / array functions not implemented; builder and dict not implemented  |
+| gvarianttype.h      | {{page.ok}}      | `GVariantType`|       |
 | gversion.h          | {{page.ok}}      | `GLib`        |       |
 | gversionmacros.h    | {{page.missing}} |               |       |
 | gwin32.h            | {{page.missing}} |               |       |

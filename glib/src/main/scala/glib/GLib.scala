@@ -23,13 +23,16 @@ object GLib {
    */
   @inline def checkVersion(requiredMajor: guint, requiredMinor: guint, requiredMicro: guint): CString = extern
 
+  @name("g_free")
+  @inline final def free(ptr: Ptr[Byte]): Unit = extern
+
   /**
    * Frees a null-terminated array of strings, as well as each string it contains.
    *
    * @param str_array array to be freed
    */
   @name("g_strfreev")
-  @inline def strfreev(str_array: Ptr[CString]): Unit = extern
+  @inline final def strfreev(str_array: Ptr[CString]): Unit = extern
 //  def checkVersion(requiredMajor: guint, requiredMinor: guint, requiredMicro: guint): Try[Unit] = {
 //    checkVersion(requiredMajor,requiredMinor,requiredMicro) match {
 //      case null => Success(())

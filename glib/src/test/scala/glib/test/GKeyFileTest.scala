@@ -2,7 +2,7 @@
 package glib.test
 
 import scalanative.native._
-import glib.{GAutoreleasePool, GError, GKeyFile}
+import glib.{GError, GKeyFile}
 import utest._
 
 import scala.scalanative.native.CObj.Out
@@ -18,7 +18,7 @@ object GKeyFileTest extends TestSuite {
         keys.free()
       }
     }
-    'wrappers-GAutoreleasePool{ implicit pool: GAutoreleasePool =>
+    'wrappers-AutoreleasePool{ implicit pool: AutoreleasePool =>
       val keys = new GKeyFile
       assert( keys.groups.size == 0 )
 

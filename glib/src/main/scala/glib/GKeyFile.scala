@@ -14,7 +14,7 @@ import scalanative.native._
  * @see [[https://developer.gnome.org/glib/stable/glib-Key-value-file-parser.html#g-key-file-ref]]
  *
  * @note You must either `free()` instances of GKeyFile manually, or use [[GKeyFile()]] with an
- *       [[GAutoreleasePool]] for allocation.
+ *       [[AutoreleasePool]] for allocation.
  */
 @CObj
 final class GKeyFile extends GAllocated {
@@ -118,11 +118,11 @@ final class GKeyFile extends GAllocated {
   /**
    * Returns a Seq with the names of all groups in this GKeyFile.
    *
-   * @note You must either `free()` the returned Seq manually, or use an [[GAutoreleasePool]]!
+   * @note You must either `free()` the returned Seq manually, or use an [[AutoreleasePool]]!
    *
    * @return Wrapper around array returned by [[getGroups()]]
    */
-  def groups(implicit pool: GAutoreleasePool = null): GSeq[CString] = Zone{ implicit z: Zone =>
+  def groups(implicit pool: AutoreleasePool = null): GSeq[CString] = Zone{ implicit z: Zone =>
     val size = Out.alloc[gsize]
     val array = getGroups()(size)
     val seq = Wrappers.NullTerminatedStringArray(array,size.value.get.toInt)
@@ -146,13 +146,13 @@ final class GKeyFile extends GAllocated {
   /**
    * Returns a Seq with all keys in the specified group.
    *
-   * @note You must either call `free()` the returned Seq manually, or use an [[GAutoreleasePool]]!
+   * @note You must either call `free()` the returned Seq manually, or use an [[AutoreleasePool]]!
    *
    * @param groupName group for which all keys should be returned
    * @param pool GAutoreleasePool (if =null, you must free the Seq manually!)
    * @return Wrapper around array returned by [[getKeys()]]
    */
-  def keys(groupName: CString)(implicit pool: GAutoreleasePool = null): GSeq[CString] = Zone{ implicit z: Zone =>
+  def keys(groupName: CString)(implicit pool: AutoreleasePool = null): GSeq[CString] = Zone{ implicit z: Zone =>
     val size = Out.alloc[gsize]
     val array = getKeys(groupName)(size,null)
     val seq = Wrappers.NullTerminatedStringArray(array,size.value.get.toInt)
@@ -266,13 +266,13 @@ final class GKeyFile extends GAllocated {
   /**
    * Returns a Seq with all values for `key` under `groupName`.
    *
-   * @note You must either call `free()` on the returned Seq manually, or use an [[GAutoreleasePool]]!
+   * @note You must either call `free()` on the returned Seq manually, or use an [[AutoreleasePool]]!
    *
    * @param groupName group for which all keys should be returned
    * @param pool GAutoreleasePool (if =null, you must free the Seq manually!)
    * @return Wrapper around array returned by [[getStringList()]]
    */
-  def stringList(groupName: CString, key: CString)(implicit pool: GAutoreleasePool = null): GSeq[CString] = Zone{ implicit z: Zone =>
+  def stringList(groupName: CString, key: CString)(implicit pool: AutoreleasePool = null): GSeq[CString] = Zone{ implicit z: Zone =>
     val size = Out.alloc[gsize]
     val array = getStringList(groupName,key)(size,null)
     val seq = Wrappers.NullTerminatedStringArray(array,size.value.get.toInt)
@@ -295,7 +295,7 @@ final class GKeyFile extends GAllocated {
 
 object GKeyFile {
 
-  def apply(implicit pool: GAutoreleasePool = null): GKeyFile = {
+  def apply(implicit pool: AutoreleasePool = null): GKeyFile = {
     val obj = new GKeyFile
     if(pool!=null)
       pool.register(obj)

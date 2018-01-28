@@ -8,7 +8,7 @@ package object glib {
   type gshort   = CShort
   type glong    = CLong
   type gint     = CInt
-  type gboolean = Boolean //gint
+  type gboolean = Boolean
   type guchar   = CUnsignedChar
   type gushort  = CUnsignedShort
   type gulong   = CUnsignedLong
@@ -35,5 +35,18 @@ package object glib {
   type guintptr = CUnsignedLong
 
   type GQuark   = guint32
+
+  type GFunc = CFunctionPtr2[gpointer,gpointer,_]
+
+  type GSListStruct = CStruct2[gpointer,Ptr[Byte]]
+  type GListStruct  = CStruct3[gpointer,Ptr[Byte],Ptr[Byte]]
+
+  /**
+   * A type in the GVariant type system.
+   *
+   * Two types may not be compared by value; use [[GVariantType.equal]] or [[GVariantType.isSubtypeOf]].
+   * May be copied using [[GVariantType.copy]] and freed using [[GVariantType.free]]
+   */
+  type GVariantType = CString
 
 }
