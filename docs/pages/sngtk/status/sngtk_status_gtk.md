@@ -144,7 +144,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkoverlay.h                | {{page.missing}} |               |       |
 | gtkpadcontroller.h          | {{page.missing}} |               |       |
 | gtkpagesetup.h              | {{page.missing}} |               |       |
-| gtkpaned.h                  | {{page.missing}} |               |       |
+| gtkpaned.h                  | {{page.partial}} | `GtkPaned`    |       |
 | gtkpapersize.h              | {{page.missing}} |               |       |
 | gtkplacessidebar.h          | {{page.missing}} |               |       |
 | gtkplug.h                   | {{page.missing}} |               |       |

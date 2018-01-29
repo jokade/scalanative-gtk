@@ -1,6 +1,8 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package glib
 
+import glib.convert.Wrappers.GListWrapper
+
 import scala.scalanative.native.CObj.updatesThis
 import scalanative.native._
 
@@ -53,6 +55,7 @@ final class GList(var __ref: CObj.Ref[GListStruct]) extends CObj.CRef[GListStruc
     this
   }
 
+  @inline def asScala[T](implicit valueWrapper: GWrapper[T]): GListWrapper[T] = GListWrapper(this,valueWrapper)
 }
 
 object GList {

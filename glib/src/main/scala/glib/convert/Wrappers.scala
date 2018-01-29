@@ -43,6 +43,8 @@ object Wrappers {
 
   case class GSListWrapper[T](raw: GSList, valueWrapper: GWrapper[T]) extends MutableList[T]
 
+  case class GListWrapper[T](raw: GList, valueWrapper: GWrapper[T]) extends MutableList[T]
+
   class GListIterator[T](private var _next: Ptr[GSListStruct], valueWrapper: GWrapper[T]) extends AbstractIterator[T] {
     override def hasNext: Boolean = _next != null
 
