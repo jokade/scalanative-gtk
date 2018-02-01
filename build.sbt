@@ -5,8 +5,9 @@ version in ThisBuild := "0.0.1-SNAPSHOT"
 scalaVersion in ThisBuild := "2.11.12"
 
 val Version = new {
-  val obj_interop = "0.0.3-SNAPSHOT"
-  val slogging    = "0.5.3"
+  val obj_interop = "0.0.3"
+  //val slogging    = "0.5.3"
+  val smacrotools = "0.0.8"
   val utest       = "0.6.3"
 }
 
@@ -28,7 +29,7 @@ lazy val nativeSettings = Seq(
 
 lazy val scalanativeGtk = project.in(file("."))
   .enablePlugins(ScalaNativePlugin)
-  .aggregate(gobj,glib,gtk3)
+  .aggregate(glib,gobj,gio,gtk3,tepl)
   .settings(commonSettings ++ dontPublish:_*)
   .settings(
     name := "scalanative-gtk-bindings"
@@ -47,19 +48,37 @@ lazy val gobj = project
   .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings ++ publishingSettings:_*)
   .settings(
-    name := "scalanative-gobj"
+    name := "scalanative-gobj",
+    libraryDependencies ++= Seq(
+//      "de.surfice" %% "smacrotools" % Version.smacrotools
+    )
   )
 
 
+lazy val gio = project
+  .dependsOn(gobj)
+  .enablePlugins(ScalaNativePlugin)
+  .settings(commonSettings ++ publishingSettings:_*)
+  .settings(
+    name := "scalanative-gio"
+  )
+
 
 lazy val gtk3 = project
-  .dependsOn(gobj)
+  .dependsOn(gio)
   .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings ++ publishingSettings:_*)
   .settings(
     name := "scalanative-gtk3"
   )
 
+lazy val tepl = project
+  .dependsOn(gtk3)
+  .enablePlugins(ScalaNativePlugin)
+  .settings(commonSettings ++ publishingSettings:_*)
+  .settings(
+    name := "scalanative-tepl"
+  )
 
 lazy val gtkTest = project
   .dependsOn(gtk3)

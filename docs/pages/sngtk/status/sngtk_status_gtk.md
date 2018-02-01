@@ -138,7 +138,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkmodules.h                | {{page.missing}} |               |       |
 | gtkmountoperation.h         | {{page.missing}} |               |       |
 | gtknativedialog.h           | {{page.missing}} |               |       |
-| gtknotebook.h               | {{page.missing}} |               |       |
+| gtknotebook.h               | {{page.ok}}      | `GtkNotebook` |       |
 | gtkoffscreenwindow.h        | {{page.missing}} |               |       |
 | gtkorientable.h             | {{page.missing}} |               |       |
 | gtkoverlay.h                | {{page.missing}} |               |       |

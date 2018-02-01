@@ -11,7 +11,6 @@ import scalanative.native._
  * @see [[https://developer.gnome.org/gtk3/stable/GtkBin.html]]
  */
 @CObj
-@debug
 class GtkBin extends GtkContainer {
   /**
    * Gets the child of this GtkBin, or NULL if the bin contains no child widget.

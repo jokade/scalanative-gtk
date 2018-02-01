@@ -1,7 +1,8 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package gtk
 
-import gobject.GObject
+import glib.gpointer
+import gobject.{GCallback, GObject}
 
 import scalanative.native._
 
@@ -43,6 +44,26 @@ class GtkBuilder extends GObject {
    */
   @name("gtk_builder_get_object")
   @inline def getObjectPtr(name: CString): CObj.Ref[Nothing] = extern
+
+  /**
+   * Adds the `callbackSymbol` to the scope of this builder under the given `callbackName`.
+   *
+   * Using this method overrides the behaviour of [[connectSignals]] for any callback symbols that are added.
+   *
+   * @param callbackName The name of the callback, as expected in the XML
+   * @param callbackSymbol The callback pointer
+   */
+  @inline def addCallbackSymbol(callbackName: CString, callbackSymbol: GCallback): Unit = extern
+
+  /**
+   * This method is a simpler varaition of [[connectSignalsFull]].
+   * It uses symbols explicitly added to this builder with prior calls to [[addCallbackSymbol]].
+   * In the case that symbols are not explicitly added, it uses GModule's introspective features to
+   * look at the application's symbol table.
+   *
+   * @param userData user data to pass back with all signals
+   */
+  @inline def connectSignals(userData: gpointer): Unit = extern
 }
 
 object GtkBuilder {
@@ -56,4 +77,6 @@ object GtkBuilder {
    */
   @name("gtk_builder_new_from_file")
   @inline def fromFile(filename: CString): GtkBuilder = extern
+
+  def fromFile(filename: String): GtkBuilder = Zone{ implicit z => fromFile(toCString(filename)) }
 }

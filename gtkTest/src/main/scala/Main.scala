@@ -1,5 +1,7 @@
+import de.surfice.smacrotools.debug
+
 import scalanative.native._
-import gtk._
+import gtk.{SignalHandler, _}
 
 object Main {
 
@@ -54,4 +56,5 @@ object Main {
     greeting.setMarkup(s"<span size='large'>Hello ${entry.text}!</span>")
   }
 }
+
 
