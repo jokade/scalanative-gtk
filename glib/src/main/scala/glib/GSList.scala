@@ -1,12 +1,10 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package glib
 
-import de.surfice.smacrotools.debug
 import glib.convert.Wrappers.GSListWrapper
 
-import scala.collection.mutable
-import scala.scalanative.native.CObj.{CObjWrapper, CRef, updatesThis}
 import scalanative.native._
+import cobj._
 
 /**
  * A singly-linked list.
@@ -18,7 +16,7 @@ import scalanative.native._
  * @see [[https://developer.gnome.org/glib/stable/glib-Singly-Linked-Lists.html]]
  */
 @CObj.Mutable(prefix = "g_slist_")
-final class GSList(var __ref: CObj.Ref[GSListStruct]) extends CRef[GSListStruct] with GListLike {
+final class GSList(var __ref: Ref[GSListStruct]) extends CRef[GSListStruct] with GListLike {
   /**
    * Creates an empty list.
    */

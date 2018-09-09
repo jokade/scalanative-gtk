@@ -2,6 +2,7 @@
 package gtk
 
 import scalanative.native._
+import cobj._
 
 /**
  * A widget that display a small to medium amount of text.

@@ -5,6 +5,7 @@ import de.surfice.smacrotools.debug
 import glib.{gpointer, gulong}
 
 import scala.scalanative.native._
+import cobj._
 
 @CObj("g_signal_")
 trait GSignalReceiver {

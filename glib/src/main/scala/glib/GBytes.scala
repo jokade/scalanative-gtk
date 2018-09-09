@@ -1,8 +1,8 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package glib
 
-import scala.scalanative.native.CObj.Out
 import scalanative.native._
+import cobj._
 
 /**
  * @see [[https://developer.gnome.org/glib/stable/glib-Byte-Arrays.html#g-bytes-new]]

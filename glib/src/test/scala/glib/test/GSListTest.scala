@@ -5,7 +5,8 @@ import glib.{GSList, GVariant}
 import utest._
 
 import scalanative.native._
-import CObj.implicits._
+import cobj._
+import Implicits._
 
 object GSListTest extends TestSuite {
   val tests = Tests {

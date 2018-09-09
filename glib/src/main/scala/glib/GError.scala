@@ -4,7 +4,8 @@ package glib
 import de.surfice.smacrotools.debug
 
 import scalanative.native._
-import CObj.implicits._
+import cobj._
+import Implicits._
 
 /**
  * @see [[https://developer.gnome.org/glib/stable/glib-Error-Reporting.html#g-error-new]]
@@ -12,7 +13,7 @@ import CObj.implicits._
 // TODO: add CVararg* (currently crashes due to https://github.com/scala-native/scala-native/issues/1142)
 @CObj
 class GError(domain: GQuark, code: gint, format: Ptr[gchar])
-  extends CObj.CRef[CStruct3[GQuark,gint,CString]] with GAllocated {
+  extends CRef[CStruct3[GQuark,gint,CString]] with GAllocated {
   /**
    * Error domain, e.g. `G_FILE_ERROR`
    */
@@ -31,5 +32,5 @@ class GError(domain: GQuark, code: gint, format: Ptr[gchar])
   def free(): Unit = extern
 }
 object GError {
-  def NULL: GError = new GError(null:CObj.Ref[CStruct3[GQuark,gint,CString]])
+  def NULL: GError = new GError(null:Ref[CStruct3[GQuark,gint,CString]])
 }

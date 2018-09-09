@@ -205,10 +205,10 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtktextdisplay.h            | {{page.missing}} |               |       |
 | gtktextiter.h               | {{page.missing}} |               |       |
 | gtktextlayout.h             | {{page.missing}} |               |       |
-| gtktextmark.h               | {{page.missing}} |               |       |
+| gtktextmark.h               | {{page.ok}}      | `GtkTextMark` |       |
 | gtktexttag.h                | {{page.missing}} |               |       |
 | gtktexttagtable.h           | {{page.missing}} |               |       |
-| gtktextview.h               | {{page.missing}} |               |       |
+| gtktextview.h               | {{page.partial}} | `GtkTextView` |       |
 | gtktogglebutton.h           | {{page.missing}} |               |       |
 | gtktoggletoolbutton.h       | {{page.missing}} |               |       |
 | gtktoolbar.h                | {{page.missing}} |               |       |

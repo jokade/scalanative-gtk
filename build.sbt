@@ -5,7 +5,7 @@ version in ThisBuild := "0.0.1-SNAPSHOT"
 scalaVersion in ThisBuild := "2.11.12"
 
 val Version = new {
-  val obj_interop = "0.0.3"
+  val obj_interop = "0.0.5"
   //val slogging    = "0.5.3"
   val smacrotools = "0.0.8"
   val utest       = "0.6.3"
@@ -29,7 +29,7 @@ lazy val nativeSettings = Seq(
 
 lazy val scalanativeGtk = project.in(file("."))
   .enablePlugins(ScalaNativePlugin)
-  .aggregate(glib,gobj,gio,gtk3,tepl)
+  .aggregate(glib,gobj,gio,gtk3,sourceview,tepl)
   .settings(commonSettings ++ dontPublish:_*)
   .settings(
     name := "scalanative-gtk-bindings"
@@ -72,8 +72,16 @@ lazy val gtk3 = project
     name := "scalanative-gtk3"
   )
 
-lazy val tepl = project
+lazy val sourceview = project
   .dependsOn(gtk3)
+  .enablePlugins(ScalaNativePlugin)
+  .settings(commonSettings ++ publishingSettings:_*)
+  .settings(
+    name := "scalanative-gtksourceview"
+  )
+
+lazy val tepl = project
+  .dependsOn(sourceview)
   .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings ++ publishingSettings:_*)
   .settings(
@@ -82,8 +90,12 @@ lazy val tepl = project
 
 lazy val gtkTest = project
   .dependsOn(gtk3)
-  .enablePlugins(ScalaNativePlugin)
-  .settings(commonSettings ++ nativeSettings ++ dontPublish:_*)
+  .enablePlugins(ScalaNativePlugin,NBHPkgConfigPlugin)
+  .settings(commonSettings ++ dontPublish ++ nativeSettings:_*)
+  .settings(
+    //nativeLinkingOptions ++= nbhNativeLinkingOptions.value
+    //nativeLinkingOptions ++= Seq("-lgtk-3.0","-lglib-2.0")
+  )
   
 
 lazy val dontPublish = Seq(

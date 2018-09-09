@@ -5,6 +5,7 @@ import de.surfice.smacrotools.debug
 import glib.{gint, guint}
 
 import scalanative.native._
+import cobj._
 
 /**
  * Base class for widgets which contain other widgets.

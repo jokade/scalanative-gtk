@@ -2,6 +2,7 @@
 package gtk
 
 import scalanative.native._
+import cobj._
 
 /**
  * Base class for widgets with alignments and padding.

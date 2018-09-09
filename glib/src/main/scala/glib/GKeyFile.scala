@@ -1,12 +1,10 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package glib
 
-import de.surfice.smacrotools.debug
 import glib.convert.Wrappers
 
-import scala.scalanative.native.CObj.Out
 import scalanative.native._
-
+import cobj._
 
 /**
  * Key-value file parser -- parses .ini-like config files.

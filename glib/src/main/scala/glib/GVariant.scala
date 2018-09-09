@@ -3,8 +3,8 @@ package glib
 
 import de.surfice.smacrotools.debug
 
-import scala.scalanative.native.CObj.{Out, returnsThis}
 import scalanative.native._
+import cobj._
 
 /**
  * Strongly typed value datatype.
@@ -17,7 +17,7 @@ import scalanative.native._
  * @param arg argument, as per formatString
  */
 @CObj
-final class GVariant(formatString: CString, arg: Any) extends CObj.CObjWrapper with GAllocated {
+final class GVariant(formatString: CString, arg: Any) extends CObjWrapper with GAllocated {
 
   @inline override def free(): Unit = unref()
 
@@ -334,7 +334,7 @@ final class GVariant(formatString: CString, arg: Any) extends CObj.CObjWrapper w
 
 object GVariant {
 
-  def apply(ref: gpointer): GVariant = new GVariant(ref.cast[CObj.Ref[Byte]])
+  def apply(ref: gpointer): GVariant = new GVariant(ref.cast[Ref[Byte]])
   def apply(value: Int): GVariant = GVariant.int32(value)
   def apply(value: Double): GVariant = GVariant.double(value)
   def apply(value: Boolean): GVariant = GVariant.boolean(value)

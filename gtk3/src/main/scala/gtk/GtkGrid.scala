@@ -4,6 +4,7 @@ package gtk
 import glib.{gint, guint}
 
 import scalanative.native._
+import cobj._
 
 /**
  * Pack widgets in rows and columns.

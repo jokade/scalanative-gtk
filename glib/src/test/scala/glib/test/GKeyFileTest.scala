@@ -4,8 +4,7 @@ package glib.test
 import scalanative.native._
 import glib.{GError, GKeyFile}
 import utest._
-
-import scala.scalanative.native.CObj.Out
+import cobj._
 
 object GKeyFileTest extends TestSuite {
   val tests = Tests{

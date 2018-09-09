@@ -3,8 +3,8 @@ package gtk
 
 import glib.{gboolean, gint}
 
-import scala.scalanative.native.CObj.nullable
 import scalanative.native._
+import cobj._
 
 /**
  * A tabbed notebook container.

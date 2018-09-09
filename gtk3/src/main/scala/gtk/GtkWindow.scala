@@ -1,10 +1,10 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package gtk
 
-import de.surfice.smacrotools.debug
 import glib.gboolean
 
 import scala.scalanative.native._
+import cobj._
 
 /**
  * Toplevel which can conatin other widgets.

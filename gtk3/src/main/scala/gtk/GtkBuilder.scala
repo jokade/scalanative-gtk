@@ -5,6 +5,7 @@ import glib.gpointer
 import gobject.{GCallback, GObject}
 
 import scalanative.native._
+import cobj._
 
 /**
  * Build an interface from an XML UI definition.
@@ -43,7 +44,7 @@ class GtkBuilder extends GObject {
    * @return The requested object pointer, or null.
    */
   @name("gtk_builder_get_object")
-  @inline def getObjectPtr(name: CString): CObj.Ref[Nothing] = extern
+  @inline def getObjectPtr(name: CString): Ref[Nothing] = extern
 
   /**
    * Adds the `callbackSymbol` to the scope of this builder under the given `callbackName`.

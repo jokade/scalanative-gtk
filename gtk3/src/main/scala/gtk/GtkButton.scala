@@ -4,6 +4,7 @@ package gtk
 import de.surfice.smacrotools.debug
 
 import scalanative.native._
+import cobj._
 
 @CObj
 //@debug

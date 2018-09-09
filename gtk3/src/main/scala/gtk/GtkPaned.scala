@@ -4,6 +4,7 @@ package gtk
 import glib.{gboolean, gint}
 
 import scala.scalanative.native._
+import cobj._
 
 /**
  * A widget with two adjustable panes.
@@ -53,13 +54,13 @@ class GtkPaned(orientation: GtkOrientation) extends GtkContainer {
   /**
    * Returns the first child of the paned widget, or null.
    */
-  @CObj.nullable
+  @nullable
   @inline def getChild1(): GtkWidget = extern
 
   /**
    * Returns the second child of the paned widget, or null.
    */
-  @CObj.nullable
+  @nullable
   @inline def getChild2(): GtkWidget = extern
 
   /**

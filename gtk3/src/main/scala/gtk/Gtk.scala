@@ -2,6 +2,7 @@
 package gtk
 
 import scala.scalanative.native._
+import cobj._
 
 @CObj
 object Gtk {

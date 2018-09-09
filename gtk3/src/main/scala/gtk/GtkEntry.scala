@@ -2,6 +2,7 @@
 package gtk
 
 import scalanative.native._
+import cobj._
 
 /**
  * A single line text entry field.

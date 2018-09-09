@@ -3,6 +3,7 @@ package tepl
 
 import glib.GList
 
+import scala.scalanative.native.CObj.nullable
 import scalanative.native._
 
 /**
@@ -33,6 +34,7 @@ trait TeplTabGroup extends CObj.CObjWrapper {
   /**
    * Returns the currently displayed tab in this group.
    */
+  @nullable
   @inline final def getActiveTab(): TeplTab = extern
 
   /**
@@ -41,4 +43,12 @@ trait TeplTabGroup extends CObj.CObjWrapper {
    * @param tab TeplTab to be made active (must be part of this group!)
    */
   @inline final def setActiveTab(tab: TeplTab): Unit = extern
+
+  /**
+   * Returns the currently active TeplView, or null
+   */
+  @nullable
+  @inline final def getActiveView(): TeplView = extern
+
+//  @inline final def getActiveBuffer(): Tepl
 }

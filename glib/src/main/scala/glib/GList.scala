@@ -3,8 +3,8 @@ package glib
 
 import glib.convert.Wrappers.GListWrapper
 
-import scala.scalanative.native.CObj.updatesThis
 import scalanative.native._
+import cobj._
 
 /**
  * A linked list that can be iterated over in both directions.
@@ -16,7 +16,7 @@ import scalanative.native._
  * @see [[https://developer.gnome.org/glib/stable/glib-Doubly-Linked-Lists.html]]
  */
 @CObj.Mutable
-final class GList(var __ref: CObj.Ref[GListStruct]) extends CObj.CRef[GListStruct] with GListLike {
+final class GList(var __ref: Ref[GListStruct]) extends CRef[GListStruct] with GListLike {
   /**
    * Creates an empty list.
    */

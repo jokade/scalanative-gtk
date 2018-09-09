@@ -1,10 +1,9 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package glib
 
-import de.surfice.smacrotools.debug
-
 import scala.util.{Failure, Success, Try}
 import scalanative.native._
+import cobj._
 
 @CObj(prefix = "glib_")
 object GLib {

@@ -6,6 +6,7 @@ import glib.{gboolean, gint}
 import gobject.{GObject, GSignalReceiver}
 
 import scalanative.native._
+import cobj._
 
 /**
  * Base class for all widgets.

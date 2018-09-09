@@ -4,6 +4,7 @@ package gtk
 import glib.{gboolean, gint, guint}
 
 import scalanative.native._
+import cobj._
 
 /**
  * A container box.
