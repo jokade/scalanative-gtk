@@ -5,19 +5,16 @@ import de.surfice.smacrotools.debug
 
 import scalanative.native._
 import cobj._
+import scala.scalanative.native.cobj.runtime.CObjObject
 
 /**
  * Strongly typed value datatype.
  *
  * @see [[https://developer.gnome.org/glib/stable/glib-GVariant.html]]
  *
- * @constructor
- * Creates a new GVariant instance.
- * @param formatString a GVariant format string
- * @param arg argument, as per formatString
  */
 @CObj
-final class GVariant(formatString: CString, arg: Any) extends CObjWrapper with GAllocated {
+class GVariant extends CObjObject with GAllocated {
 
   @inline override def free(): Unit = unref()
 
@@ -333,8 +330,17 @@ final class GVariant(formatString: CString, arg: Any) extends CObjWrapper with G
 }
 
 object GVariant {
+  /**
+   * @constructor
+   * Creates a new GVariant instance.
+   * @param formatString a GVariant format string
+   * @param arg argument, as per formatString
+   *
+   */
+  @name("g_variant_new")
+  def apply(formatString: CString, arg: Any): GVariant = extern
 
-  def apply(ref: gpointer): GVariant = new GVariant(ref.cast[Ref[Byte]])
+//  def apply(ref: gpointer): GVariant = new GVariant(ref.Ref[Byte]])
   def apply(value: Int): GVariant = GVariant.int32(value)
   def apply(value: Double): GVariant = GVariant.double(value)
   def apply(value: Boolean): GVariant = GVariant.boolean(value)

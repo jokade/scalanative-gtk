@@ -2,9 +2,10 @@
 package glib
 
 import scala.scalanative.native._
+import scala.scalanative.native.cobj.CObjWrapper
 
 trait GListLike extends GAllocated {
-  def __ref: Any
+  def __ptr: Ptr[Byte]
 
   /**
    * Appends a new element to the end of the list.
@@ -60,7 +61,7 @@ trait GListLike extends GAllocated {
 
   /**
    * Calls the provided closure for every data element in this list.
-   * The data element is wrapped using the implicitly provided GWrapper.
+   * The data element is wrapped using the implicitly provided CObjWrapper.
    *
    * @note Don't store the wrapped element passed to `f` for access outside of `f`!
    *       The wrapper my be reused to improve perfomance.
@@ -68,7 +69,7 @@ trait GListLike extends GAllocated {
    * @param f
    * @param valueWrapper used to wrap data elements before they are passed to `f`
    */
-  final def foreach[T](f: T=>_)(implicit valueWrapper: GWrapper[T]): Unit = {
+  final def foreach[T](f: T=>_)(implicit valueWrapper: CObjWrapper[T]): Unit = {
     var p = ptr
     while(p != null) {
       f(valueWrapper.wrap(!p._1))
@@ -76,16 +77,16 @@ trait GListLike extends GAllocated {
     }
   }
 
-  def appendAll[T](xs: TraversableOnce[T])(implicit valueWrapper: GWrapper[T]): GListLike
+  def appendAll[T](xs: TraversableOnce[T])(implicit valueWrapper: CObjWrapper[T]): GListLike
 
   @inline final def size: Int = length().toInt
-  @inline final def isEmpty: Boolean = __ref == null
-  @inline final def nonEmpty: Boolean = __ref != null
+  @inline final def isEmpty: Boolean = __ptr == null
+  @inline final def nonEmpty: Boolean = __ptr != null
 
   def ptr: Ptr[GSListStruct]
 
   final def lastPtr: Ptr[GSListStruct] =
-    if(__ref==null) null
+    if(__ptr==null) null
     else{
       var p = ptr
       while((!p._2) != null)
@@ -94,27 +95,27 @@ trait GListLike extends GAllocated {
     }
 
   /**
-   * Returns the specified element, wrapped by the implicitly provided GWrapper.
+   * Returns the specified element, wrapped by the implicitly provided CObjWrapper.
    *
    * @param idx
    * @param valueWrapper
    * @tparam T
    */
-  @inline final def apply[T](idx: Int)(implicit valueWrapper: GWrapper[T]): T = valueWrapper.wrap(!nth(idx.toUInt)._1)
+  @inline final def apply[T](idx: Int)(implicit valueWrapper: CObjWrapper[T]): T = valueWrapper.wrap(!nth(idx.toUInt)._1)
 
   /**
-   * Appends a single element, unwrapped using the implicitly provided GWrapper.
+   * Appends a single element, unwrapped using the implicitly provided CObjWrapper.
    * @param x element to append
-   * @param valueWrapper GWrapper used for unwrapping of `x`
+   * @param valueWrapper CObjWrapper used for unwrapping of `x`
    * @tparam T
    */
-  @inline final def +=[T](x: T)(implicit valueWrapper: GWrapper[T]): GListLike = append(valueWrapper.unwrap(x))
+  @inline final def +=[T](x: T)(implicit valueWrapper: CObjWrapper[T]): GListLike = append(valueWrapper.unwrap(x))
 
   /**
-   * Prepends a single element, unwrapped using the implicitly provided GWrapper.
+   * Prepends a single element, unwrapped using the implicitly provided CObjWrapper.
    * @param x element to prepend
-   * @param valueWrapper GWrapper used to unwrap `x`
+   * @param valueWrapper CObjWrapper used to unwrap `x`
    * @tparam T
    */
-  def +=:[T](x: T)(implicit valueWrapper: GWrapper[T]): GListLike = prepend(valueWrapper.unwrap(x))
+  def +=:[T](x: T)(implicit valueWrapper: CObjWrapper[T]): GListLike = prepend(valueWrapper.unwrap(x))
 }

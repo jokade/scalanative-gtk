@@ -1,10 +1,13 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package glib
 
+//import glib.convert.Wrappers.GListWrapper
+
 import glib.convert.Wrappers.GListWrapper
 
 import scalanative.native._
 import cobj._
+import scala.scalanative.native.cobj.runtime.CObjObject
 
 /**
  * A linked list that can be iterated over in both directions.
@@ -15,16 +18,17 @@ import cobj._
  *
  * @see [[https://developer.gnome.org/glib/stable/glib-Doubly-Linked-Lists.html]]
  */
-@CObj.Mutable
-final class GList(var __ref: Ref[GListStruct]) extends CRef[GListStruct] with GListLike {
+@CObj
+//@CObj.Mutable
+class GList extends CObjObject with GListLike {
   /**
    * Creates an empty list.
    */
-  def this() = this(null)
+//  def this() = this(null)
 
   @inline def free(): Unit = extern
 
-  @inline def ptr: Ptr[GSListStruct] = __ref.cast[Ptr[GSListStruct]]
+  @inline def ptr: Ptr[GSListStruct] = __ptr.cast[Ptr[GSListStruct]]
 
   @updatesThis
   @inline def append(data: gpointer): GList = extern
@@ -41,12 +45,14 @@ final class GList(var __ref: Ref[GListStruct]) extends CRef[GListStruct] with GL
 
   @inline def foreach(func: GFunc, userData: gpointer): Unit = extern
 
-  def appendAll[T](xs: TraversableOnce[T])(implicit valueWrapper: GWrapper[T]): GList = {
-    val list = new GList()
+  def appendAll[T](xs: TraversableOnce[T])(implicit valueWrapper: CObjWrapper[T]): GList = ???
+  /*
+  def appendAll[T](xs: TraversableOnce[T])(implicit valueWrapper: CObjWrapper[T]): GList = {
+    val list = new GList(null)
     xs.foreach(p => list.prepend(valueWrapper.unwrap(p)))
     list.reverse()
-    if(__ref == null)
-      __ref = list.__ref
+    if(__ptr == null)
+      __ptr = list.__ptr
     else {
       val last = lastPtr
       !lastPtr._2 = list.ptr.cast[Ptr[Byte]]
@@ -54,13 +60,13 @@ final class GList(var __ref: Ref[GListStruct]) extends CRef[GListStruct] with GL
     }
     this
   }
-
-  @inline def asScala[T](implicit valueWrapper: GWrapper[T]): GListWrapper[T] = GListWrapper(this,valueWrapper)
+*/
+  @inline def asScala[T](implicit valueWrapper: CObjWrapper[T]): GListWrapper[T] = GListWrapper(this,valueWrapper)
 }
 
 object GList {
-  def apply[T](values: T*)(implicit valueWrapper: GWrapper[T]): GList = {
-    val list = new GList()
+  def apply[T](values: T*)(implicit valueWrapper: CObjWrapper[T]): GList = {
+    val list = new GList(null)
     values.foreach(p => list.prepend(valueWrapper.unwrap(p)))
     list.reverse()
   }

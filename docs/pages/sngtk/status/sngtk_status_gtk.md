@@ -199,7 +199,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkswitch.h                 | {{page.missing}} |               |       |
 | gtktestutils.h              | {{page.missing}} |               |       |
 | gtktextattributes.h         | {{page.missing}} |               |       |
-| gtktextbuffer.h             | {{page.missing}} |               |       |
+| gtktextbuffer.h             | {{page.partial}} | `GtkTextBuffer`  |       |
 | gtktextbufferrichtext.h     | {{page.missing}} |               |       |
 | gtktextchild.h              | {{page.missing}} |               |       |
 | gtktextdisplay.h            | {{page.missing}} |               |       |

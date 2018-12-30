@@ -10,8 +10,6 @@ import cobj._
  * Toplevel which can conatin other widgets.
  *
  * @see [[https://developer.gnome.org/gtk3/stable/GtkWindow.html]]
- * @constructor
- * @param windowType type of window
  */
 @CObj
 //@debug
@@ -45,5 +43,8 @@ class GtkWindow(windowType: GtkWindowType) extends GtkBin {
 
 object GtkWindow {
 
+  def apply(): GtkWindow = apply(GtkWindowType.TOPLEVEL)
 
+  @name("gtk_window_new")
+  def apply(windowType: GtkWindowType): GtkWindow = extern
 }

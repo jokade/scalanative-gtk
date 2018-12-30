@@ -16,7 +16,7 @@ import cobj._
 @CObj
 class GtkWidget extends GObject with GtkBuildable {
 
-  final def isNull: Boolean = __ref == null
+  //final def isNull: Boolean = __ref == null
 
   /**
    * Destroys a widget.

@@ -34,7 +34,7 @@ class GtkBuilder extends GObject {
    * @param name name of the object to get
    * @return The requested object, or null
    */
-  @inline def getObject(name: CString): GObject = extern
+//  @inline def getObject(name: CString): GObject = extern
 
   /**
    * Returns the raw Gtk pointer to the named object, or null, if the object is not defined in this GtkBuilder.

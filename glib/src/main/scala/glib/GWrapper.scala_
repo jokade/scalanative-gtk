@@ -10,7 +10,7 @@ trait GWrapper[T] {
 
 object GWrapper {
   implicit object GVariantWrapper extends GWrapper[GVariant] {
-    @inline def wrap(ptr: gpointer): GVariant = GVariant(ptr)
-    @inline def unwrap(value: GVariant): gpointer = value.__ref.cast[gpointer]
+    @inline def wrap(ptr: gpointer): GVariant = new GVariant(ptr)
+    @inline def unwrap(value: GVariant): gpointer = value.__ptr
   }
 }

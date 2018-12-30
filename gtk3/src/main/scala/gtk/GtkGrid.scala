@@ -109,3 +109,8 @@ class GtkGrid extends GtkContainer {
    */
   @inline def getColumnSpacing(): guint = extern
 }
+
+object GtkGrid {
+  @name("gtk_grid_new")
+  def apply(): GtkGrid = extern
+}

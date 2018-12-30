@@ -356,3 +356,8 @@ class GtkNotebook extends GtkContainer {
   @nullable
   @inline final def getActionWidget(packType: GtkPackType): GtkWidget = extern
 }
+
+object GtkNotebook {
+  @name("gtk_notebook_new")
+  def apply(): GtkNotebook = extern
+}

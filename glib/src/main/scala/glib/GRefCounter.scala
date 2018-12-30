@@ -1,6 +1,8 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package glib
 
+import scala.scalanative.native.cobj.CObj
+
 /**
  * This trait is not specified explicitly by GLib, but some of its
  * types provide reference count based freeing using `_ref` and `_unref`.

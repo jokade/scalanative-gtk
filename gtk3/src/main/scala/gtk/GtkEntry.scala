@@ -33,3 +33,8 @@ class GtkEntry extends GtkWidget {
   @inline def text: String = fromCString(getText())
 
 }
+
+object GtkEntry {
+  @name("gtk_entry_new")
+  def apply(): GtkEntry = extern
+}

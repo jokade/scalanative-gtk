@@ -8,12 +8,9 @@ import cobj._
  * A widget that display a small to medium amount of text.
  *
  * @see [[https://developer.gnome.org/gtk3/stable/GtkLabel.html]]
- *
- * @constructor
- * @param str the text of the label
  */
 @CObj
-class GtkLabel(str: CString) extends GtkMisc {
+class GtkLabel extends GtkMisc {
   /**
    * Sets the text within the GtkLabel widget. It overwrites any text that was there before.
    *
@@ -57,4 +54,14 @@ class GtkLabel(str: CString) extends GtkMisc {
   def setMarkup(str: String)(implicit z: Zone = null): Unit =
     if(z==null) Zone{ implicit z => setMarkup(toCString(str)) }
     else setMarkup(toCString(str))
+}
+
+object GtkLabel {
+  /**
+   * Creates a new GtkLabel.
+   *
+   * @param str the text of the label
+   */
+  @name("gtk_label_new")
+  def apply(str: CString): GtkLabel = extern
 }

@@ -24,6 +24,10 @@ class GtkButton extends GtkBin {
 }
 
 object GtkButton {
+
+  @name("gtk_button_new")
+  def apply(): GtkButton = extern
+
   /**
    * Creates a GtkButton widget with a GtkLabel child containing the given text.
    *

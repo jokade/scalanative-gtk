@@ -1,11 +1,11 @@
 organization in ThisBuild := "de.surfice"
 
-version in ThisBuild := "0.0.1-SNAPSHOT"
+version in ThisBuild := "0.0.2-SNAPSHOT"
 
 scalaVersion in ThisBuild := "2.11.12"
 
 val Version = new {
-  val obj_interop = "0.0.5"
+  val obj_interop = "0.0.6-SNAPSHOT"
   //val slogging    = "0.5.3"
   val smacrotools = "0.0.8"
   val utest       = "0.6.3"
@@ -16,8 +16,8 @@ lazy val commonSettings = Seq(
   scalacOptions ++= Seq("-deprecation","-unchecked","-feature","-language:implicitConversions","-Xlint"),
   addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
   libraryDependencies ++= Seq(
-    "de.surfice" %%% "scalanative-interop-cobj" % Version.obj_interop,
-    "com.lihaoyi" %%% "utest" % Version.utest % "test"
+    "de.surfice" %%% "scalanative-interop-cobj" % Version.obj_interop
+    //"com.lihaoyi" %%% "utest" % Version.utest % "test"
     ),
   testFrameworks += new TestFramework("utest.runner.Framework")
   )
@@ -29,7 +29,7 @@ lazy val nativeSettings = Seq(
 
 lazy val scalanativeGtk = project.in(file("."))
   .enablePlugins(ScalaNativePlugin)
-  .aggregate(glib,gobj,gio,gtk3,sourceview,tepl)
+  .aggregate(glib,gobj,gio,json,gtk3,sourceview,tepl)
   .settings(commonSettings ++ dontPublish:_*)
   .settings(
     name := "scalanative-gtk-bindings"
@@ -88,9 +88,17 @@ lazy val tepl = project
     name := "scalanative-tepl"
   )
 
+lazy val json = project
+  .dependsOn(glib,gobj)
+  .enablePlugins(ScalaNativePlugin)
+  .settings(commonSettings ++ publishingSettings:_*)
+  .settings(
+    name := "scalanative-json-glib"
+  )
+
 lazy val gtkTest = project
   .dependsOn(gtk3)
-  .enablePlugins(ScalaNativePlugin,NBHPkgConfigPlugin)
+  .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings ++ dontPublish ++ nativeSettings:_*)
   .settings(
     //nativeLinkingOptions ++= nbhNativeLinkingOptions.value

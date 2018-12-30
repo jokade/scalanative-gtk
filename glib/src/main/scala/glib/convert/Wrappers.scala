@@ -6,20 +6,22 @@ import java.util
 import glib._
 
 import scala.collection.{AbstractIterable, AbstractIterator, AbstractSeq, mutable}
+import scala.scalanative.native.cobj.CObjWrapper
 import scalanative.native._
 
 object Wrappers {
-  case class NullTerminatedStringArray(array: Ptr[CString], length: Int)
-    extends AbstractSeq[CString] with IndexedSeq[CString] with GSeq[CString] {
-    def apply(idx: Int): CString = array(idx)
-    override def free(): Unit = {
-      GLib.strfreev(array)
-    }
-  }
+//  case class NullTerminatedStringArray(array: Ptr[CString], length: Int)
+//    extends AbstractSeq[CString] with IndexedSeq[CString] with GSeq[CString] {
+//    def apply(idx: Int): CString = array(idx)
+//    override def free(): Unit = {
+//      GLib.strfreev(array)
+//    }
+//  }
 
   abstract class MutableList[T] extends mutable.AbstractSeq[T] with GAllocated {
+    def __ptr: Ptr[Byte] = raw.__ptr
     val raw: GListLike
-    val valueWrapper: GWrapper[T]
+    val valueWrapper: CObjWrapper[T]
     final override def free(): Unit = raw.free
     final override def iterator: Iterator[T] = new GListIterator(raw.ptr,valueWrapper)
     final override def apply(idx: Int): T = valueWrapper.wrap(!raw.nth(idx.toUInt)._1)
@@ -41,11 +43,11 @@ object Wrappers {
     }
   }
 
-  case class GSListWrapper[T](raw: GSList, valueWrapper: GWrapper[T]) extends MutableList[T]
+//  case class GSListWrapper[T](raw: GSList, valueWrapper: CObjWrapper[T]) extends MutableList[T]
 
-  case class GListWrapper[T](raw: GList, valueWrapper: GWrapper[T]) extends MutableList[T]
+  case class GListWrapper[T](raw: GList, valueWrapper: CObjWrapper[T]) extends MutableList[T]
 
-  class GListIterator[T](private var _next: Ptr[GSListStruct], valueWrapper: GWrapper[T]) extends AbstractIterator[T] {
+  class GListIterator[T](private var _next: Ptr[GSListStruct], valueWrapper: CObjWrapper[T]) extends AbstractIterator[T] {
     override def hasNext: Boolean = _next != null
 
     override def next(): T = {
