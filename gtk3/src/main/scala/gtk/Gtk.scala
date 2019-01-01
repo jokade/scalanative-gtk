@@ -1,6 +1,8 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package gtk
 
+import glib.gboolean
+
 import scala.scalanative.native._
 import cobj._
 
@@ -28,6 +30,8 @@ object Gtk {
   @inline def main(): Unit = extern
   @inline def mainQuit(): Unit = extern
   @inline def init(argc: Ptr[Int], argv: Ptr[Ptr[CString]]): Unit = extern
+
+  def mainIteration(): gboolean = extern
 
 }
 

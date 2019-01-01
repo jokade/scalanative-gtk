@@ -1,8 +1,17 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 
+import gtk.utils.GtkExecutionContext
+
 import scalanative.native._
 
 package object gtk {
+
+  lazy val gtkExecutionContext: GtkExecutionContext = new GtkExecutionContext
+
+  object Implicits {
+    implicit def gtkExecutionContext: GtkExecutionContext = gtk.gtkExecutionContext
+  }
+
   /* gtkwindow.h */
   type GtkWindowType = Int
   object GtkWindowType {

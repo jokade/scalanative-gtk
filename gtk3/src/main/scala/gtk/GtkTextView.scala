@@ -4,12 +4,14 @@ package gtk
 import glib.{gboolean, gdouble}
 
 import scalanative.native._
+import cobj._
 
 /**
  * Widget that displays a [[GtkTextBuffer]]
  *
  * @see [[https://developer.gnome.org/gtk3/stable/GtkTextView.html]]
  */
+@CObj
 class GtkTextView extends GtkContainer {
 
   /**

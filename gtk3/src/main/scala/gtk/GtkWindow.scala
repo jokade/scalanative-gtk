@@ -13,12 +13,7 @@ import cobj._
  */
 @CObj
 //@debug
-class GtkWindow(windowType: GtkWindowType) extends GtkBin {
-
-  /**
-   * Creates a new toplevel window.
-   */
-  def this() = this(GtkWindowType.TOPLEVEL)
+class GtkWindow extends GtkBin {
 
   /**
    * Sets the title of the window.

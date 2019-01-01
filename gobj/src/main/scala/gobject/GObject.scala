@@ -9,7 +9,6 @@ import cobj._
 import scala.scalanative.native.cobj.runtime.CObjObject
 
 @CObj
-@debug
 class GObject extends CObjObject with GAllocated with GRefCounter with GSignalReceiver {
   @inline def ref(): Unit = extern
   @inline def unref(): Unit = extern

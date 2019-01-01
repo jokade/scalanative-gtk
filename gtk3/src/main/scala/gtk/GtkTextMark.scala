@@ -17,7 +17,6 @@ import cobj._
  * @param leftGravity whether the mark should have left gravity
  */
 @CObj
-@debug
 class GtkTextMark(name: CString, leftGravity: gboolean) extends GObject {
 
   /**

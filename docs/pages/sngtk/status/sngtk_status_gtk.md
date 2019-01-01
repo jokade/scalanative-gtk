@@ -124,7 +124,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtklevelbar.h               | {{page.missing}} |               |       |
 | gtklinkbutton.h             | {{page.missing}} |               |       |
 | gtklistbox.h                | {{page.missing}} |               |       |
-| gtkliststore.h              | {{page.missing}} |               |       |
+| gtkliststore.h              | {{page.partial}} | `GtkListStore`  |       |
 | gtklockbutton.h             | {{page.missing}} |               |       |
 | gtkmain.h                   | {{page.missing}} |               |       |
 | gtkmenu.h                   | {{page.missing}} |               |       |
@@ -219,13 +219,13 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtktoolshell.h              | {{page.missing}} |               |       |
 | gtktooltip.h                | {{page.missing}} |               |       |
 | gtktreednd.h                | {{page.missing}} |               |       |
-| gtktreemodel.h              | {{page.missing}} |               |       |
+| gtktreemodel.h              | {{page.partial}} | `GtkTreeModel`|       |
 | gtktreemodelfilter.h        | {{page.missing}} |               |       |
 | gtktreemodelsort.h          | {{page.missing}} |               |       |
 | gtktreeselection.h          | {{page.missing}} |               |       |
 | gtktreesortable.h           | {{page.missing}} |               |       |
 | gtktreestore.h              | {{page.missing}} |               |       |
-| gtktreeview.h               | {{page.missing}} |               |       |
+| gtktreeview.h               | {{page.partial}} | `GtkTreeView` |       |
 | gtktreeviewcolumn.h         | {{page.missing}} |               |       |
 | gtktypebuiltins.h           | {{page.missing}} |               |       |
 | gtktypes.h                  | {{page.missing}} |               |       |
