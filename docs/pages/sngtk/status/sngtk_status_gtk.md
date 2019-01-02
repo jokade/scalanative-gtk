@@ -96,7 +96,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkfontchooser.h            | {{page.missing}} |               |       |
 | gtkfontchooserdialog.h      | {{page.missing}} |               |       |
 | gtkfontchooserwidget.h      | {{page.missing}} |               |       |
-| gtkframe.h                  | {{page.missing}} |               |       |
+| gtkframe.h                  | {{page.ok}}      | `GtkFrame`    |       |
 | gtkgesture.h                | {{page.missing}} |               |       |
 | gtkgesturedrag.h            | {{page.missing}} |               |       |
 | gtkgesturelongpress.h       | {{page.missing}} |               |       |
@@ -141,7 +141,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtknotebook.h               | {{page.ok}}      | `GtkNotebook` |       |
 | gtkoffscreenwindow.h        | {{page.missing}} |               |       |
 | gtkorientable.h             | {{page.missing}} |               |       |
-| gtkoverlay.h                | {{page.missing}} |               |       |
+| gtkoverlay.h                | {{page.ok}}      | `GtkOverlay`  |       |
 | gtkpadcontroller.h          | {{page.missing}} |               |       |
 | gtkpagesetup.h              | {{page.missing}} |               |       |
 | gtkpaned.h                  | {{page.partial}} | `GtkPaned`    |       |
@@ -173,7 +173,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkscrollbar.h              | {{page.missing}} |               |       |
 | gtkscrolledwindow.h         | {{page.missing}} |               |       |
 | gtksearchbar.h              | {{page.missing}} |               |       |
-| gtksearchentry.h            | {{page.missing}} |               |       |
+| gtksearchentry.h            | {{page.ok}}      | `GtkSearchEntry` |       |
 | gtkselection.h              | {{page.missing}} |               |       |
 | gtkseparator.h              | {{page.missing}} |               |       |
 | gtkseparatormenuitem.h      | {{page.missing}} |               |       |
@@ -189,7 +189,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtksizerequest.h            | {{page.missing}} |               |       |
 | gtksocket.h                 | {{page.missing}} |               |       |
 | gtkspinbutton.h             | {{page.missing}} |               |       |
-| gtkspinner.h                | {{page.missing}} |               |       |
+| gtkspinner.h                | {{page.ok}}      |`GtkSpinner`   |       |
 | gtkstack.h                  | {{page.missing}} |               |       |
 | gtkstacksidebar.h           | {{page.missing}} |               |       |
 | gtkstackswitcher.h          | {{page.missing}} |               |       |

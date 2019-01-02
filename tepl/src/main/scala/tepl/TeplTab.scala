@@ -2,6 +2,7 @@
 package tepl
 
 import scalanative.native._
+import cobj._
 
 @CObj
 class TeplTab {

@@ -5,6 +5,7 @@ import gtk.Gtk
 
 import scala.collection.mutable.ListBuffer
 import scala.concurrent.ExecutionContext
+import scala.scalanative.native.{CArray, CString}
 
 /**
  * An ExecutionContext that is integrated with the Gtk main event loop
@@ -19,6 +20,7 @@ class GtkExecutionContext extends ExecutionContext {
 
   def run(): Unit = {
     while(active) {
+//      Gtk.mainIterationDo(false)
       Gtk.mainIteration()
       if(queue.nonEmpty) {
         val runnable = queue.remove(0)

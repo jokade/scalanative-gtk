@@ -4,6 +4,7 @@ package gtksourceview
 import gtk.GtkTextView
 
 import scalanative.native._
+import cobj._
 
 /**
  * Widget that displays a [[GtkSourceBuffer]].

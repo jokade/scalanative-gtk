@@ -2,6 +2,7 @@
 package gtksourceview
 
 import scalanative.native._
+import cobj._
 import gtk.GtkTextBuffer
 
 /**

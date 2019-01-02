@@ -23,6 +23,7 @@ class GtkListStore extends GtkTreeModel {
   def append(implicit iter: GtkTreeIter): Unit = extern
 
   def set(column: Int, value: CString)(implicit iter: GtkTreeIter): Unit = GtkListStore.ext.gtk_list_store_set(__ptr,iter.__ptr,column,value,-1)
+  def set(column: Int, value: String)(implicit iter: GtkTreeIter): Unit = Zone{ implicit z => set(column,toCString(value))}
   def set(column: Int, value: Int)(implicit iter: GtkTreeIter): Unit = GtkListStore.ext.gtk_list_store_set(__ptr,iter.__ptr,column,value,-1)
   def set(column: Int, value: Double)(implicit iter: GtkTreeIter): Unit = GtkListStore.ext.gtk_list_store_set(__ptr,iter.__ptr,column,value,-1)
   def set(column: Int, value: Boolean)(implicit iter: GtkTreeIter): Unit = GtkListStore.ext.gtk_list_store_set(__ptr,iter.__ptr,column,value,-1)
@@ -31,13 +32,18 @@ class GtkListStore extends GtkTreeModel {
    * Removes all rows from the list store
    */
   def clear(): Unit = extern
-//  def appendRow(values: Any*)(implicit iter: GtkTreeIter): Unit = {
-//    append
-//    values.zipWithIndex foreach {
+
+  def appendRow(values: Any*)(implicit iter: GtkTreeIter): Unit = {
+    append
+    values.zipWithIndex foreach {
 //      case (s:Ptr[_],idx) => set(idx,s.cast[CString])
-//      case _ => throw new IllegalArgumentException("unsupported value type")
-//    }
-//  }
+      case (s: String, idx) => set(idx,s)
+      case (i: Int, idx)    => set(idx,i)
+      case (b: Boolean, idx)=> set(idx,b)
+      case (d: Double, idx) => set(idx,d)
+      case _ => throw new IllegalArgumentException("unsupported value type")
+    }
+  }
 }
 
 object GtkListStore {

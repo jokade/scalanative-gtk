@@ -4,6 +4,7 @@ package tepl
 import gtk.{GtkBuildable, GtkNotebook}
 
 import scalanative.native._
+import cobj._
 
 /**
  * TeplNotebook — Subclass of [[gtk.GtkNotebook]] implementing the TeplTabGroup interface

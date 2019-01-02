@@ -3,8 +3,8 @@ package tepl
 
 import glib.GList
 
-import scala.scalanative.native.CObj.nullable
 import scalanative.native._
+import cobj._
 
 /**
  * Interface for a group of [[TeplTab]]s.
@@ -12,7 +12,7 @@ import scalanative.native._
  * @see [[https://developer.gnome.org/tepl/stable/TeplTabGroup.html]]
  */
 @CObj
-trait TeplTabGroup extends CObj.CObjWrapper {
+trait TeplTabGroup extends CObjWrapper {
   /**
    * Gets the list of tabs contained in this group.
    * If this group contains children that are not [[TeplTab]]s, those will not be present
