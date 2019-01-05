@@ -96,6 +96,14 @@ lazy val json = project
     name := "scalanative-json-glib"
   )
 
+lazy val soup = project
+  .dependsOn(gio)
+  .enablePlugins(ScalaNativePlugin)
+  .settings(commonSettings ++ publishingSettings:_*)
+  .settings(
+    name := "scalanative-libsoup"
+  )
+
 lazy val gtkTest = project
   .dependsOn(gtk3)
   .enablePlugins(ScalaNativePlugin)
