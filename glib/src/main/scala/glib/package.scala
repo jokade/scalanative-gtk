@@ -41,6 +41,8 @@ package object glib {
   type GSListStruct = CStruct2[gpointer,Ptr[Byte]]
   type GListStruct  = CStruct3[gpointer,Ptr[Byte],Ptr[Byte]]
 
+  type GDestroyNotify = CFunctionPtr1[gpointer,Unit]
+
   /**
    * A type in the GVariant type system.
    *
