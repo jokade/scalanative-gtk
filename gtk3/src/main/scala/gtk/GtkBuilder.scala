@@ -1,7 +1,7 @@
-// Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package gtk
 
 import glib.gpointer
+import glib.utils.GZone
 import gobject.{GCallback, GObject}
 
 import scalanative.native._
@@ -79,5 +79,5 @@ object GtkBuilder {
   @name("gtk_builder_new_from_file")
   @inline def fromFile(filename: CString): GtkBuilder = extern
 
-  def fromFile(filename: String): GtkBuilder = Zone{ implicit z => fromFile(toCString(filename)) }
+  def fromFile(filename: String): GtkBuilder = GZone{ implicit z => fromFile(toCString(filename)) }
 }

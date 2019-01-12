@@ -29,7 +29,7 @@ lazy val nativeSettings = Seq(
 
 lazy val scalanativeGtk = project.in(file("."))
   .enablePlugins(ScalaNativePlugin)
-  .aggregate(glib,gobj,gio,json,gtk3,sourceview,tepl)
+  .aggregate(glib,gobj,gio,gtk3,json,soup) //,sourceview,tepl)
   .settings(commonSettings ++ dontPublish:_*)
   .settings(
     name := "scalanative-gtk-bindings"

@@ -1,4 +1,3 @@
-// Copyright (c) 2019. Distributed under the MIT License (see included LICENSE file).
 package gtk
 
 import de.surfice.smacrotools.debug
@@ -14,6 +13,8 @@ import cobj._
  */
 @CObj
 class GtkTreeView extends GtkContainer {
+
+  private lazy val _selection = getSelection()
 
   /**
    * Returns the amount in pixels of extra indentation for child levels.
@@ -32,6 +33,11 @@ class GtkTreeView extends GtkContainer {
    */
   def getModel(): GtkTreeModel = extern
   def setModel(model: GtkTreeModel): Unit = extern
+
+  /**
+   * Returns the selection object associated with this tree.
+   */
+  def getSelection(): GtkTreeSelection = extern
 
   /**
    * Returns true if the headers are visible.
@@ -111,6 +117,13 @@ class GtkTreeView extends GtkContainer {
    * Returns a list with all columns in this tree view.
    */
   def getColumns(): GList = extern
+
+  def withSelection(f: GtkTreeIter=>Any): Unit = GtkTreeIter{ implicit iter =>
+    _selection.getSelected(null,iter)
+    f(iter)
+  }
+
+  def onRowActivated[T](callback: CFunctionPtr4[Ptr[Byte],Ptr[Byte],Ptr[Byte],T,_], data: T): Unit = connect(c"row-activated",callback,data)
 }
 
 object GtkTreeView {

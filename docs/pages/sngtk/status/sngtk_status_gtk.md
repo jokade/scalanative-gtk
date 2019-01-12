@@ -71,7 +71,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkcssprovider.h            | {{page.missing}} |               |       |
 | gtkcsssection.h             | {{page.missing}} |               |       |
 | gtkdebug.h                  | {{page.missing}} |               |       |
-| gtkdialog.h                 | {{page.missing}} |               |       |
+| gtkdialog.h                 | {{page.partial}} | `GtkDialog`   |       |
 | gtkdnd.h                    | {{page.missing}} |               |       |
 | gtkdragdest.h               | {{page.missing}} |               |       |
 | gtkdragsource.h             | {{page.missing}} |               |       |
@@ -111,7 +111,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkheaderbar.h              | {{page.missing}} |               |       |
 | gtkicontheme.h              | {{page.missing}} |               |       |
 | gtkiconview.h               | {{page.missing}} |               |       |
-| gtkimage.h                  | {{page.missing}} |               |       |
+| gtkimage.h                  | {{page.partial}} | `GtkImage`    |       |
 | gtkimcontext.h              | {{page.missing}} |               |       |
 | gtkimcontextinfo.h          | {{page.missing}} |               |       |
 | gtkimcontextsimple.h        | {{page.missing}} |               |       |
@@ -133,7 +133,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkmenuitem.h               | {{page.missing}} |               |       |
 | gtkmenushell.h              | {{page.missing}} |               |       |
 | gtkmenutoolbutton.h         | {{page.missing}} |               |       |
-| gtkmessagedialog.h          | {{page.missing}} |               |       |
+| gtkmessagedialog.h          | {{page.partial}} | `GtkMessageDialog`|       |
 | gtkmodelbutton.h            | {{page.missing}} |               |       |
 | gtkmodules.h                | {{page.missing}} |               |       |
 | gtkmountoperation.h         | {{page.missing}} |               |       |
@@ -222,7 +222,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtktreemodel.h              | {{page.partial}} | `GtkTreeModel`|       |
 | gtktreemodelfilter.h        | {{page.missing}} |               |       |
 | gtktreemodelsort.h          | {{page.missing}} |               |       |
-| gtktreeselection.h          | {{page.missing}} |               |       |
+| gtktreeselection.h          | {{page.partial}} | `GtkTreeSelection` |       |
 | gtktreesortable.h           | {{page.missing}} |               |       |
 | gtktreestore.h              | {{page.missing}} |               |       |
 | gtktreeview.h               | {{page.partial}} | `GtkTreeView` |       |

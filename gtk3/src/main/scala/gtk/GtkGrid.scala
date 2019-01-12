@@ -1,4 +1,3 @@
-// Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package gtk
 
 import glib.{gint, guint}
@@ -108,6 +107,7 @@ class GtkGrid extends GtkContainer {
    * Returns the amount of space between columns in this grid.
    */
   @inline def getColumnSpacing(): guint = extern
+
 }
 
 object GtkGrid {

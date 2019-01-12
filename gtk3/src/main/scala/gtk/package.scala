@@ -1,5 +1,6 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 
+import glib.{gboolean, gpointer}
 import gtk.utils.GtkExecutionContext
 
 import scalanative.native._
@@ -12,7 +13,6 @@ package object gtk {
     implicit def gtkExecutionContext: GtkExecutionContext = gtk.gtkExecutionContext
   }
 
-  /* gtkwindow.h */
   type GtkWindowType = Int
   object GtkWindowType {
     val TOPLEVEL: GtkWindowType = 0
@@ -20,7 +20,6 @@ package object gtk {
   }
 
 
-  /* gtkenums.h */
   type GtkAlign = Int
   object GtkAlign {
     val FILL = 0
@@ -46,6 +45,16 @@ package object gtk {
     val BOTTOM = 2
   }
 
+  type GtkButtonsType = Int
+  object GtkButtonsType {
+    val NONE      :GtkButtonsType = 0
+    val OK        :GtkButtonsType = 1
+    val CLOSE     :GtkButtonsType = 2
+    val CANCEL    :GtkButtonsType = 3
+    val YES_NO    :GtkButtonsType = 4
+    val OK_CANCEL :GtkButtonsType = 5
+  }
+
   type GtkDeleteType = Int
   object GtkDeleteType {
     val CHARS = 0
@@ -56,6 +65,13 @@ package object gtk {
     val PARAGRAPH_ENDS = 5
     val PARAGRAPHS = 6
     val WHITESPACE = 7
+  }
+
+  type GtkDialogFlags = Int
+  object GtkDialogFlags {
+    val MODAL               :GtkDialogFlags = 1 << 0
+    val DESTROY_WITH_PARENT :GtkDialogFlags = 1 << 1
+    val USE_HEADER_BAR      :GtkDialogFlags = 1 << 2
   }
 
   type GtkDirectionType = Int
@@ -233,6 +249,14 @@ package object gtk {
     val WORD_CHAR = 3
   }
 
+  type PangoWrapMode = Int
+  object PangoWrapMode {
+    val WORD      :PangoWrapMode = 0
+    val CHAR      :PangoWrapMode = 1
+    val WORD_CHAR :PangoWrapMode = 2
+  }
+
+  type GtkTreeSelectionFunc = CFunctionPtr5[Ptr[Byte],Ptr[Byte],Ptr[Byte],gboolean,gpointer,Unit]
 //  type GtkStockId = CString
 //  object GtkStockId {
 //

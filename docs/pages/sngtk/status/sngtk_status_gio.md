@@ -95,7 +95,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | glistmodel.h                | {{page.missing}} |                   |       | 
 | gliststore.h                | {{page.missing}} |                   |       | 
 | gloadableicon.h             | {{page.missing}} |                   |       | 
-| gmemoryinputstream.h        | {{page.missing}} |                   |       | 
+| gmemoryinputstream.h        | {{page.ok}}      | `GMemoryInputStream`|       | 
 | gmemoryoutputstream.h       | {{page.missing}} |                   |       | 
 | gmenu.h                     | {{page.missing}} |                   |       | 
 | gmenuexporter.h             | {{page.missing}} |                   |       | 

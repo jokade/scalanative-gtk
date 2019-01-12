@@ -1,4 +1,3 @@
-// Copyright (c) 2019. Distributed under the MIT License (see included LICENSE file).
 package gtk
 
 import glib.{gboolean, gint}

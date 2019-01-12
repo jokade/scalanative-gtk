@@ -1,7 +1,9 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package gtk
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Single
 import glib.gboolean
+import glib.utils.GZone
 
 import scala.scalanative.native._
 import cobj._
@@ -9,7 +11,7 @@ import cobj._
 @CObj
 object Gtk {
 
-  def init(args: Array[String]): Array[String] = Zone { implicit z: Zone =>
+  def init(args: Array[String]): Array[String] = GZone { implicit z: Zone =>
     val argc = alloc[CInt]
     !argc = args.length
     val argv = alloc[CString](args.length)

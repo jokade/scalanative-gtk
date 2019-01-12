@@ -1,4 +1,3 @@
-// Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package gtk
 
 import de.surfice.smacrotools.debug
@@ -137,6 +136,41 @@ class GtkWidget extends GObject with GtkBuildable {
    * @param height requested height, or -1 to unset
    */
   @inline def setSizeRequest(width: gint, height: gint): Unit = extern
+
+  /**
+   * Whether to exapnd in both directions. Setting this sets both [[hexpand]] and [[vexpand]].
+   */
+  def expand: gboolean = getBooleanProp(c"expand")
+  def expand_=(setting: gboolean): Unit = setBooleanProp(c"expand",setting)
+
+  /**
+   * Whether to expand horizontally.
+   */
+  def hexpand: gboolean = getBooleanProp(c"hexpand")
+  def hexpand_=(setting: gboolean): Unit = setBooleanProp(c"hexpand",setting)
+
+  /**
+   * Whether to expand vertically
+   */
+  def vexpand: gboolean = getBooleanProp(c"vexpand")
+  def vexpand_=(setting: gboolean): Unit = setBooleanProp(c"vexpand",setting)
+
+  /**
+   * Returns the max. margin on any side.
+   */
+  def margin: gint = getIntProp(c"margin")
+
+  /**
+   * Sets the margin for all four sides.
+   * @param setting
+   */
+  def margin_=(setting: gint): Unit = setIntProp(c"margin",setting)
+
+  /**
+   * How to distribute horizontal space if this widget gets extra space.
+   */
+  def halign: GtkAlign = getIntProp(c"halign")
+  def halign_=(align: GtkAlign): Unit = setIntProp(c"halign",align)
 }
 
 object GtkWidget {

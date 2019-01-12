@@ -19,7 +19,7 @@ class GObject extends CObjObject with GAllocated with GRefCounter with GSignalRe
    *
    * @param propName Name of the property
    */
-  def getInt(propName: CString): gint = {
+  def getIntProp(propName: CString): gint = {
     val v = stackalloc[gint]
     !v = 0
     GObject.ext.g_object_get(__ptr,propName,v.cast[Ptr[Ptr[Byte]]], null)
@@ -32,14 +32,14 @@ class GObject extends CObjObject with GAllocated with GRefCounter with GSignalRe
    * @param propName Name of the property
    * @param value property value
    */
-  def setInt(propName: CString, value: gint): Unit = GObject.ext.g_object_set(__ptr,propName,value.cast[Ptr[Byte]],null)
+  def setIntProp(propName: CString, value: gint): Unit = GObject.ext.g_object_set(__ptr,propName,value.cast[Ptr[Byte]],null)
 
   /**
    * Returns the value of the specified guint property.
    *
    * @param propName Name of the property
    */
-  def getUInt(propName: CString): guint = {
+  def getUIntProp(propName: CString): guint = {
     val v = stackalloc[guint]
     !v = 0.toUInt
     GObject.ext.g_object_get(__ptr,propName,v.cast[Ptr[Ptr[Byte]]], null)
@@ -52,14 +52,54 @@ class GObject extends CObjObject with GAllocated with GRefCounter with GSignalRe
    * @param propName Name of the property
    * @param value property value
    */
-  def setUInt(propName: CString, value: guint): Unit = GObject.ext.g_object_set(__ptr,propName,value.cast[Ptr[Byte]],null)
+  def setUIntProp(propName: CString, value: guint): Unit = GObject.ext.g_object_set(__ptr,propName,value.cast[Ptr[Byte]],null)
+
+  /**
+   * Returns the value of the specified float property.
+   *
+   * @param propName NAme of the property
+   */
+  def getFloatProp(propName: CString): gfloat = {
+    val v = stackalloc[gfloat]
+    !v = 0.0f
+    GObject.ext.g_object_getFloat(__ptr,propName,v, null)
+    !v
+  }
+
+  /**
+   * Sets the value for the specified gfloat property.
+   *
+   * @param propName Name of the property.
+   * @param value property value
+   */
+  def setFloatProp(propName: CString, value: gfloat): Unit = GObject.ext.g_object_setFloat(__ptr,propName,value,null)
+
+  /**
+   * Returns the value of the specified boolean property.
+   *
+   * @param propName Name of the property
+   */
+  def getBooleanProp(propName: CString): gboolean = {
+    val v = stackalloc[gboolean]
+    !v = false
+    GObject.ext.g_object_get(__ptr,propName,v.cast[Ptr[Ptr[Byte]]], null)
+    !v
+  }
+
+  /**
+   * Sets the value for the specified boolean property.
+   *
+   * @param propName Name of the property.
+   * @param value property value
+   */
+  def setBooleanProp(propName: CString, value: gboolean): Unit = GObject.ext.g_object_set(__ptr,propName,value.cast[Ptr[Byte]],null)
 
   /**
    * Returns the value of the specified string property.
    *
    * @param propName Name of the propertx
    */
-  def getString(propName: CString): CString = {
+  def getStringProp(propName: CString): CString = {
     val v = stackalloc[CString]
     !v = null
     GObject.ext.g_object_get(__ptr,propName,v,null)
@@ -72,14 +112,14 @@ class GObject extends CObjObject with GAllocated with GRefCounter with GSignalRe
    * @param propName Name of the property
    * @param value property value
    */
-  def setString(propName: CString, value: CString): Unit = GObject.ext.g_object_set(__ptr,propName,value.cast[Ptr[Byte]],null)
+  def setStringProp(propName: CString, value: CString): Unit = GObject.ext.g_object_set(__ptr,propName,value.cast[Ptr[Byte]],null)
 
   /**
    * Returns the value of the specified object property (i.e. a pointer to the object, or null).
    *
    * @param propName Name of the property
    */
-  def getObject(propName: CString): Ptr[Byte] = {
+  def getObjectProp(propName: CString): Ptr[Byte] = {
     val v = stackalloc[Ptr[Byte]]
     !v = null
     GObject.ext.g_object_get(__ptr,propName,v,null)
@@ -89,9 +129,13 @@ class GObject extends CObjObject with GAllocated with GRefCounter with GSignalRe
 
 object GObject {
  @extern
- protected[gobject] object ext {
+ object ext {
    def g_object_get(self: Ptr[Byte], name: CString, ptr: Ptr[Ptr[Byte]], last: Ptr[Byte]): Unit = extern
+   @name("g_object_get")
+   def g_object_getFloat(self: Ptr[Byte], name: CString, ptr: Ptr[Float], last: Ptr[Byte]): Unit = extern
    def g_object_set(self: Ptr[Byte], name: CString, ptr: Ptr[Byte], last: Ptr[Byte]): Unit = extern
+   @name("g_object_set")
+   def g_object_setFloat(self: Ptr[Byte], name: CString, value: CFloat, last: Ptr[Byte]): Unit = extern
  }
 }
 

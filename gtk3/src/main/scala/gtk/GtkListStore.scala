@@ -1,6 +1,6 @@
-// Copyright (c) 2019. Distributed under the MIT License (see included LICENSE file).
 package gtk
 
+import glib.utils.GZone
 import glib.{gboolean, gdouble, gint, gpointer}
 import gobject.{GObject, GType}
 
@@ -23,7 +23,7 @@ class GtkListStore extends GtkTreeModel {
   def append(implicit iter: GtkTreeIter): Unit = extern
 
   def set(column: Int, value: CString)(implicit iter: GtkTreeIter): Unit = GtkListStore.ext.gtk_list_store_set(__ptr,iter.__ptr,column,value,-1)
-  def set(column: Int, value: String)(implicit iter: GtkTreeIter): Unit = Zone{ implicit z => set(column,toCString(value))}
+  def set(column: Int, value: String)(implicit iter: GtkTreeIter): Unit = GZone{ implicit z => set(column,toCString(value))}
   def set(column: Int, value: Int)(implicit iter: GtkTreeIter): Unit = GtkListStore.ext.gtk_list_store_set(__ptr,iter.__ptr,column,value,-1)
   def set(column: Int, value: Double)(implicit iter: GtkTreeIter): Unit = GtkListStore.ext.gtk_list_store_set(__ptr,iter.__ptr,column,value,-1)
   def set(column: Int, value: Boolean)(implicit iter: GtkTreeIter): Unit = GtkListStore.ext.gtk_list_store_set(__ptr,iter.__ptr,column,value,-1)

@@ -14,9 +14,13 @@ class GtkExecutionContext extends ExecutionContext {
   private var active = true
   private val queue: ListBuffer[Runnable] = new ListBuffer
 
-  override def execute(runnable: Runnable): Unit = queue += runnable
+  override def execute(runnable: Runnable): Unit = {
+    queue += runnable
+  }
 
-  override def reportFailure(cause: Throwable): Unit = {}
+  override def reportFailure(cause: Throwable): Unit = {
+    println(cause)
+  }
 
   def run(): Unit = {
     while(active) {
