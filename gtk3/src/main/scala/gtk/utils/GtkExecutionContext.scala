@@ -11,23 +11,25 @@ import scala.scalanative.native.{CArray, CString}
  * An ExecutionContext that is integrated with the Gtk main event loop
  */
 class GtkExecutionContext extends ExecutionContext {
-  private var active = true
-  private val queue: ListBuffer[Runnable] = new ListBuffer
+  private var _active = true
+  private val _queue: ListBuffer[Runnable] = new ListBuffer
 
   override def execute(runnable: Runnable): Unit = {
-    queue += runnable
+    _queue += runnable
   }
+
+  def queue(f: ()=>Any): Unit = execute(new Task(f))
 
   override def reportFailure(cause: Throwable): Unit = {
     println(cause)
   }
 
   def run(): Unit = {
-    while(active) {
+    while(_active) {
 //      Gtk.mainIterationDo(false)
       Gtk.mainIteration()
-      if(queue.nonEmpty) {
-        val runnable = queue.remove(0)
+      if(_queue.nonEmpty) {
+        val runnable = _queue.remove(0)
         try{
           runnable.run()
         } catch {
@@ -37,5 +39,9 @@ class GtkExecutionContext extends ExecutionContext {
     }
   }
 
-  def quit(): Unit = active = false
+  def quit(): Unit = _active = false
+
+  private class Task(f: ()=>Any) extends Runnable {
+    override def run(): Unit = f()
+  }
 }

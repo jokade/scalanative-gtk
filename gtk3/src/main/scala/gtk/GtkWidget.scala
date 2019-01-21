@@ -167,10 +167,47 @@ class GtkWidget extends GObject with GtkBuildable {
   def margin_=(setting: gint): Unit = setIntProp(c"margin",setting)
 
   /**
+   * Margin on the bottom side of this widget.
+   */
+  def marginBottom: gint = getIntProp(c"margin-bottom")
+  def marginBottom_=(margin: gint): Unit = setIntProp(c"margin-bottom",margin)
+
+  /**
+   * Margin on the top side of this widget.
+   */
+  def marginTop: gint = getIntProp(c"margin-top")
+  def marginTop_=(margin: gint): Unit = setIntProp(c"margin-top",margin)
+
+  /**
+   * Margin on end of this widget, horizontally.
+   */
+  def marginEnd: gint = getIntProp(c"margin-end")
+  def marginEnd_=(margin: gint): Unit = setIntProp(c"margin-end",margin)
+
+  /**
+   * Margin on start of this widget, horizontally.
+   */
+  def marginStart: gint = getIntProp(c"margin-start")
+  def marginStart_=(margin: gint): Unit = setIntProp(c"margin-start",margin)
+
+
+  /**
    * How to distribute horizontal space if this widget gets extra space.
    */
   def halign: GtkAlign = getIntProp(c"halign")
   def halign_=(align: GtkAlign): Unit = setIntProp(c"halign",align)
+
+  /**
+   * Whether the widget responds to input
+   */
+  def sensitive: gboolean = getBooleanProp(c"sensitive")
+  def sensitive_=(setting: gboolean): Unit = setBooleanProp(c"sensitive",setting)
+
+  /**
+   * Tooltip text for this widget
+   */
+  def tooltipText: String = getStringProp(c"tooltip-text")
+  def tooltipText_=(tooltip: String): Unit = setStringProp(c"tooltip-text",tooltip)
 }
 
 object GtkWidget {

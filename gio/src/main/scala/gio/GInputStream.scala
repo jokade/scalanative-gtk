@@ -2,7 +2,7 @@
 package gio
 
 import de.surfice.smacrotools.debug
-import glib.{GBytes, GError, gsize, gssize}
+import glib._
 
 import scalanative.native._
 import cobj._
@@ -42,4 +42,13 @@ class GInputStream extends GObject {
    * @see [[https://developer.gnome.org/gio/stable/GInputStream.html#g-input-stream-read-bytes]]
    */
   def readBytes(count: gsize, cancellable: GCancellable)(implicit error: Out[GError]): GBytes = extern
+
+  /**
+   * Closes the stream, releasing resources related to it.
+   *
+   * @param cancellable optional GCancellable, or null
+   * @param error location to store an occurring error, null to ignore
+   * @return
+   */
+  def close(cancellable: GCancellable)(implicit error: Out[GError]): gboolean = extern
 }

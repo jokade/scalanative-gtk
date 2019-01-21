@@ -1,6 +1,7 @@
 package gtk
 
-import glib.gboolean
+import glib.{gboolean, gint}
+import gtk.gdk.GdkPixbuf
 
 import scala.scalanative.native._
 import cobj._
@@ -19,7 +20,35 @@ class GtkWindow extends GtkBin {
    *
    * @param title title of the window
    */
-  @inline def setTitle(title: CString): Unit = extern
+  def setTitle(title: CString): Unit = extern
+
+  def title_=(title: String): Unit = setStringProp(c"title",title)
+  def title: String = getStringProp(c"title")
+
+  def modal: gboolean = getBooleanProp(c"modal")
+  def modal_=(setting: gboolean): Unit = setBooleanProp(c"modal",setting)
+
+  def resizable: gboolean = getBooleanProp(c"resizable")
+  def resizable_=(setting: gboolean): Unit = setBooleanProp(c"resizable",setting)
+
+  def getIcon(): GdkPixbuf = extern
+  def setIcon(icon: GdkPixbuf): Unit = extern
+
+  /**
+   * Resizes the window as if the user had done so.
+   *
+   * @param width width in pixels
+   * @param height height in pixels
+   */
+  def resize(width: gint, height: gint): Unit = extern
+
+  /**
+   * Presents this window to the user.
+   *
+   * This may mean raising the window in the stacking order, deiconifying it,
+   * moving it to the current desktop, and/or giving it the keyboard focus.
+   */
+  def present(): Unit = extern
 
   /**
    * Sets whether the user can resize this window.
@@ -27,12 +56,12 @@ class GtkWindow extends GtkBin {
    *
    * @param resizable true, if the user can resize the window
    */
-  @inline def setResizable(resizable: gboolean): Unit = extern
+//  @inline def setResizable(resizable: gboolean): Unit = extern
 
   /**
    * Returns true if this window is resizable by the user.
    */
-  @inline def getResizable(): gboolean = extern
+//  @inline def getResizable(): gboolean = extern
 }
 
 object GtkWindow {

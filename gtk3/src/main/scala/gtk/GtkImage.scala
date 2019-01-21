@@ -14,6 +14,11 @@ import cobj._
 class GtkImage extends GtkMisc {
 
   def setFromPixbuf(pixbuf: GdkPixbuf): Unit = extern
+
+  /**
+   * Resets the image to be empty.
+   */
+  def clear(): Unit = extern
 }
 
 object GtkImage {

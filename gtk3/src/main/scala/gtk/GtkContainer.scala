@@ -48,6 +48,9 @@ class GtkContainer extends GtkWidget {
    */
   @inline def setBorderWidth(borderWidth: guint): Unit = extern
 
+//  def borderWidth: Int = getBorderWidth().toInt
+//  def borderWidth_=(width: Int): Unit = setBorderWidth(width.toUInt)
+
   /**
    * Retrieves the border width of this conatiner.
    */

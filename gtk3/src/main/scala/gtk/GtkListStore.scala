@@ -41,7 +41,8 @@ class GtkListStore extends GtkTreeModel {
       case (i: Int, idx)    => set(idx,i)
       case (b: Boolean, idx)=> set(idx,b)
       case (d: Double, idx) => set(idx,d)
-      case _ => throw new IllegalArgumentException("unsupported value type")
+      case (p,idx) => set(idx,p.asInstanceOf[Object].cast[Ptr[Byte]])
+//      case _ => throw new IllegalArgumentException("GtkListStore.appendRow(): received unsupported value type")
     }
   }
 }

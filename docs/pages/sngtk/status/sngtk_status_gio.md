@@ -99,7 +99,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gmemoryoutputstream.h       | {{page.missing}} |                   |       | 
 | gmenu.h                     | {{page.missing}} |                   |       | 
 | gmenuexporter.h             | {{page.missing}} |                   |       | 
-| gmenumodel.h                | {{page.missing}} |                   |       | 
+| gmenumodel.h                | {{page.partial}} | `GMenuModel`      |       | 
 | gmount.h                    | {{page.missing}} |                   |       | 
 | gmountoperation.h           | {{page.missing}} |                   |       | 
 | gnativevolumemonitor.h      | {{page.missing}} |                   |       | 

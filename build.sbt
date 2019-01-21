@@ -5,7 +5,7 @@ version in ThisBuild := "0.0.2-SNAPSHOT"
 scalaVersion in ThisBuild := "2.11.12"
 
 val Version = new {
-  val obj_interop = "0.0.6-SNAPSHOT"
+  val obj_interop = "0.0.7-SNAPSHOT"
   //val slogging    = "0.5.3"
   val smacrotools = "0.0.8"
   val utest       = "0.6.3"
@@ -29,7 +29,7 @@ lazy val nativeSettings = Seq(
 
 lazy val scalanativeGtk = project.in(file("."))
   .enablePlugins(ScalaNativePlugin)
-  .aggregate(glib,gobj,gio,gtk3,json,soup) //,sourceview,tepl)
+  .aggregate(glib,gobj,gio,gtk3,json,soup,macIntegration) //,sourceview,tepl)
   .settings(commonSettings ++ dontPublish:_*)
   .settings(
     name := "scalanative-gtk-bindings"
@@ -102,6 +102,14 @@ lazy val soup = project
   .settings(commonSettings ++ publishingSettings:_*)
   .settings(
     name := "scalanative-libsoup"
+  )
+
+lazy val macIntegration = project
+  .dependsOn(gtk3)
+  .enablePlugins(ScalaNativePlugin)
+  .settings(commonSettings ++ publishingSettings:_*)
+  .settings(
+    name := "scalanative-gtk-mac-integration"
   )
 
 lazy val gtkTest = project

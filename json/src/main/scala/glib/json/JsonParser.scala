@@ -49,15 +49,14 @@ object JsonParser {
    * @param data the buffer to parse
    * @param length the length of the buffer, or -1
    */
-  def fromData(data: CString, length: gssize = -1): Try[JsonParser] = Zone{ implicit z =>
-    implicit val err = Out.alloc[GError]
+  def fromData(data: CString, length: gssize = -1): Try[JsonParser] = {
     val parser = JsonParser()
-    parser.loadFromData(data,length)
-    err.value match {
-      case None => Success(parser)
-      case Some(gerr) =>
-        parser.free()
-        Failure(ParseError(gerr))
+    GError[Try[JsonParser]]{ implicit err =>
+      parser.loadFromData(data,length)
+      Success(parser)
+    } { err =>
+      parser.free()
+      Failure(ParseError(err))
     }
   }
 }

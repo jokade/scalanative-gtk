@@ -90,3 +90,12 @@ class GtkPaned(orientation: GtkOrientation) extends GtkContainer {
 
 
 }
+
+object GtkPaned {
+  @name("gtk_paned_new")
+  def apply(orientation: GtkOrientation): GtkPaned = extern
+
+  def horizontal(): GtkPaned = apply(GtkOrientation.HORIZONTAL)
+
+  def vertical(): GtkPaned = apply(GtkOrientation.VERTICAL)
+}

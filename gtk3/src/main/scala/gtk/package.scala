@@ -256,7 +256,28 @@ package object gtk {
     val WORD_CHAR :PangoWrapMode = 2
   }
 
+  type GtkIconLookupFlags = Int
+  object GtkIconLookupFlags {
+    val NO_SVG           :GtkIconLookupFlags = 1 << 0
+    val FORCE_SVG        :GtkIconLookupFlags = 1 << 1
+    val USE_BUILTIN      :GtkIconLookupFlags = 1 << 2
+    val GENERIC_FALLBACK :GtkIconLookupFlags = 1 << 3
+    val FORCE_SIZE       :GtkIconLookupFlags = 1 << 4
+    val FORCE_REGULAR    :GtkIconLookupFlags = 1 << 5
+    val FORCE_SYMBOLIC   :GtkIconLookupFlags = 1 << 6
+    val DIR_LTR          :GtkIconLookupFlags = 1 << 7
+    val DIR_RTL          :GtkIconLookupFlags = 1 << 8
+  }
   type GtkTreeSelectionFunc = CFunctionPtr5[Ptr[Byte],Ptr[Byte],Ptr[Byte],gboolean,gpointer,Unit]
+
+
+  type GtkPackDirection = Int
+  object GtkPackDirection {
+    val LTR :GtkPackDirection = 0
+    val RTL :GtkPackDirection = 1
+    val TTB :GtkPackDirection = 2
+    val BTT :GtkPackDirection = 3
+  }
 //  type GtkStockId = CString
 //  object GtkStockId {
 //

@@ -99,12 +99,14 @@ class GObject extends CObjObject with GAllocated with GRefCounter with GSignalRe
    *
    * @param propName Name of the propertx
    */
-  def getStringProp(propName: CString): CString = {
+  def getCStringProp(propName: CString): CString = {
     val v = stackalloc[CString]
     !v = null
     GObject.ext.g_object_get(__ptr,propName,v,null)
     !v
   }
+
+  def getStringProp(propName: CString): String = fromCString(getCStringProp(propName))
 
   /**
    * Sets the value for the specified string property.
@@ -113,6 +115,8 @@ class GObject extends CObjObject with GAllocated with GRefCounter with GSignalRe
    * @param value property value
    */
   def setStringProp(propName: CString, value: CString): Unit = GObject.ext.g_object_set(__ptr,propName,value.cast[Ptr[Byte]],null)
+
+  def setStringProp(propName: CString, value: String): Unit = PoolZone{ implicit z => setStringProp(propName,toCString(value))}
 
   /**
    * Returns the value of the specified object property (i.e. a pointer to the object, or null).
@@ -128,6 +132,7 @@ class GObject extends CObjObject with GAllocated with GRefCounter with GSignalRe
 }
 
 object GObject {
+
  @extern
  object ext {
    def g_object_get(self: Ptr[Byte], name: CString, ptr: Ptr[Ptr[Byte]], last: Ptr[Byte]): Unit = extern
@@ -136,6 +141,8 @@ object GObject {
    def g_object_set(self: Ptr[Byte], name: CString, ptr: Ptr[Byte], last: Ptr[Byte]): Unit = extern
    @name("g_object_set")
    def g_object_setFloat(self: Ptr[Byte], name: CString, value: CFloat, last: Ptr[Byte]): Unit = extern
+
+//   def g_object_new(objectType: GType, last: CString): Ptr[Byte] = extern
  }
 }
 

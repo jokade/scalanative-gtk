@@ -23,8 +23,8 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkaccelmap.h               | {{page.missing}} |               |       |
 | gtkaccessible.h             | {{page.missing}} |               |       |
 | gtkactionable.h             | {{page.missing}} |               |       |
-| gtkactionbar.h              | {{page.missing}} |               |       |
-| gtkadjustment.h             | {{page.missing}} |               |       |
+| gtkactionbar.h              | {{page.ok}}      | `GtkActionBar`|       |
+| gtkadjustment.h             | {{page.partial}} | `GtkAdjustment`|       |
 | gtkappchooser.h             | {{page.missing}} |               |       |
 | gtkappchooserbutton.h       | {{page.missing}} |               |       |
 | gtkappchooserdialog.h       | {{page.missing}} |               |       |
@@ -108,7 +108,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkgesturezoom.h            | {{page.missing}} |               |       |
 | gtkglarea.h                 | {{page.missing}} |               |       |
 | gtkgrid.h                   | {{page.missing}} |               |       |
-| gtkheaderbar.h              | {{page.missing}} |               |       |
+| gtkheaderbar.h              | {{page.partial}} | `GtkHeaderBar` |       |
 | gtkicontheme.h              | {{page.missing}} |               |       |
 | gtkiconview.h               | {{page.missing}} |               |       |
 | gtkimage.h                  | {{page.partial}} | `GtkImage`    |       |
@@ -128,9 +128,9 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtklockbutton.h             | {{page.missing}} |               |       |
 | gtkmain.h                   | {{page.missing}} |               |       |
 | gtkmenu.h                   | {{page.missing}} |               |       |
-| gtkmenubar.h                | {{page.missing}} |               |       |
+| gtkmenubar.h                | {{page.ok}}      | `GtkMenuBar`  |       |
 | gtkmenubutton.h             | {{page.missing}} |               |       |
-| gtkmenuitem.h               | {{page.missing}} |               |       |
+| gtkmenuitem.h               | {{page.partial}} | `GtkMenuItem` |       |
 | gtkmenushell.h              | {{page.missing}} |               |       |
 | gtkmenutoolbutton.h         | {{page.missing}} |               |       |
 | gtkmessagedialog.h          | {{page.partial}} | `GtkMessageDialog`|       |
@@ -171,7 +171,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkscalebutton.h            | {{page.missing}} |               |       |
 | gtkscrollable.h             | {{page.missing}} |               |       |
 | gtkscrollbar.h              | {{page.missing}} |               |       |
-| gtkscrolledwindow.h         | {{page.missing}} |               |       |
+| gtkscrolledwindow.h         | {{page.partial}} | `GtkScrolledWindow` |       |
 | gtksearchbar.h              | {{page.missing}} |               |       |
 | gtksearchentry.h            | {{page.ok}}      | `GtkSearchEntry` |       |
 | gtkselection.h              | {{page.missing}} |               |       |

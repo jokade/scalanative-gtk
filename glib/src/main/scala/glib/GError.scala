@@ -48,4 +48,13 @@ object GError {
   @name("g_error_new")
   def apply(domain: GQuark, code: gint, format: Ptr[gchar]): GError = extern
   //def NULL: GError = new GError(null)
+
+  def apply[R](f: Out[GError]=>R)(onError: GError=>R): R = PoolZone{ implicit z =>
+    val err = Out.alloc[GError]
+    val result = f(err)
+    if(err.isDefined)
+      onError(err.value)
+    else
+      result
+  }
 }

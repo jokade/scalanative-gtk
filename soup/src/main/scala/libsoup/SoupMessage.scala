@@ -29,7 +29,7 @@ class SoupMessage(method: CString, uriString: CString) extends GObject {
   @inline def statusCode: guint = getUIntProp(c"status-code")
   @inline def statusCode_=(code: guint): Unit = setUIntProp(c"status-code",code)
 
-  @inline def reasonPhrase: CString = getStringProp(c"reason-phrase")
+  @inline def reasonPhrase: CString = getCStringProp(c"reason-phrase")
 
   def responseBody: SoupMessageBody = {
     val p = getObjectProp(c"response-body")

@@ -42,13 +42,22 @@ class GtkTreeModel extends GObject {
     GtkTreeModel.ext.getString(__ptr,iter.__ptr,column,v,-1)
     !v
   }
+
+  def getPtr(column: Int)(implicit iter: GtkTreeIter): Ptr[Byte] = {
+    val v = stackalloc[Ptr[Byte]]
+    !v = null
+    GtkTreeModel.ext.getString(__ptr,iter.__ptr,column,v,-1)
+    !v
+  }
 }
 
 object GtkTreeModel {
   @extern
   object ext {
-    @name("gtk_tree_model_get")
-    def getInt(model: Ptr[Byte], iter: Ptr[Byte], column: Int, value: Ptr[Byte], last: Int): Unit = extern
+//    @name("gtk_tree_model_get")
+//    def get(model: Ptr[Byte], iter: Ptr[Ptr[Byte]], column: Int, value: Ptr[Byte], last: Int): Unit = extern
+//    @name("gtk_tree_model_get")
+//    def getInt(model: Ptr[Byte], iter: Ptr[Byte], column: Int, value: Ptr[Byte], last: Int): Unit = extern
     @name("gtk_tree_model_get")
     def getString(model: Ptr[Byte], iter: Ptr[Byte], column: Int, value: Ptr[CString], last: Int): Unit = extern
   }

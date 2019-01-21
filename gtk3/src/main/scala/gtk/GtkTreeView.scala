@@ -77,8 +77,8 @@ class GtkTreeView extends GtkContainer {
    * @param title title of the new column
    * @return The appended column.
    */
-  def appendTextColumn(title: CString): GtkTreeViewColumn = {
-    val col = GtkTreeViewColumn.text(title,getNColumns().toInt)
+  def appendTextColumn(title: String): GtkTreeViewColumn = PoolZone{ implicit z =>
+    val col = GtkTreeViewColumn.text(toCString(title),getNColumns().toInt)
     appendColumn(col)
     col
   }
