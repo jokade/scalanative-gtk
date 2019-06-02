@@ -8,7 +8,7 @@ val Version = new {
   val obj_interop = "0.0.7-SNAPSHOT"
   //val slogging    = "0.5.3"
   val smacrotools = "0.0.8"
-  val utest       = "0.6.3"
+  val utest       = "0.6.8-SNAPSHOT"
 }
 
 
@@ -16,8 +16,8 @@ lazy val commonSettings = Seq(
   scalacOptions ++= Seq("-deprecation","-unchecked","-feature","-language:implicitConversions","-Xlint"),
   addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
   libraryDependencies ++= Seq(
-    "de.surfice" %%% "scalanative-interop-cobj" % Version.obj_interop
-    //"com.lihaoyi" %%% "utest" % Version.utest % "test"
+    "de.surfice" %%% "scalanative-interop-cobj" % Version.obj_interop,
+    "com.lihaoyi" %%% "utest" % Version.utest % "test"
     ),
   testFrameworks += new TestFramework("utest.runner.Framework")
   )

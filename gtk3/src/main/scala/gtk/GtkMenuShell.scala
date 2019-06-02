@@ -11,4 +11,10 @@ import cobj._
 @CObj
 class GtkMenuShell extends GtkContainer {
 
+  /**
+   * Adds a new GtkMenuItem to the end of this menu shell's item list.
+   *
+   * @param child
+   */
+  def append(child: GtkMenuItem): Unit = extern
 }

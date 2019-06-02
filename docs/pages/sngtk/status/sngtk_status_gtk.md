@@ -127,7 +127,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkliststore.h              | {{page.partial}} | `GtkListStore`  |       |
 | gtklockbutton.h             | {{page.missing}} |               |       |
 | gtkmain.h                   | {{page.missing}} |               |       |
-| gtkmenu.h                   | {{page.missing}} |               |       |
+| gtkmenu.h                   | {{page.partial}} | `GtkMenu`     |       |
 | gtkmenubar.h                | {{page.ok}}      | `GtkMenuBar`  |       |
 | gtkmenubutton.h             | {{page.missing}} |               |       |
 | gtkmenuitem.h               | {{page.partial}} | `GtkMenuItem` |       |

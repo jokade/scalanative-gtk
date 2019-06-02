@@ -26,8 +26,8 @@ object GtkMenuItem {
    * @param label the text for the label
    */
   @name("gtk_menu_item_new_with_label")
-  def apply(label: CString): GtkMenuItem = extern
+  def withLabel(label: CString): GtkMenuItem = extern
 
-  def apply(label: String): GtkMenuItem = PoolZone{ implicit z => apply(toCString(label)) }
+  def withLabel(label: String): GtkMenuItem = PoolZone{ implicit z => withLabel(toCString(label)) }
 
 }
