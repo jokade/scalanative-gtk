@@ -4,15 +4,14 @@ package gobject
 import de.surfice.smacrotools.debug
 import glib._
 
-import scalanative.native._
+import scalanative._
+import unsafe._
+import unsigned._
 import cobj._
-import scala.scalanative.native.cobj.runtime.CObjObject
+import scala.scalanative.interop.PoolZone
 
 @CObj
-class GObject extends CObjObject with GAllocated with GRefCounter with GSignalReceiver {
-  @inline def ref(): Unit = extern
-  @inline def unref(): Unit = extern
-  @inline def free(): Unit = unref()
+class GObject extends GRefCounter with GSignalReceiver {
 
   /**
    * Returns the value of the specified gint property.
@@ -22,7 +21,7 @@ class GObject extends CObjObject with GAllocated with GRefCounter with GSignalRe
   def getIntProp(propName: CString): gint = {
     val v = stackalloc[gint]
     !v = 0
-    GObject.ext.g_object_get(__ptr,propName,v.cast[Ptr[Ptr[Byte]]], null)
+    GObject.ext.g_object_get(__ptr,propName,v.asInstanceOf[Ptr[Ptr[Byte]]], null)
     !v
   }
 
@@ -32,7 +31,7 @@ class GObject extends CObjObject with GAllocated with GRefCounter with GSignalRe
    * @param propName Name of the property
    * @param value property value
    */
-  def setIntProp(propName: CString, value: gint): Unit = GObject.ext.g_object_set(__ptr,propName,value.cast[Ptr[Byte]],null)
+  def setIntProp(propName: CString, value: gint): Unit = GObject.ext.g_object_set(__ptr,propName,value.asInstanceOf[Ptr[Byte]],null)
 
   /**
    * Returns the value of the specified guint property.
@@ -42,7 +41,7 @@ class GObject extends CObjObject with GAllocated with GRefCounter with GSignalRe
   def getUIntProp(propName: CString): guint = {
     val v = stackalloc[guint]
     !v = 0.toUInt
-    GObject.ext.g_object_get(__ptr,propName,v.cast[Ptr[Ptr[Byte]]], null)
+    GObject.ext.g_object_get(__ptr,propName,v.asInstanceOf[Ptr[Ptr[Byte]]], null)
     !v
   }
 
@@ -52,7 +51,7 @@ class GObject extends CObjObject with GAllocated with GRefCounter with GSignalRe
    * @param propName Name of the property
    * @param value property value
    */
-  def setUIntProp(propName: CString, value: guint): Unit = GObject.ext.g_object_set(__ptr,propName,value.cast[Ptr[Byte]],null)
+  def setUIntProp(propName: CString, value: guint): Unit = GObject.ext.g_object_set(__ptr,propName,value.asInstanceOf[Ptr[Byte]],null)
 
   /**
    * Returns the value of the specified float property.
@@ -82,7 +81,7 @@ class GObject extends CObjObject with GAllocated with GRefCounter with GSignalRe
   def getBooleanProp(propName: CString): gboolean = {
     val v = stackalloc[gboolean]
     !v = false
-    GObject.ext.g_object_get(__ptr,propName,v.cast[Ptr[Ptr[Byte]]], null)
+    GObject.ext.g_object_get(__ptr,propName,v.asInstanceOf[Ptr[Ptr[Byte]]], null)
     !v
   }
 
@@ -92,7 +91,7 @@ class GObject extends CObjObject with GAllocated with GRefCounter with GSignalRe
    * @param propName Name of the property.
    * @param value property value
    */
-  def setBooleanProp(propName: CString, value: gboolean): Unit = GObject.ext.g_object_set(__ptr,propName,value.cast[Ptr[Byte]],null)
+  def setBooleanProp(propName: CString, value: gboolean): Unit = GObject.ext.g_object_set(__ptr,propName,value.asInstanceOf[Ptr[Byte]],null)
 
   /**
    * Returns the value of the specified string property.
@@ -114,7 +113,7 @@ class GObject extends CObjObject with GAllocated with GRefCounter with GSignalRe
    * @param propName Name of the property
    * @param value property value
    */
-  def setStringProp(propName: CString, value: CString): Unit = GObject.ext.g_object_set(__ptr,propName,value.cast[Ptr[Byte]],null)
+  def setStringProp(propName: CString, value: CString): Unit = GObject.ext.g_object_set(__ptr,propName,value.asInstanceOf[Ptr[Byte]],null)
 
   def setStringProp(propName: CString, value: String): Unit = PoolZone{ implicit z => setStringProp(propName,toCString(value))}
 
@@ -129,6 +128,17 @@ class GObject extends CObjObject with GAllocated with GRefCounter with GSignalRe
     GObject.ext.g_object_get(__ptr,propName,v,null)
     !v
   }
+
+  /**
+   * Increases the reference count on this object.
+   */
+  @returnsThis
+  override def ref(): this.type = extern
+
+  /**
+   * Decreases the reference count on this object. This may result in the object being freed.
+   */
+  override def unref(): Unit = extern
 }
 
 object GObject {

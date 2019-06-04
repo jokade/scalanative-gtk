@@ -3,7 +3,8 @@ package gtk
 import glib.utils.GZone
 import glib.{gboolean, gfloat}
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 
 /**

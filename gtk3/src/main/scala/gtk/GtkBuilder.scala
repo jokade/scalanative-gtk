@@ -4,7 +4,8 @@ import glib.gpointer
 import glib.utils.GZone
 import gobject.{GCallback, GObject}
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 
 /**
@@ -44,7 +45,7 @@ class GtkBuilder extends GObject {
    * @return The requested object pointer, or null.
    */
   @name("gtk_builder_get_object")
-  @inline def getObjectPtr(name: CString): Ref[Nothing] = extern
+  @inline def getObjectPtr(name: CString): Ptr[Byte] = extern
 
   /**
    * Adds the `callbackSymbol` to the scope of this builder under the given `callbackName`.

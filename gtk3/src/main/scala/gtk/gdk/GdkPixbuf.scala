@@ -3,7 +3,8 @@ package gtk.gdk
 import gio.{GCancellable, GInputStream}
 import glib.{GError, gboolean, gint}
 
-import scala.scalanative.native._
+import scala.scalanative._
+import unsafe._
 import cobj._
 
 /**

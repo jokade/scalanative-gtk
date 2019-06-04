@@ -1,21 +1,18 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package glib
 
-import de.surfice.smacrotools.debug
-
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
-import scala.scalanative.native.cobj.runtime.CObjObject
 
 /**
- * @see [[https://developer.gnome.org/glib/stable/glib-Byte-Arrays.html#g-bytes-new]]
- *
- * @constructor
+ * @see [[https://developer.gnome.org/glib/stable/glib-Byte-Arrays.html]]
  */
 @CObj
-class GBytes extends CObjObject with GRefCounter {
+class GBytes extends CObject with GRefCounter {
 
-  @inline def ref(): Unit = extern
+  @returnsThis
+  @inline def ref(): this.type = extern
 
   @inline def unref(): Unit = extern
 

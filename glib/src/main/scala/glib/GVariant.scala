@@ -3,9 +3,9 @@ package glib
 
 import de.surfice.smacrotools.debug
 
-import scalanative.native._
+import scalanative._
 import cobj._
-import scala.scalanative.native.cobj.runtime.CObjObject
+import unsafe._
 
 /**
  * Strongly typed value datatype.
@@ -14,9 +14,7 @@ import scala.scalanative.native.cobj.runtime.CObjObject
  *
  */
 @CObj
-class GVariant extends CObjObject with GAllocated {
-
-  @inline override def free(): Unit = unref()
+class GVariant extends CObject with GRefCounter {
 
   /**
    * Decreases the reference count of this value.
@@ -30,7 +28,7 @@ class GVariant extends CObjObject with GAllocated {
    * @return this
    */
   @returnsThis
-  @inline def ref(): GVariant = extern
+  @inline def ref(): this.type = extern
 
   /**
    * GVariant uses a floating reference count system.

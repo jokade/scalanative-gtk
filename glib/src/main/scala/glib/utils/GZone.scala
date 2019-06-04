@@ -2,9 +2,10 @@ package glib.utils
 
 import glib.GSlice
 
-import scala.annotation.tailrec
-import scala.scalanative.native
-import scala.scalanative.native._
+import scala.scalanative._
+import scala.scalanative.interop.PoolZone
+import scala.scalanative.libc.stdlib
+import unsafe._
 
 trait GZone extends Zone {
   def totalSize: CSize
@@ -39,6 +40,9 @@ object GZone {
     private var _maxAllocSize: CSize = 0
     private var _maxLevel: Int = 0
 
+
+    override def close(): Unit = ???
+    override def isClosed: CBool = ???
 
     override def statInfo: String =
       s"""GZone Statistics:

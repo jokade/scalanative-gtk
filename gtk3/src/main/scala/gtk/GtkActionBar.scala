@@ -2,7 +2,8 @@ package gtk
 
 import glib.guint
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 
 /**

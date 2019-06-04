@@ -1,13 +1,15 @@
-// Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package gobject
 
 import de.surfice.smacrotools.debug
 import glib.{gpointer, gulong}
 
-import scala.scalanative.native._
+import scalanative._
+import unsafe._
+import unsigned._
 import cobj._
 
 @CObj("g_signal_")
+@debug
 trait GSignalReceiver {
 
   /**
@@ -24,8 +26,15 @@ trait GSignalReceiver {
    *
    * @see [[https://developer.gnome.org/gobject/stable/gobject-Signals.html#g-signal-connect]]
    */
-  @inline def connect[T](detailedSignal: CString, cHandler: GCallback, data: T): gulong =
-    connectData(detailedSignal,cHandler,data,null,0.toUInt)
+//  @inline def connect[T](detailedSignal: CString, cHandler: GCallback, data: T)(implicit wrapper: CObjectWrapper[T]): gulong =
+//    connectData(detailedSignal,cHandler,data,null,0.toUInt)
+
+
+//  def connect[R](signalName: CString, handler: () => R): gulong = connectData(signalName,new CFuncPtr0[R] {
+//    override def apply(): R = {
+//      handler()
+//    }
+//  },null,null,0.toUInt)
 
   /**
    * Connects a GCallback function to a signal for a particular object.
@@ -43,8 +52,8 @@ trait GSignalReceiver {
    * @param data
    * @return the handler ID (always greater than 0 for successful connections)
    */
-  def connectSwapped[T](detailedSignal: CString, cHandler: GCallback, data: T): gulong =
-    connectData(detailedSignal,cHandler,data,null,GConnectFlags.SWAPPED)
+//  def connectSwapped[T](detailedSignal: CString, cHandler: GCallback, data: T)(implicit wrapper: CObjectWrapper[T]): gulong =
+//    connectData(detailedSignal,cHandler,data,null,GConnectFlags.SWAPPED)
 
   /**
    * Connects a GCallback function to a signal received by this object.
@@ -58,6 +67,7 @@ trait GSignalReceiver {
    *
    * @see [[https://developer.gnome.org/gobject/stable/gobject-Signals.html#g-signal-connect-data]]
    */
-  def connectData[T](detailedSignal: CString, cHandler: CFunctionPtr, data: T, destroyData: GClosureNotify, connectFlags: GConnectFlags): gulong = extern
+//  def connectData[T](detailedSignal: CString, cHandler: CFuncPtr, data: T, destroyData: GClosureNotify, connectFlags: GConnectFlags)(implicit wrapper: CObjectWrapper[T]): gulong = extern
+  def connectData(detailedSignal: CString, cHandler: CFuncPtr, data: Ptr[Byte], destroyData: GClosureNotify, connectFlags: GConnectFlags): gulong = extern
 
 }

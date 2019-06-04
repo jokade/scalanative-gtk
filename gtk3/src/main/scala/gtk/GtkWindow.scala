@@ -3,7 +3,8 @@ package gtk
 import glib.{gboolean, gint}
 import gtk.gdk.GdkPixbuf
 
-import scala.scalanative.native._
+import scala.scalanative._
+import unsafe._
 import cobj._
 
 /**

@@ -5,13 +5,13 @@ import glib.{GAllocated, gint, gpointer}
 import gobject.GBoxed
 import gtk.GtkTreeIter.GtkTreeIterStruct
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
-import scala.scalanative.native.cobj.runtime.CObjObject
 
 @CObj
-class GtkTreeIter extends CObjObject with GAllocated {
-  def __struct: Ptr[GtkTreeIterStruct] = __ptr.cast[Ptr[GtkTreeIterStruct]]
+class GtkTreeIter extends GAllocated {
+  def __struct: Ptr[GtkTreeIterStruct] = __ptr.asInstanceOf[Ptr[GtkTreeIterStruct]]
 
   override def free(): Unit = {
   }
@@ -26,8 +26,8 @@ object GtkTreeIter {
    * @param zone
    */
   def alloc(implicit zone: Zone): GtkTreeIter = {
-    val iter = scalanative.native.alloc[GtkTreeIterStruct]
-    new GtkTreeIter(iter.cast[Ptr[Byte]])
+    val iter = scalanative.unsafe.alloc[GtkTreeIterStruct]
+    new GtkTreeIter(iter.asInstanceOf[Ptr[Byte]])
   }
 
   def apply[R](f: GtkTreeIter=>R): R = GZone{ implicit z =>

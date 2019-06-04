@@ -3,7 +3,8 @@ package gtk
 import glib.{GDestroyNotify, gboolean, gpointer}
 import gobject.GObject
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 
 /**

@@ -3,8 +3,10 @@ package gtk
 import de.surfice.smacrotools.debug
 import glib.{GList, gboolean, gint, guint}
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
+import scala.scalanative.interop.PoolZone
 
 /**
  * A widget for displaying both trees and lists.
@@ -116,14 +118,14 @@ class GtkTreeView extends GtkContainer {
   /**
    * Returns a list with all columns in this tree view.
    */
-  def getColumns(): GList = extern
+  def getColumns(): GList[GtkTreeViewColumn] = extern
 
   def withSelection(f: GtkTreeIter=>Any): Unit = GtkTreeIter{ implicit iter =>
     _selection.getSelected(null,iter)
     f(iter)
   }
 
-  def onRowActivated[T](callback: CFunctionPtr4[Ptr[Byte],Ptr[Byte],Ptr[Byte],T,_], data: T): Unit = connect(c"row-activated",callback,data)
+//  def onRowActivated[T](callback: CFuncPtr4[Ptr[Byte],Ptr[Byte],Ptr[Byte],T,_], data: T)(implicit wrapper: CObjectWrapper[T]): Unit = connect(c"row-activated",callback,data)
 }
 
 object GtkTreeView {

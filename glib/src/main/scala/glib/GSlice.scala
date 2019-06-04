@@ -1,7 +1,8 @@
 package glib
 
-import scala.scalanative.native._
+import scala.scalanative._
 import cobj._
+import unsafe._
 
 @CObj
 object GSlice {

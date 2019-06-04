@@ -2,7 +2,8 @@ package gio
 
 import glib.{GBytes, GDestroyNotify, gssize}
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 
 /**

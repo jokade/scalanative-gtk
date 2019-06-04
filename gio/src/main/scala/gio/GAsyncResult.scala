@@ -1,6 +1,6 @@
 package gio
 
-import scalanative.native._
+import scalanative._
 import cobj._
 
 @CObj

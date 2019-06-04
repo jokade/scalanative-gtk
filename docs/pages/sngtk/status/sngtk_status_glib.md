@@ -35,7 +35,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gerror.h            | {{page.partial}} |               |       |
 | gfileutils.h        | {{page.missing}} |               |       |
 | ggettext.h          | {{page.missing}} |               |       |
-| ghash.h             | {{page.missing}} |               |       |
+| ghash.h             | {{page.partial}} | `GHashTable`  |       |
 | ghmac.h             | {{page.missing}} |               |       |
 | ghook.h             | {{page.missing}} |               |       |
 | ghostutils.h        | {{page.missing}} |               |       |
@@ -44,7 +44,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | giochannel.h        | {{page.missing}} |               |       |
 | gkeyfile.h          | {{page.partial}} |               |       |
 | glib-autocleanups.h | {{page.missing}} |               |       |
-| glist.h             | {{page.partial}} |               |       |
+| glist.h             | {{page.partial}} | `GList`, `GSList` |       |
 | gmacros.h           | {{page.missing}} |               |       |
 | gmain.h             | {{page.missing}} |               |       |
 | gmappedfile.h       | {{page.missing}} |               |       |

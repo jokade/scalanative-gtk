@@ -8,11 +8,13 @@ import utest._
 
 object GVariantTest extends TestSuite {
   val tests = Tests {
+    /*
     'new_ref_unref-{
       val v = new GVariant(c"u",42).ref()
       assert( GVariantType.equal(v.getType(), GVariantType.UINT32) )
       v.unref()
     }
+    */
     'equals-{
       val v1 = GVariant.int32(42)
       val v2 = GVariant.int32(42)

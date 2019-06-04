@@ -1,9 +1,10 @@
-// Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
-
 import glib.{gboolean, gpointer}
 import gtk.utils.GtkExecutionContext
 
-import scalanative.native._
+import scalanative._
+import unsafe._
+import unsigned._
+import cobj._
 
 package object gtk {
 
@@ -268,7 +269,7 @@ package object gtk {
     val DIR_LTR          :GtkIconLookupFlags = 1 << 7
     val DIR_RTL          :GtkIconLookupFlags = 1 << 8
   }
-  type GtkTreeSelectionFunc = CFunctionPtr5[Ptr[Byte],Ptr[Byte],Ptr[Byte],gboolean,gpointer,Unit]
+  type GtkTreeSelectionFunc = CFuncPtr5[Ptr[Byte],Ptr[Byte],Ptr[Byte],gboolean,gpointer,Unit]
 
 
   type GtkPackDirection = Int

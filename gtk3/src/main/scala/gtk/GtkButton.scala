@@ -4,8 +4,10 @@ import de.surfice.smacrotools.debug
 import glib.gboolean
 import glib.utils.GZone
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
+import scala.scalanative.interop.PoolZone
 
 @CObj
 //@debug

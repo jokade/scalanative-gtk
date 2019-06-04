@@ -1,11 +1,11 @@
 package gtk
 
 import glib.{GError, GList, gboolean, gint}
-import glib.convert.Wrappers.GListWrapper
 import gobject.GObject
 import gtk.gdk.GdkPixbuf
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 import scala.util.{Failure, Success, Try}
 
@@ -16,7 +16,6 @@ import scala.util.{Failure, Success, Try}
  */
 @CObj
 class GtkIconTheme extends GObject {
-  import CObjWrapper.Implicits.StringWrapper
 
   /**
    * Checks whether this theme includes the specified icon.
@@ -42,10 +41,10 @@ class GtkIconTheme extends GObject {
    * @param size the desired icon size. The resulting icon may not be exactly this size
    * @param flags flags modifying the behaviour of the icon lookup
    */
-  def loadIcon(name: String, size: gint, flags: GtkIconLookupFlags = 0): Try[GdkPixbuf] =
-    GError[Try[GdkPixbuf]](implicit err => PoolZone(implicit z => Success(loadIcon(toCString(name),size,flags)))){ err =>
-      Failure(new RuntimeException(s"could not load icon '$name': ${fromCString(err.message)}"))
-    }
+//  def loadIcon(name: String, size: gint, flags: GtkIconLookupFlags = 0): Try[GdkPixbuf] =
+//    GError[Try[GdkPixbuf]](implicit err => PoolZone(implicit z => Success(loadIcon(toCString(name),size,flags)))){ err =>
+//      Failure(new RuntimeException(s"could not load icon '$name': ${fromCString(err.message)}"))
+//    }
 
   /**
    * Lists the icons in this theme.
@@ -53,14 +52,14 @@ class GtkIconTheme extends GObject {
    * @param context a string identifying a particular type of icon, or null to list all icons
    * @return a list holding the names of all icons in this theme.
    */
-  def listIcons(context: CString): GList = extern
+  def listIcons(context: CString): GList[GtkImage] = extern
 
   /**
    * Returns a list with the names of all icons defined in this theme.
    *
    * @note The returned list needs to be freed!
    */
-  def allIcons: GListWrapper[String] = listIcons(null).asScala[String]
+//  def allIcons: GList[String] = listIcons(null).asScala[String]
 }
 
 object GtkIconTheme {

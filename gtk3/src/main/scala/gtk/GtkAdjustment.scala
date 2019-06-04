@@ -1,6 +1,7 @@
 package gtk
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 import glib.gdouble
 import gobject.GObject

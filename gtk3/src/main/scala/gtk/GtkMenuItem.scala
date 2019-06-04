@@ -1,7 +1,9 @@
 package gtk
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
+import scala.scalanative.interop.PoolZone
 
 /**
  * Widget used for items in menus.

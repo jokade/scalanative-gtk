@@ -4,7 +4,8 @@ import de.surfice.smacrotools.debug
 import glib.{gboolean, gint}
 import gobject.{GObject, GSignalReceiver}
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 
 /**

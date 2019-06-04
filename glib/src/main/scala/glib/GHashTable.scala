@@ -1,0 +1,133 @@
+package glib
+
+import de.surfice.smacrotools.debug
+
+import scalanative._
+import unsafe._
+import cobj._
+
+/**
+ * Hash Tables — associations between keys and values so that given a key the value can be found quickly.
+ *
+ * @see [[https://developer.gnome.org/glib/stable/glib-Hash-Tables.html]]
+ */
+@CObj
+class GHashTable[K<:CObject,V<:CObject] extends GRefCounter {
+
+  /**
+   * Inserts a new key and value into this hashtable.
+   *
+   * If the key already exists in the this hashtable, its current value is replaced with the new value.
+   * If you supplied a value_destroy_func when creating the GHashTable, the old value is freed using that function.
+   * If you supplied a key_destroy_func when creating the GHashTable, the passed key is freed using that function.
+   *
+   * @param key
+   * @param value
+   * @return true if the key did not yet exist in the hashtable.
+   */
+  def insert(key: K, value: V): gboolean = extern
+
+  /**
+   * Inserts a new key and value into this hashtable.
+   *
+   * The difference to [[insert()]] is that if the key already exists in the GHashTable,
+   * it gets replaced by the new key. If you supplied a value_destroy_func when creating the GHashTable,
+   * the old value is freed using that function. If you supplied a key_destroy_func when creating the GHashTable,
+   * the old key is freed using that function.
+   *
+   * @param key
+   * @param value
+   * @return
+   */
+  def replace(key: K, value: V): gboolean = extern
+
+  /**
+   * Removes a key and its associated value from this hashtable.
+   *
+   * @param key
+   * @return true if the key was found and removed from the hashtable.
+   */
+  def remove(key: K): gboolean = extern
+
+  /**
+   * Removes all keys and their associated values from this hashtable.
+   */
+  def removeAll(): Unit = extern
+
+  /**
+   * Retrieves every key inside this hashtable. The returned list is valid until changes release those keys.
+   *
+   * This iterates over every entry in the hash table to build the list. To iterate over the entries mor efficiently,
+   * use a [[foreach()]] instead.
+   */
+  def getKeys(): GList[V] = extern
+
+  /**
+   * Returns the number of elements contained in the GHashTable.
+   */
+  @name("g_hash_table_size")
+  def length: guint = extern
+
+  @inline def size: Int = length.toInt
+
+  /**
+   * Looks up a key in a GHashTable. Note that this function cannot distinguish between a key that is not present
+   * and one which is present and has the value NULL. If you need this distinction, use g_hash_table_lookup_extended().
+   *
+   * @param key
+   * @return
+   */
+  @nullable
+  def lookup(key: K)(implicit wrapper: CObjectWrapper[V]): V = extern
+
+  def lookupExtended(lookupKey: K)(implicit origKey: Out[V], value: Out[V]): gboolean = extern
+
+  /**
+   * Checks if the key is in this hashtable.
+   *
+   * @param key
+   * @return
+   */
+  def contains(key: K): gboolean = extern
+
+  def foreach(f: Function2[K,V,Unit])(implicit kWrapper: CObjectWrapper[K], vWrapper: CObjectWrapper[V]): Unit = {
+    val iter = stackalloc[GHashTableIter]
+    val key = stackalloc[gpointer]
+    val value = stackalloc[gpointer]
+    GHashTable.iterInit(iter,this.__ptr)
+    while( GHashTable.iterNext(iter,key,value) ) {
+      f(kWrapper.wrap(!key),vWrapper.wrap(!value))
+    }
+  }
+
+  /**
+   * Increases the reference count on this object.
+   */
+  @returnsThis
+  override def ref(): this.type = extern
+
+  /**
+   * Decreases the reference count on this object. This may result in the object being freed.
+   */
+  override def unref(): Unit = extern
+
+}
+
+object GHashTable {
+  @name("g_hash_table_new")
+  def apply[K<:CObject,V<:CObject](hashFunc: GHashFunc, keyEqualFunc: GEqualFunc): GHashTable[K,V] = extern
+
+  /**
+   * Creates an empty hashtable that compares keys similar to
+   * @tparam K
+   * @tparam V
+   * @return
+   */
+  def apply[K<:CObject,V<:CObject](): GHashTable[K,V] = apply(null,null)
+
+  @name("g_hash_table_iter_init")
+  private def iterInit(iter: Ptr[GHashTableIter], hashtable: Ptr[Byte]): Unit = extern
+
+  @name("g_hash_table_iter_next")
+  private def iterNext(iter: Ptr[GHashTableIter], key: Ptr[gpointer], value: Ptr[gpointer]): gboolean = extern
+}

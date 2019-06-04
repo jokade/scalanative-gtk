@@ -1,6 +1,7 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 
-import scala.scalanative.native._
+import scala.scalanative._
+import unsafe._
 
 package object glib {
   /* gtypes.h */
@@ -36,12 +37,12 @@ package object glib {
 
   type GQuark   = guint32
 
-  type GFunc = CFunctionPtr2[gpointer,gpointer,_]
+  type GFunc = CFuncPtr2[gpointer,gpointer,_]
 
   type GSListStruct = CStruct2[gpointer,Ptr[Byte]]
   type GListStruct  = CStruct3[gpointer,Ptr[Byte],Ptr[Byte]]
 
-  type GDestroyNotify = CFunctionPtr1[gpointer,Unit]
+  type GDestroyNotify = CFuncPtr1[gpointer,Unit]
 
   /**
    * A type in the GVariant type system.
@@ -50,5 +51,9 @@ package object glib {
    * May be copied using [[GVariantType.copy]] and freed using [[GVariantType.free]]
    */
   type GVariantType = CString
+
+  type GHashTableIter = CStruct6[gpointer,gpointer,gpointer,CInt,gboolean,gpointer]
+  type GHashFunc = CFuncPtr1[gconstpointer,guint]
+  type GEqualFunc = CFuncPtr2[gconstpointer,gconstpointer,gboolean]
 
 }

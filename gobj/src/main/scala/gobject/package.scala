@@ -2,7 +2,9 @@
 
 import glib.gsize
 
-import scala.scalanative.native._
+import scalanative._
+import unsafe._
+import unsigned._
 
 package object gobject {
 
@@ -36,14 +38,14 @@ package object gobject {
   }
 
   /* gclosure.h */
-  type GCallback           = CFunctionPtr
-//  type GCallback0[R]       = CFunctionPtr0[R]
-//  type GCallback1[T1,R]    = CFunctionPtr1[T1,R]
-//  type GCallback2[T1,T2,R] = CFunctionPtr2[T1,T2,R]
+  type GCallback           = CFuncPtr
+//  type GCallback0[R]       = CFuncPtr0[R]
+//  type GCallback1[T1,R]    = CFuncPtr1[T1,R]
+//  type GCallback2[T1,T2,R] = CFuncPtr2[T1,T2,R]
 
-  type GClosureMarshal     = CFunctionPtr0[Unit]
-  type GVaClosureMarshal   = CFunctionPtr0[Unit]
-  type GClosureNotify      = CFunctionPtr0[Unit]
+  type GClosureMarshal     = CFuncPtr0[Unit]
+  type GVaClosureMarshal   = CFuncPtr0[Unit]
+  type GClosureNotify      = CFuncPtr0[Unit]
 
   /* gsignal.h */
   type GConnectFlags = UInt

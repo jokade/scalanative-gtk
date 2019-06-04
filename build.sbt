@@ -32,14 +32,14 @@ lazy val scalanativeGtk = project.in(file("."))
   .aggregate(glib,gobj,gio,gtk3,json,soup,macIntegration) //,sourceview,tepl)
   .settings(commonSettings ++ dontPublish:_*)
   .settings(
-    name := "scalanative-gtk-bindings"
+    //name := "scalanative-gtk-bindings"
     )
 
 lazy val glib = project
   .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings ++ nativeSettings ++ publishingSettings:_*)
   .settings(
-    name := "scalanative-glib"
+    //name := "scalanative-glib"
   )
 
 
@@ -48,7 +48,7 @@ lazy val gobj = project
   .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings ++ publishingSettings:_*)
   .settings(
-    name := "scalanative-gobj",
+    //name := "scalanative-gobj",
     libraryDependencies ++= Seq(
 //      "de.surfice" %% "smacrotools" % Version.smacrotools
     )
@@ -60,7 +60,7 @@ lazy val gio = project
   .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings ++ publishingSettings:_*)
   .settings(
-    name := "scalanative-gio"
+    //name := "scalanative-gio"
   )
 
 
@@ -69,7 +69,7 @@ lazy val gtk3 = project
   .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings ++ publishingSettings:_*)
   .settings(
-    name := "scalanative-gtk3"
+    //name := "scalanative-gtk3"
   )
 
 lazy val sourceview = project
@@ -77,7 +77,7 @@ lazy val sourceview = project
   .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings ++ publishingSettings:_*)
   .settings(
-    name := "scalanative-gtksourceview"
+    //name := "scalanative-gtksourceview"
   )
 
 lazy val tepl = project
@@ -85,7 +85,7 @@ lazy val tepl = project
   .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings ++ publishingSettings:_*)
   .settings(
-    name := "scalanative-tepl"
+    //name := "scalanative-tepl"
   )
 
 lazy val json = project
@@ -93,7 +93,7 @@ lazy val json = project
   .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings ++ publishingSettings:_*)
   .settings(
-    name := "scalanative-json-glib"
+    //name := "scalanative-json-glib"
   )
 
 lazy val soup = project
@@ -101,7 +101,7 @@ lazy val soup = project
   .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings ++ publishingSettings:_*)
   .settings(
-    name := "scalanative-libsoup"
+    //name := "scalanative-libsoup"
   )
 
 lazy val macIntegration = project
@@ -109,7 +109,7 @@ lazy val macIntegration = project
   .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings ++ publishingSettings:_*)
   .settings(
-    name := "scalanative-gtk-mac-integration"
+    //name := "scalanative-gtk-mac-integration"
   )
 
 lazy val gtkTest = project

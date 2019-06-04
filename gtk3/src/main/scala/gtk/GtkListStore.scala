@@ -4,7 +4,8 @@ import glib.utils.GZone
 import glib.{gboolean, gdouble, gint, gpointer}
 import gobject.{GObject, GType}
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 
 /**
@@ -36,12 +37,12 @@ class GtkListStore extends GtkTreeModel {
   def appendRow(values: Any*)(implicit iter: GtkTreeIter): Unit = {
     append
     values.zipWithIndex foreach {
-//      case (s:Ptr[_],idx) => set(idx,s.cast[CString])
+//      case (s:Ptr[_],idx) => set(idx,s.asInstanceOf[CString])
       case (s: String, idx) => set(idx,s)
       case (i: Int, idx)    => set(idx,i)
       case (b: Boolean, idx)=> set(idx,b)
       case (d: Double, idx) => set(idx,d)
-      case (p,idx) => set(idx,p.asInstanceOf[Object].cast[Ptr[Byte]])
+      case (p,idx) => set(idx,p.asInstanceOf[Object].asInstanceOf[Ptr[Byte]])
 //      case _ => throw new IllegalArgumentException("GtkListStore.appendRow(): received unsupported value type")
     }
   }

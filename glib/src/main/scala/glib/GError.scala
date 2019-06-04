@@ -3,35 +3,36 @@ package glib
 
 import de.surfice.smacrotools.debug
 
-import scalanative.native._
+import scalanative._
 import cobj._
-import Implicits._
-import scala.scalanative.native.cobj.runtime.CObjObject
+import scala.scalanative.interop.PoolZone
+import unsafe._
+//import Implicits._
 
 /**
  * @see [[https://developer.gnome.org/glib/stable/glib-Error-Reporting.html#g-error-new]]
  */
 // TODO: add CVararg* (currently crashes due to https://github.com/scala-native/scala-native/issues/1142)
 @CObj
-class GError extends CObjObject with GAllocated {
+class GError extends CObject with GAllocated {
   type GErrorStruct = CStruct3[GQuark,gint,CString]
 
-  @inline def __struct: Ptr[GErrorStruct] = __ptr.cast[Ptr[GErrorStruct]]
+  @inline def __struct: Ptr[GErrorStruct] = __ptr.asInstanceOf[Ptr[GErrorStruct]]
 
   /**
    * Error domain, e.g. `G_FILE_ERROR`
    */
-  def domain: GQuark = !__struct._1
+//  def domain: GQuark = !__struct._1
 
   /**
    * Error code, e.g. `G_FILE_ERROR_NOENT`
    */
-  def code: gint = !__struct._2
+//  def code: gint = !__struct._2
 
   /**
    * Human-readable error message
    */
-  def message: CString = !__struct._3
+//  def message: CString = !__struct._3
 
   def free(): Unit = extern
 }

@@ -5,7 +5,6 @@ import gtk.Gtk
 
 import scala.collection.mutable.ListBuffer
 import scala.concurrent.ExecutionContext
-import scala.scalanative.native.{CArray, CString}
 
 /**
  * An ExecutionContext that is integrated with the Gtk main event loop

@@ -6,8 +6,9 @@ import java.util
 import glib._
 
 import scala.collection.{AbstractIterable, AbstractIterator, AbstractSeq, mutable}
-import scala.scalanative.native.cobj.CObjWrapper
-import scalanative.native._
+import scalanative._
+import cobj._
+import unsafe._
 
 object Wrappers {
 //  case class NullTerminatedStringArray(array: Ptr[CString], length: Int)
@@ -17,28 +18,28 @@ object Wrappers {
 //      GLib.strfreev(array)
 //    }
 //  }
-
+/*
   abstract class MutableList[T] extends mutable.AbstractSeq[T] with GAllocated {
     def __ptr: Ptr[Byte] = raw.__ptr
     val raw: GListLike
-    val valueWrapper: CObjWrapper[T]
+    val valueWrapper: CObjectWrapper[T]
     final override def free(): Unit = raw.free
     final override def iterator: Iterator[T] = new GListIterator(raw.ptr,valueWrapper)
-    final override def apply(idx: Int): T = valueWrapper.wrap(!raw.nth(idx.toUInt)._1)
+//    final override def apply(idx: Int): T = valueWrapper.wrap(!raw.nth(idx.toUInt)._1)
     final override def update(i: CInt, a: T): Unit = ???
     final override def length: Int = raw.length().toInt
     final def prepend(elem: T): this.type = {
-      raw.prepend(valueWrapper.unwrap(elem))
+//      raw.prepend(valueWrapper.unwrap(elem))
       this
     }
     @inline final def +=:(elem: T): this.type = prepend(elem)
     final def append(elem: T): this.type = {
-      raw.append(valueWrapper.unwrap(elem))
+//      raw.append(valueWrapper.unwrap(elem))
       this
     }
     @inline final def +=(elem: T): this.type = append(elem)
     final def ++=(xs: TraversableOnce[T]): this.type = {
-      raw.appendAll(xs)(valueWrapper)
+//      raw.appendAll(xs)(valueWrapper)
       this
     }
   }
@@ -56,5 +57,6 @@ object Wrappers {
       valueWrapper.wrap(data)
     }
   }
+  */
 }
 

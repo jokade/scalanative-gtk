@@ -1,7 +1,7 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package glib
 
-import scala.scalanative.native._
+import scala.scalanative.unsafe._
 
 @extern
 object ext {

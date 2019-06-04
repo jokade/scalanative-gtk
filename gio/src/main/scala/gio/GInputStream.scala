@@ -4,7 +4,8 @@ package gio
 import de.surfice.smacrotools.debug
 import glib._
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 import gobject.GObject
 

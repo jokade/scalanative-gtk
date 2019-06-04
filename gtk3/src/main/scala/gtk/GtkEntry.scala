@@ -2,7 +2,8 @@ package gtk
 
 import glib.{gboolean, gfloat, gint, guint16}
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 
 /**

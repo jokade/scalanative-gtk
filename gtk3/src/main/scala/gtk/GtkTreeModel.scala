@@ -3,9 +3,9 @@ package gtk
 import glib.GLib
 import gobject.GObject
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
-import scala.scalanative.native.cobj.runtime.CObjObject
 
 /**
  * The tree interface used by [[GtkTreeView]].

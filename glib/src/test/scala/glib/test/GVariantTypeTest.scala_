@@ -3,7 +3,7 @@ package glib.test
 
 import glib.GVariantType
 import utest._
-import scalanative.native._
+import scalanative._
 
 object GVariantTypeTest extends TestSuite {
   val tests = Tests {

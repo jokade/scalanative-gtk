@@ -3,7 +3,8 @@ package gtk
 import de.surfice.smacrotools.debug
 import glib.{gint, guint}
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 
 /**
