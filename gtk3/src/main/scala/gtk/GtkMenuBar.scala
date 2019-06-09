@@ -39,5 +39,5 @@ object GtkMenuBar {
    * @param model
    */
   @name("gtk_menu_bar_new_from_model")
-  def apply(model: GMenuModel): GtkMenuBar = extern
+  def fromModel(model: GMenuModel): GtkMenuBar = extern
 }

@@ -16,7 +16,6 @@ import scala.util.{Failure, Success, Try}
  */
 @CObj
 class GtkIconTheme extends GObject {
-  import CObjWrapper.Implicits.StringWrapper
 
   /**
    * Checks whether this theme includes the specified icon.
@@ -60,7 +59,7 @@ class GtkIconTheme extends GObject {
    *
    * @note The returned list needs to be freed!
    */
-  def allIcons: GListWrapper[String] = listIcons(null).asScala[String]
+//  def allIcons: GListWrapper[String] = listIcons(null).asScala[String]
 }
 
 object GtkIconTheme {
