@@ -5,9 +5,9 @@ import de.surfice.smacrotools.debug
 import glib.{GAllocated, gboolean, gdouble, gint64}
 import gobject.GBoxed
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
-import scala.scalanative.native.cobj.runtime.CObjObject
 
 /**
  * Node in a JSON object model.
@@ -15,7 +15,7 @@ import scala.scalanative.native.cobj.runtime.CObjObject
  * @see [[https://developer.gnome.org/json-glib/stable/json-glib-JSON-Node.html#JsonNode]]
  */
 @CObj
-class JsonNode extends CObjObject with GBoxed with GAllocated {
+class JsonNode extends CObject with GBoxed with GAllocated {
   override def free(): Unit = extern
 
   @name("json_node_get_node_type")

@@ -1,12 +1,13 @@
 package gtk
 
 import de.surfice.smacrotools.debug
-import glib.{gboolean, gint}
+import glib.{gboolean, gint, gulong}
 import gobject.{GObject, GSignalReceiver}
 
 import scalanative._
 import unsafe._
 import cobj._
+import scala.scalanative.interop.RefZone
 
 /**
  * Base class for all widgets.
@@ -209,6 +210,8 @@ class GtkWidget extends GObject with GtkBuildable {
    */
   def tooltipText: String = getStringProp(c"tooltip-text")
   def tooltipText_=(tooltip: String): Unit = setStringProp(c"tooltip-text",tooltip)
+
+  def onDestroy(handler: Function0[Unit])(implicit refZone: RefZone): gulong = connect(c"destroy",handler)
 }
 
 object GtkWidget {

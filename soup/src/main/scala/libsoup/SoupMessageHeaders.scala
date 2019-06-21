@@ -1,11 +1,9 @@
-//     Project: scalanative-libsoup
-//      Module:
-// Description:
 package libsoup
 
 import glib.GAllocated
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 
 /**

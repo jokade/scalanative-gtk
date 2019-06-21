@@ -10,13 +10,9 @@ import cobj._
  * A container box.
  *
  * @see [[https://developer.gnome.org/gtk3/stable/GtkBox.html]]
- *
- * @constructor
- * @param orientation the box's orientation
- * @param spacing  the number of pixels to place by default between children
  */
 @CObj
-class GtkBox(orientation: GtkOrientation, spacing: gint) extends GtkContainer {
+class GtkBox extends GtkContainer {
   /**
    * Adds `child` to this box, packed with reference to the start of the box.
    * The child is packed after any other child packed with reference to the start of the box.
@@ -72,4 +68,8 @@ class GtkBox(orientation: GtkOrientation, spacing: gint) extends GtkContainer {
    * @param spacing the number of pixels to put between children
    */
   @inline def setSpacing(spacing: gint): Unit = extern
+}
+
+object GtkBox {
+  def apply(orientation: GtkOrientation, spacing: gint): GtkBox = extern
 }

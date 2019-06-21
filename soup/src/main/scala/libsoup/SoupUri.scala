@@ -4,16 +4,15 @@ import de.surfice.smacrotools.debug
 import glib.{GAllocated, GLib}
 import gobject.GBoxed
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
-import scala.scalanative.native.cobj.runtime.CObjObject
 
 /**
  * @see [[https://developer.gnome.org/libsoup/stable/SoupURI.html]]
  */
 @CObj
-@debug
-class SoupUri extends CObjObject with GBoxed with GAllocated {
+class SoupUri extends CObject with GBoxed with GAllocated {
 
   /**
    * Sets the URIs host part.

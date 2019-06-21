@@ -1,11 +1,11 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package glib
 
-import de.surfice.smacrotools.debug
+import glib.convert.Wrappers.ListWrapper
 
-import scalanative._
-import cobj._
-import unsafe._
+import scala.scalanative._
+import scala.scalanative.cobj._
+import scala.scalanative.unsafe._
 
 /**
  * A linked list that can be iterated over in both directions.
@@ -31,7 +31,7 @@ class GList[T<:CObject] extends GListLike[T] {
 
   def appendAll(xs: TraversableOnce[T]): GList[T] = new GList( GList.appendAll(this.__ptr,xs) )
 
-//  @inline def asScala[T](implicit valueWrapper: CObjWrapper[T]): GListWrapper[T] = GListWrapper(this,valueWrapper)
+  def asScala(implicit valueWrapper: CObjectWrapper[T]): ListWrapper[T] = new ListWrapper[T](this)
 }
 
 object GList {

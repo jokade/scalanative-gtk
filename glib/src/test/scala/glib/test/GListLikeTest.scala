@@ -65,6 +65,16 @@ trait GListLikeTest extends TestSuite {
       l5.foreach((x:GVariant) => sum += x.getInt32())
       sum ==> 45
     }
+
+    'asScala-{
+      val eut = emptyList[GVariant].appendAll(Seq(GVariant(1),GVariant(2),GVariant(3)))
+      eut.size ==> 3
+
+      val list = eut.asScala
+      list.size ==> 3
+      list ==> Seq(GVariant(1),GVariant(2),GVariant(3))
+
+    }
   }
 }
 

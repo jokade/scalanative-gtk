@@ -1,7 +1,8 @@
 package libsoup
 
 import gobject.GObject
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 
 /**

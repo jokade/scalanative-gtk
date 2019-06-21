@@ -9,54 +9,42 @@ import scala.collection.{AbstractIterable, AbstractIterator, AbstractSeq, mutabl
 import scalanative._
 import cobj._
 import unsafe._
+import unsigned._
 
 object Wrappers {
-//  case class NullTerminatedStringArray(array: Ptr[CString], length: Int)
-//    extends AbstractSeq[CString] with IndexedSeq[CString] with GSeq[CString] {
-//    def apply(idx: Int): CString = array(idx)
-//    override def free(): Unit = {
-//      GLib.strfreev(array)
-//    }
-//  }
-/*
-  abstract class MutableList[T] extends mutable.AbstractSeq[T] with GAllocated {
-    def __ptr: Ptr[Byte] = raw.__ptr
-    val raw: GListLike
-    val valueWrapper: CObjectWrapper[T]
-    final override def free(): Unit = raw.free
-    final override def iterator: Iterator[T] = new GListIterator(raw.ptr,valueWrapper)
-//    final override def apply(idx: Int): T = valueWrapper.wrap(!raw.nth(idx.toUInt)._1)
-    final override def update(i: CInt, a: T): Unit = ???
-    final override def length: Int = raw.length().toInt
-    final def prepend(elem: T): this.type = {
-//      raw.prepend(valueWrapper.unwrap(elem))
-      this
-    }
-    @inline final def +=:(elem: T): this.type = prepend(elem)
-    final def append(elem: T): this.type = {
-//      raw.append(valueWrapper.unwrap(elem))
-      this
-    }
-    @inline final def +=(elem: T): this.type = append(elem)
-    final def ++=(xs: TraversableOnce[T]): this.type = {
-//      raw.appendAll(xs)(valueWrapper)
-      this
-    }
-  }
+  //  case class NullTerminatedStringArray(array: Ptr[CString], length: Int)
+  //    extends AbstractSeq[CString] with IndexedSeq[CString] with GSeq[CString] {
+  //    def apply(idx: Int): CString = array(idx)
+  //    override def free(): Unit = {
+  //      GLib.strfreev(array)
+  //    }
+  //  }
 
-//  case class GSListWrapper[T](raw: GSList, valueWrapper: CObjWrapper[T]) extends MutableList[T]
-
-  case class GListWrapper[T](raw: GList, valueWrapper: CObjWrapper[T]) extends MutableList[T]
-
-  class GListIterator[T](private var _next: Ptr[GSListStruct], valueWrapper: CObjWrapper[T]) extends AbstractIterator[T] {
+  class ListIterator[T](private var _next: Ptr[GSListStruct], valueWrapper: CObjectWrapper[T]) extends AbstractIterator[T] {
     override def hasNext: Boolean = _next != null
 
     override def next(): T = {
-      val data = !_next._1
-      _next = (!_next._2).cast[Ptr[GSListStruct]]
+      val data = _next._1
+      _next = (_next._2).asInstanceOf[Ptr[GSListStruct]]
       valueWrapper.wrap(data)
     }
   }
-  */
+
+  class ListWrapper[T](val wrapped: GListLike[T])(implicit val valueWrapper: CObjectWrapper[T]) extends AbstractSeq[T] with GAllocated {
+
+    override def __ptr: Ptr[Byte] = wrapped.__ptr
+
+//    override def update(idx: Int, elem: T): Unit = ???
+
+    override def length: Int = wrapped.size
+
+    override def apply(idx: Int): T = wrapped.nthData(idx.toUInt)
+
+    override def free(): Unit = wrapped.free()
+
+    override def iterator: Iterator[T] = new ListIterator[T](wrapped.__ptr.asInstanceOf[Ptr[GSListStruct]],valueWrapper)
+  }
+
+
 }
 

@@ -1,12 +1,10 @@
-//     Project: scalanative-libsoup
-//      Module:
-// Description:
 package libsoup
 
 import de.surfice.smacrotools.debug
 import gobject.GBoxed
 
-import scala.scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 
 /**

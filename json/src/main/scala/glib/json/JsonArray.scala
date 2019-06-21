@@ -4,9 +4,9 @@ package glib.json
 import glib.{GList, GRefCounter, guint}
 import gobject.GBoxed
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
-import scala.scalanative.native.cobj.runtime.CObjObject
 
 /**
  * A JSON array representation.
@@ -14,7 +14,7 @@ import scala.scalanative.native.cobj.runtime.CObjObject
  * @see [[https://developer.gnome.org/json-glib/stable/json-glib-JSON-Array.html#JsonArray]]
  */
 @CObj
-class JsonArray extends CObjObject with GBoxed with GRefCounter {
+class JsonArray extends CObject with GBoxed with GRefCounter {
 
   /**
    * Returns the number of elements in this array
@@ -31,8 +31,10 @@ class JsonArray extends CObjObject with GBoxed with GRefCounter {
   /**
    * Gets the elements of this array as a list of [[JsonNode]]s
    */
-  def getElements(): GList = extern
+  def getElements(): GList[JsonNode] = extern
 
-  override def ref(): Unit = extern
+  @returnsThis
+  override def ref(): this.type = extern
   override def unref(): Unit = extern
+  override def free(): Unit = unref()
 }

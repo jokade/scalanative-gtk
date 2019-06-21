@@ -5,7 +5,8 @@ import glib.utils.GZone
 import glib.{GBytes, gint, gsize, guint}
 import gobject.GObject
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 
 /**

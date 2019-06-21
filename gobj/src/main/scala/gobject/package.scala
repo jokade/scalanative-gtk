@@ -8,6 +8,7 @@ import unsigned._
 
 package object gobject {
 
+  type SignalCallback
   /* gtype.h */
   type GType = gsize
   object GType {

@@ -1,13 +1,13 @@
 package gtk
 
 import de.surfice.smacrotools.debug
-import glib.gboolean
+import glib.{gboolean, gulong}
 import glib.utils.GZone
 
 import scalanative._
 import unsafe._
 import cobj._
-import scala.scalanative.interop.PoolZone
+import scala.scalanative.interop.{PoolZone, RefZone}
 
 @CObj
 //@debug
@@ -30,6 +30,8 @@ class GtkButton extends GtkBin {
    * Returns the current relief style of this button.
    */
   @inline def getRelief(): GtkReliefStyle = extern
+
+  def onClicked(handler: Function0[Unit])(implicit refZone: RefZone): gulong = connect(c"clicked",handler)
 }
 
 object GtkButton {

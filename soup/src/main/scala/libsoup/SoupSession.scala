@@ -5,7 +5,8 @@ import gio.{GAsyncReadyCallback, GAsyncResult, GCancellable, GInputStream}
 import glib.{GError, gpointer, guint}
 import gobject.GObject
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.util.Try
@@ -23,14 +24,14 @@ class SoupSession extends GObject {
 
   def sendMessage(msg: SoupMessage): guint = extern
   def send(msg: SoupMessage, cancellable: GCancellable)(implicit error: Out[GError]): GInputStream = extern
-  def queueMessage(msg: SoupMessage, callback: CFunctionPtr3[Ptr[Byte],Ptr[Byte],Ptr[Byte],_], data: Ptr[Byte]): Unit = extern
+  def queueMessage(msg: SoupMessage, callback: CFuncPtr3[Ptr[Byte],Ptr[Byte],Ptr[Byte],_], data: Ptr[Byte]): Unit = extern
   def sendAsync(msg: SoupMessage, cancellable: GCancellable, callback: GAsyncReadyCallback, data: gpointer): Unit = extern
   def sendFinish(result: GAsyncResult)(implicit error: Out[GError]): GInputStream = extern
 
   def queueMessage(msg: SoupMessage): Future[SoupMessage] = {
     val promise = Promise[SoupMessage]()
 //    _queued += promise
-    queueMessage(msg,SoupSession.callbackPtr, promise.cast[Ptr[Byte]])
+    queueMessage(msg,SoupSession.callbackPtr, promise.asInstanceOf[Ptr[Byte]])
     promise.future
   }
 
@@ -48,7 +49,7 @@ class SoupSession extends GObject {
     val promise = Promise[GInputStream]()
     val req = SoupMessage.fromQuery(uri,queryFields)
     req.ref()
-    sendAsync(req,null,SoupSession.asyncCallbackPtr,promise.cast[gpointer])
+    sendAsync(req,null,SoupSession.asyncCallbackPtr,promise.asInstanceOf[gpointer])
     promise.future
   }
 
@@ -60,18 +61,22 @@ object SoupSession {
 
   private def callback(pSession: Ptr[Byte], pMsg: Ptr[Byte], pData: Ptr[Byte]): Unit = {
     val msg = new SoupMessage(pMsg)
-    val promise = pData.cast[Promise[SoupMessage]]
+    val promise = pData.asInstanceOf[Promise[SoupMessage]]
     promise.success(msg)
   }
-  private val callbackPtr = CFunctionPtr.fromFunction3(callback)
+  private val callbackPtr = new CFuncPtr3[Ptr[Byte],Ptr[Byte],Ptr[Byte],Unit] {
+    override def apply(arg1: Ptr[CSignedChar], arg2: Ptr[CSignedChar], arg3: Ptr[CSignedChar]): Unit = callback(arg1,arg2,arg3)
+  }
 
   private def asyncCallback(pSession: Ptr[Byte], pResult: Ptr[Byte], pData: Ptr[Byte]): Unit = {
-    val promise = pData.cast[Promise[GInputStream]]
+    val promise = pData.asInstanceOf[Promise[GInputStream]]
     val err = stackalloc[Ptr[Byte]]
     !err = null
     val stream = new GInputStream(__ext.soup_session_send_finish(pSession,pResult,null))
     promise.success(stream)
   }
 
-  private val asyncCallbackPtr = CFunctionPtr.fromFunction3(asyncCallback)
+  private val asyncCallbackPtr = new CFuncPtr3[Ptr[Byte],Ptr[Byte],Ptr[Byte],Unit] {
+    override def apply(arg1: Ptr[CSignedChar], arg2: Ptr[CSignedChar], arg3: Ptr[CSignedChar]): Unit = asyncCallback(arg1,arg2,arg3)
+  }
 }

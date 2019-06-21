@@ -3,7 +3,8 @@ package glib.test
 
 import glib.{GVariant, GVariantType}
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import utest._
 
 object GVariantTest extends TestSuite {

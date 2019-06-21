@@ -1,11 +1,12 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package glib
 
+import glib.convert.Wrappers.ListWrapper
+
 import scala.scalanative._
-import unsafe._
-import unsigned._
-import cobj._
-import scala.scalanative.cobj.CObj.CObjWrapper
+import scala.scalanative.cobj._
+import scala.scalanative.unsafe._
+import scala.scalanative.unsigned._
 
 trait GListLike[T] extends GAllocated {
 
@@ -114,4 +115,6 @@ trait GListLike[T] extends GAllocated {
    * @tparam T
    */
 //  def +=:[T](x: T)(implicit valueWrapper: CObjWrapper[T]): GListLike = prepend(valueWrapper.unwrap(x))
+
+    def asScala(implicit valueWrapper: CObjectWrapper[T]): ListWrapper[T]
 }

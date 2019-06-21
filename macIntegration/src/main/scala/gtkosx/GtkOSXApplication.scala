@@ -3,8 +3,10 @@ package gtkosx
 import gobject.{GObject, GType}
 import gtk.GtkMenuShell
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
+import scala.scalanative.interop.PoolZone
 
 @CObj(prefix = "gtkosx_application_")
 class GtkOSXApplication extends GObject {

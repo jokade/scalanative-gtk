@@ -4,7 +4,8 @@ package glib.json
 import glib.{GError, gboolean, gssize}
 import gobject.GObject
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
 import scala.util.{Failure, Success, Try}
 
@@ -37,7 +38,7 @@ class JsonParser extends GObject {
 object JsonParser {
   class ParseError(msg: String) extends scala.Error(msg)
   object ParseError {
-    def apply(err: GError): ParseError = new ParseError(fromCString(err.message))
+    def apply(err: GError): ParseError = ??? //new ParseError(fromCString(err.message))
   }
 
   @name("json_parser_new")

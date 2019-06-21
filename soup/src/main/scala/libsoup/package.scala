@@ -1,4 +1,4 @@
-import scala.scalanative.native.{CFunctionPtr3, Ptr}
+import scalanative.unsafe._
 
 package object libsoup {
 

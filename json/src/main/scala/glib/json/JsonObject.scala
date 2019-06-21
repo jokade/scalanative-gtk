@@ -4,15 +4,15 @@ package glib.json
 import glib.{GRefCounter, gboolean, guint}
 import gobject.GBoxed
 
-import scalanative.native._
+import scalanative._
+import unsafe._
 import cobj._
-import scala.scalanative.native.cobj.runtime.CObjObject
 
 /**
  * A JSON object representation.
  */
 @CObj
-class JsonObject extends CObjObject with GBoxed with GRefCounter {
+class JsonObject extends CObject with GBoxed with GRefCounter {
 
   /**
    * Returns the number of members in this object.
@@ -86,6 +86,8 @@ class JsonObject extends CObjObject with GBoxed with GRefCounter {
    */
   def obj(name: CString): Option[JsonObject] = member(name).map(_.getObject())
 
-  override def ref(): Unit = extern
+  @returnsThis
+  override def ref(): this.type = extern
   override def unref(): Unit = extern
+  override def free(): Unit = unref()
 }
