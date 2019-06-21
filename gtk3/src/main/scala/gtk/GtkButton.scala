@@ -31,7 +31,7 @@ class GtkButton extends GtkBin {
    */
   @inline def getRelief(): GtkReliefStyle = extern
 
-  def onClicked(handler: Function0[Unit])(implicit refZone: RefZone): gulong = connect(c"clicked",handler)
+  def onClicked(handler: Function0[Unit])(implicit refZone: RefZone): gulong = connect0(c"clicked",handler)
 }
 
 object GtkButton {

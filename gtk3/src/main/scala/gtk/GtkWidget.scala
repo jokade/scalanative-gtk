@@ -1,6 +1,7 @@
 package gtk
 
 import de.surfice.smacrotools.debug
+import glib.utils.GZone
 import glib.{gboolean, gint, gulong}
 import gobject.{GObject, GSignalReceiver}
 
@@ -211,10 +212,39 @@ class GtkWidget extends GObject with GtkBuildable {
   def tooltipText: String = getStringProp(c"tooltip-text")
   def tooltipText_=(tooltip: String): Unit = setStringProp(c"tooltip-text",tooltip)
 
-  def onDestroy(handler: Function0[Unit])(implicit refZone: RefZone): gulong = connect(c"destroy",handler)
+  def onDestroy(handler: Function0[Unit])(implicit refZone: RefZone): gulong = connect0(c"destroy",handler)
 }
 
 object GtkWidget {
 //  @inline def destroy: CFunctionPtr1[CObj.Ref[Byte],Unit] = CFunctionPtr.fromFunction1(__ext.gtk_widget_destroy)
+
+//  /**
+//   * Fetches the widget with the specified ID from the provided GtkBuilder.
+//   *
+//   * @param gtkBuilder GtkBuilder that holds the widget.
+//   * @param id ID of the widget to get
+//   * @param wrapper
+//   * @tparam T Type of the widget to load
+//   */
+//  def fromBuilder[T<:GtkWidget](gtkBuilder: GtkBuilder, id: CString)(implicit wrapper: CObjectWrapper[T]): T =
+//    wrapper.wrap(gtkBuilder.getObjectPtr(id))
+
+//  def fromXmlString[T<:GtkWidget](xml: CString, id: CString)(implicit wrapper: CObjectWrapper[T]): T = {
+//    val b = GtkBuilder.fromString(xml,-1)
+//    val w = wrapper.wrap(b.getObjectPtr(id))
+//    b.free()
+//    w
+//  }
+
+//  def fromXmlString[T<:GtkWidget](xml: String, id: String)(implicit wrapper: CObjectWrapper[T]): T = GZone{ implicit z =>
+//    fromXmlString(toCString(xml),toCString(id))(wrapper)
+//  }
+
+//  def fromXmlFile[T<:GtkWidget](filename: CString, id: CString)(implicit wrapper: CObjectWrapper[T]): T = {
+//    val b = GtkBuilder.fromFile(filename)
+//    val w = wrapper.wrap(b.getObjectPtr(id))
+//    b.free()
+//    w
+//  }
 }
 

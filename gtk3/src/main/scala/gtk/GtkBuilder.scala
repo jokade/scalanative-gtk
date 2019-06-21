@@ -1,6 +1,6 @@
 package gtk
 
-import glib.gpointer
+import glib.{GSList, gpointer, gssize}
 import glib.utils.GZone
 import gobject.{GCallback, GObject}
 
@@ -47,6 +47,21 @@ class GtkBuilder extends GObject {
   @name("gtk_builder_get_object")
   @inline def getObjectPtr(name: CString): Ptr[Byte] = extern
 
+  def getObjects[T<:GObject]()(implicit wrapper: CObjectWrapper[T]): GSList[T] = extern
+
+  /**
+   * Returns the GObject with the specified ID, or null.
+   *
+   * @param id ID of the object to be retrieved.
+   * @param wrapper
+   * @tparam T Type of the object to be retrieved
+   */
+  def getObject[T<:GObject](id: CString)(implicit wrapper: CObjectWrapper[T]): T = wrapper.wrap(getObjectPtr(id))
+
+  def getObject[T<:GObject](id: String)(implicit wrapper: CObjectWrapper[T]): T = GZone { implicit z =>
+    getObject[T](toCString(id))
+  }
+
   /**
    * Adds the `callbackSymbol` to the scope of this builder under the given `callbackName`.
    *
@@ -66,6 +81,7 @@ class GtkBuilder extends GObject {
    * @param userData user data to pass back with all signals
    */
   @inline def connectSignals(userData: gpointer): Unit = extern
+
 }
 
 object GtkBuilder {
@@ -78,7 +94,12 @@ object GtkBuilder {
    * @return a GtkBuilder containing the described interface
    */
   @name("gtk_builder_new_from_file")
-  @inline def fromFile(filename: CString): GtkBuilder = extern
+  def fromFile(filename: CString): GtkBuilder = extern
 
   def fromFile(filename: String): GtkBuilder = GZone{ implicit z => fromFile(toCString(filename)) }
+
+  @name("gtk_builder_new_from_string")
+  def fromString(string: CString, length: gssize): GtkBuilder = extern
+
+  def fromString(string: String): GtkBuilder = GZone{ implicit z => fromString(toCString(string),-1) }
 }
