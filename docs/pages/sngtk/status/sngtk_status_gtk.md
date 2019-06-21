@@ -190,7 +190,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtksocket.h                 | {{page.missing}} |               |       |
 | gtkspinbutton.h             | {{page.missing}} |               |       |
 | gtkspinner.h                | {{page.ok}}      |`GtkSpinner`   |       |
-| gtkstack.h                  | {{page.missing}} |               |       |
+| gtkstack.h                  | {{page.partial}} |`GtkStack`     |       |
 | gtkstacksidebar.h           | {{page.missing}} |               |       |
 | gtkstackswitcher.h          | {{page.missing}} |               |       |
 | gtkstatusbar.h              | {{page.missing}} |               |       |

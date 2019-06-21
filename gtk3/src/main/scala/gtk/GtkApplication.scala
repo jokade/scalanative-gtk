@@ -2,6 +2,7 @@ package gtk
 
 import gio.{GApplication, GApplicationFlags}
 import glib.gulong
+import glib.utils.GZone
 
 import scalanative._
 import unsafe._
@@ -28,4 +29,8 @@ class GtkApplication extends GApplication {
 object GtkApplication {
   @name("gtk_application_new")
   def apply(applicationId: CString, flags: GApplicationFlags): GtkApplication = extern
+
+  def apply(applicationId: String, flags: GApplicationFlags = GApplicationFlags.FLAGS_NONE): GtkApplication = GZone{ implicit z =>
+    apply(toCString(applicationId),flags)
+  }
 }
