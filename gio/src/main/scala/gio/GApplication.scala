@@ -18,7 +18,7 @@ import scala.scalanative.runtime.{Intrinsics, RawPtr}
 @CObj
 class GApplication extends GObject {
 
-  def run(args: Int, argv: Ptr[CString]): Int = extern
+  def run(argc: Int, argv: Ptr[CString]): Int = extern
   def run(args: Array[String]): Int = GZone{ implicit z =>
     val argc = args.size
     val argv = gio.argsToArgv(args)
@@ -42,6 +42,8 @@ class GApplication extends GObject {
    * Registers the handler for the 'shutdown' signal.
    */
   def onShutdown(handler: Function0[Unit])(implicit refZone: RefZone): gulong = connect0(c"shutdown",handler)
+
+//  def onOpen(handler: Function0[Unit])(implicit refZone: RefZone): gulong = connect0(c"open",handler)
 }
 
 object GApplication {

@@ -8,7 +8,7 @@ Experimental [scala-native](https://github.com/scala-native/scala-native) bindin
 ### sbt Settings
 Add this to your `build.sbt`:
 ```scala
-libraryDependencies += "de.surfice" %%% "scalanative-gtk3" % "0.0.1-SNAPSHOT"
+libraryDependencies += "de.surfice" %%% "scalanative-gtk3" % "0.0.2-SNAPSHOT"
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 ```

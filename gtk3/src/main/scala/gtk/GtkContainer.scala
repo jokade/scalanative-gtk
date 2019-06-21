@@ -5,6 +5,7 @@ import glib.{gint, guint}
 
 import scalanative._
 import unsafe._
+import unsigned._
 import cobj._
 
 /**
@@ -56,4 +57,7 @@ class GtkContainer extends GtkWidget {
    * Retrieves the border width of this conatiner.
    */
   @inline def getBorderWidth(): guint = extern
+
+//  def borderWidth: Int = getUIntProp(c"border-width").toInt
+//  def borderWidth_=(i: Int): Unit = setUIntProp(c"border-width",i.toUInt)
 }
