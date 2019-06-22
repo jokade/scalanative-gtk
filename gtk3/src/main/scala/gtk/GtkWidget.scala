@@ -4,6 +4,7 @@ import de.surfice.smacrotools.debug
 import glib.utils.GZone
 import glib.{gboolean, gint, gulong}
 import gobject.{GObject, GSignalReceiver}
+import gtk.gdk.GdkWindow
 
 import scalanative._
 import unsafe._
@@ -123,6 +124,11 @@ class GtkWidget extends GObject with GtkBuildable {
   @inline def getName(): CString = extern
 
   /**
+   * Returns the widget's window if it is realized, otherwise null.
+   */
+  def getWindow(): GdkWindow = extern
+
+  /**
    * Sets the sensitivity of this widget.
    *
    * A widget is sensitive if the user can interact with it. Insensitive widgets are “grayed out” and the user can’t
@@ -139,6 +145,16 @@ class GtkWidget extends GObject with GtkBuildable {
    * @param height requested height, or -1 to unset
    */
   @inline def setSizeRequest(width: gint, height: gint): Unit = extern
+
+  /**
+   * Returns the width that has currently been allocated to this widget.
+   */
+  def getAllocatedWidth(): Int = extern
+
+  /**
+   * Returns the height that has currently been allocated to this widget.
+   */
+  def getAllocatedHeight(): Int = extern
 
   /**
    * Whether to exapnd in both directions. Setting this sets both [[hexpand]] and [[vexpand]].
@@ -213,6 +229,15 @@ class GtkWidget extends GObject with GtkBuildable {
   def tooltipText_=(tooltip: String): Unit = setStringProp(c"tooltip-text",tooltip)
 
   def onDestroy(handler: Function0[Unit])(implicit refZone: RefZone): gulong = connect0(c"destroy",handler)
+
+  def onRealize[T<:GtkWidget](handler: Function1[T,Unit])(implicit refZone: RefZone,wrapper: CObjectWrapper[T]): gulong =
+    connect1(c"realize", (arg1: Ptr[Byte]) => handler(wrapper.wrap(arg1)))
+
+  def onDraw[T1<:GtkWidget,T2<:CObject](handler: Function2[T1,T2,gboolean])(implicit refZone: RefZone, wrapper1: CObjectWrapper[T2], wrapper2: CObjectWrapper[T1]): gulong =
+    connect2(c"draw", (arg1: Ptr[Byte], arg2: Ptr[Byte]) => handler(wrapper2.wrap(arg1),wrapper1.wrap(arg2)))
+
+  def onDrawRaw(handler: Function2[Ptr[Byte],Ptr[Byte],gboolean])(implicit refZone: RefZone): gulong =
+    connect2(c"draw",(arg1: Ptr[Byte], arg2: Ptr[Byte]) => handler(arg1,arg2))
 }
 
 object GtkWidget {

@@ -29,32 +29,32 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkappchooserbutton.h       | {{page.missing}} |               |       |
 | gtkappchooserdialog.h       | {{page.missing}} |               |       |
 | gtkappchooserwidget.h       | {{page.missing}} |               |       |
-| gtkapplication.h            | {{page.missing}} |               |       |
-| gtkapplicationwindow.h      | {{page.missing}} |               |       |
+| gtkapplication.h            | {{page.partial}} | `GtkApplication` |       |
+| gtkapplicationwindow.h      | {{page.partial}} | `GtkApplicationWindow` |              |       |
 | gtkaspectframe.h            | {{page.missing}} |               |       |
 | gtkassistant.h              | {{page.missing}} |               |       |
 | gtkbbox.h                   | {{page.missing}} |               |       |
-| gtkbin.h                    | {{page.missing}} |               |       |
+| gtkbin.h                    | {{page.partial}} | `GtkBin`      |       |
 | gtkbindings.h               | {{page.missing}} |               |       |
 | gtkborder.h                 | {{page.missing}} |               |       |
-| gtkbox.h                    | {{page.missing}} |               |       |
-| gtkbuildable.h              | {{page.missing}} |               |       |
+| gtkbox.h                    | {{page.partial}} | `GtkBox`      |       |
+| gtkbuildable.h              | {{page.partial}} | `GtkBuildable` |       |
 | gtkbuilder.h                | {{page.missing}} |               |       |
-| gtkbutton.h                 | {{page.missing}} |               |       |
+| gtkbutton.h                 | {{page.partial}} | `GtkButton`   |       |
 | gtkcalendar.h               | {{page.missing}} |               |       |
 | gtkcellarea.h               | {{page.missing}} |               |       |
 | gtkcellareabox.h            | {{page.missing}} |               |       |
 | gtkcellareacontext.h        | {{page.missing}} |               |       |
 | gtkcelleditable.h           | {{page.missing}} |               |       |
 | gtkcelllayout.h             | {{page.missing}} |               |       |
-| gtkcellrenderer.h           | {{page.missing}} |               |       |
+| gtkcellrenderer.h           | {{page.partial}} | `GtkCellRenderer` |       |
 | gtkcellrendereraccel.h      | {{page.missing}} |               |       |
 | gtkcellrenderercombo.h      | {{page.missing}} |               |       |
 | gtkcellrendererpixbuf.h     | {{page.missing}} |               |       |
 | gtkcellrendererprogress.h   | {{page.missing}} |               |       |
 | gtkcellrendererspin.h       | {{page.missing}} |               |       |
 | gtkcellrendererspinner.h    | {{page.missing}} |               |       |
-| gtkcellrenderertext.h       | {{page.missing}} |               |       |
+| gtkcellrenderertext.h       | {{page.partial}} | `GtkCellRendererText` |       |
 | gtkcellrenderertoggle.h     | {{page.missing}} |               |       |
 | gtkcellview.h               | {{page.missing}} |               |       |
 | gtkcheckbutton.h            | {{page.missing}} |               |       |
@@ -67,7 +67,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkcolorutils.h             | {{page.missing}} |               |       |
 | gtkcombobox.h               | {{page.missing}} |               |       |
 | gtkcomboboxtext.h           | {{page.missing}} |               |       |
-| gtkcontainer.h              | {{page.missing}} |               |       |
+| gtkcontainer.h              | {{page.partial}} | `GtkContainer` |       |
 | gtkcssprovider.h            | {{page.missing}} |               |       |
 | gtkcsssection.h             | {{page.missing}} |               |       |
 | gtkdebug.h                  | {{page.missing}} |               |       |
@@ -75,9 +75,9 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkdnd.h                    | {{page.missing}} |               |       |
 | gtkdragdest.h               | {{page.missing}} |               |       |
 | gtkdragsource.h             | {{page.missing}} |               |       |
-| gtkdrawingarea.h            | {{page.missing}} |               |       |
+| gtkdrawingarea.h            | {{page.partial}} | `GtkDrawingArea`|       |
 | gtkeditable.h               | {{page.missing}} |               |       |
-| gtkentry.h                  | {{page.missing}} |               |       |
+| gtkentry.h                  | {{page.partial}} | `GtkEntry`    |       |
 | gtkentrybuffer.h            | {{page.missing}} |               |       |
 | gtkentrycompletion.h        | {{page.missing}} |               |       |
 | gtkenums.h                  | {{page.missing}} |               |       |
@@ -107,9 +107,9 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkgestureswipe.h           | {{page.missing}} |               |       |
 | gtkgesturezoom.h            | {{page.missing}} |               |       |
 | gtkglarea.h                 | {{page.missing}} |               |       |
-| gtkgrid.h                   | {{page.missing}} |               |       |
+| gtkgrid.h                   | {{page.partial}} | `GtkGrid`     |       |
 | gtkheaderbar.h              | {{page.partial}} | `GtkHeaderBar` |       |
-| gtkicontheme.h              | {{page.missing}} |               |       |
+| gtkicontheme.h              | {{page.partial}} | `GtkIconTheme` |       |
 | gtkiconview.h               | {{page.missing}} |               |       |
 | gtkimage.h                  | {{page.partial}} | `GtkImage`    |       |
 | gtkimcontext.h              | {{page.missing}} |               |       |
@@ -119,7 +119,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkimmulticontext.h         | {{page.missing}} |               |       |
 | gtkinfobar.h                | {{page.missing}} |               |       |
 | gtkinvisible.h              | {{page.missing}} |               |       |
-| gtklabel.h                  | {{page.missing}} |               |       |
+| gtklabel.h                  | {{page.partial}} | `GtkLabel`    |       |
 | gtklayout.h                 | {{page.missing}} |               |       |
 | gtklevelbar.h               | {{page.missing}} |               |       |
 | gtklinkbutton.h             | {{page.missing}} |               |       |
@@ -158,7 +158,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkradiobutton.h            | {{page.missing}} |               |       |
 | gtkradiomenuitem.h          | {{page.missing}} |               |       |
 | gtkradiotoolbutton.h        | {{page.missing}} |               |       |
-| gtkrange.h                  | {{page.missing}} |               |       |
+| gtkrange.h                  | {{page.partial}} | `GtkRange`    |       |
 | gtkrecentchooser.h          | {{page.missing}} |               |       |
 | gtkrecentchooserdialog.h    | {{page.missing}} |               |       |
 | gtkrecentchoosermenu.h      | {{page.missing}} |               |       |
@@ -167,7 +167,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkrecentmanager.h          | {{page.missing}} |               |       |
 | gtkrender.h                 | {{page.missing}} |               |       |
 | gtkrevealer.h               | {{page.missing}} |               |       |
-| gtkscale.h                  | {{page.missing}} |               |       |
+| gtkscale.h                  | {{page.partial}} | `GtkScale`    |       |
 | gtkscalebutton.h            | {{page.missing}} |               |       |
 | gtkscrollable.h             | {{page.missing}} |               |       |
 | gtkscrollbar.h              | {{page.missing}} |               |       |
@@ -234,7 +234,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkvolumebutton.h           | {{page.missing}} |               |       |
 | gtkwidget.h                 | {{page.missing}} |               |       |
 | gtkwidgetpath.h             | {{page.missing}} |               |       |
-| gtkwindow.h                 | {{page.partial}} |               |       |
+| gtkwindow.h                 | {{page.partial}} | `GtkWindow`   |       |
 | gtkwindowgroup.h            | {{page.missing}} |               |       |
 | gtkx-autocleanups.h         | {{page.missing}} |               |       |
 | gtkx.h                      | {{page.missing}} |               |       |

@@ -4,6 +4,7 @@ import glib.{gboolean, gint, guint}
 
 import scalanative._
 import unsafe._
+import unsigned._
 import cobj._
 
 /**
@@ -71,5 +72,6 @@ class GtkBox extends GtkContainer {
 }
 
 object GtkBox {
+  @name("gtk_box_new")
   def apply(orientation: GtkOrientation, spacing: gint): GtkBox = extern
 }

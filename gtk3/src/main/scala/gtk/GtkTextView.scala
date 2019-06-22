@@ -45,10 +45,20 @@ class GtkTextView extends GtkContainer {
    */
   @inline final def scrollToMark(mark: GtkTextMark, withinMargin: gdouble, useAlign: gboolean, xalign: gdouble, yalign: gdouble): Unit = extern
 
+
+  /**
+   * Whether the text can be modified by the user.
+   */
+  def editable: gboolean = getBooleanProp(c"editable")
+  def editable_=(f: gboolean): Unit = setBooleanProp(c"editable",f)
 //  @inline final def scrollToIter
 }
 
 object GtkTextView {
+
+  @name("gtk_text_view_new")
+  def apply(): GtkTextView = extern
+
   /**
    * Creates a new GtkTextView widget displaying the given buffer.
    * One buffer can be shared among many widgets.

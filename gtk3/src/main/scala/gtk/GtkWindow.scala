@@ -17,6 +17,14 @@ import cobj._
 class GtkWindow extends GtkBin {
 
   /**
+   * Sets the default size for this window.
+   *
+   * @param width width in pixels, or -1 to unset the default width
+   * @param height height in pixels, or -1 to unset the default height
+   */
+  def setDefaultSize(width: gint, height: gint): Unit = extern
+
+  /**
    * Sets the title of the window.
    *
    * @param title title of the window
