@@ -56,4 +56,6 @@ package object glib {
   type GHashFunc = CFuncPtr1[gconstpointer,guint]
   type GEqualFunc = CFuncPtr2[gconstpointer,gconstpointer,gboolean]
 
+  type GSourceFunc = CFuncPtr1[gpointer,gboolean]
+
 }
