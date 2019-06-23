@@ -81,7 +81,7 @@ class GObject extends GRefCounter with GSignalReceiver {
   def getBooleanProp(propName: CString): gboolean = {
     val v = stackalloc[gboolean]
     !v = false
-    GObject.ext.g_object_get(__ptr,propName,v.asInstanceOf[Ptr[Ptr[Byte]]], null)
+    GObject.ext.g_object_getBoolean(__ptr,propName,v.asInstanceOf[Ptr[CBool]], null)
     !v
   }
 
@@ -91,7 +91,7 @@ class GObject extends GRefCounter with GSignalReceiver {
    * @param propName Name of the property.
    * @param value property value
    */
-  def setBooleanProp(propName: CString, value: gboolean): Unit = GObject.ext.g_object_set(__ptr,propName,value.asInstanceOf[Ptr[Byte]],null)
+  def setBooleanProp(propName: CString, value: gboolean): Unit = GObject.ext.g_object_setBoolean(__ptr,propName,value,null)
 
   /**
    * Returns the value of the specified string property.
@@ -148,9 +148,15 @@ object GObject {
    def g_object_get(self: Ptr[Byte], name: CString, ptr: Ptr[Ptr[Byte]], last: Ptr[Byte]): Unit = extern
    @name("g_object_get")
    def g_object_getFloat(self: Ptr[Byte], name: CString, ptr: Ptr[Float], last: Ptr[Byte]): Unit = extern
+   @name("g_object_get")
+   def g_object_getBoolean(self: Ptr[Byte], name: CString, ptr: Ptr[CBool], last: Ptr[Byte]): Unit = extern
+
+
    def g_object_set(self: Ptr[Byte], name: CString, ptr: Ptr[Byte], last: Ptr[Byte]): Unit = extern
    @name("g_object_set")
    def g_object_setFloat(self: Ptr[Byte], name: CString, value: CFloat, last: Ptr[Byte]): Unit = extern
+   @name("g_object_set")
+   def g_object_setBoolean(self: Ptr[Byte], name: CString, value: CBool, last: Ptr[Byte]): Unit = extern
 
 //   def g_object_new(objectType: GType, last: CString): Ptr[Byte] = extern
  }

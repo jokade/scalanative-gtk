@@ -74,7 +74,7 @@ trait GSignalReceiver {
 //  def connectData[R](detailedSignal: CString, cHandler: CFuncPtr0[Unit], data: RawPtr, destroyData: GClosureNotify, connectFlags: GConnectFlags): gulong = extern
 //  def connectData[T1,R](detailedSignal: CString, cHandler: CFuncPtr1[T1,R], data: RawPtr, destroyData: GClosureNotify, connectFlags: GConnectFlags): gulong = extern
 
-  final def connect0(signal: CString, handler: Function0[Unit])(implicit refZone: RefZone): gulong = GSignalReceiver.ext.g_signal_connect_data(
+  final def connect0[R](signal: CString, handler: Function0[R])(implicit refZone: RefZone): gulong = GSignalReceiver.ext.g_signal_connect_data(
     this.__ptr,
     signal,
     new CFuncPtr1[RawPtr,Unit] { override def apply(ctx: RawPtr): Unit = Intrinsics.castRawPtrToObject(ctx).asInstanceOf[Function0[Unit]].apply() },
@@ -84,7 +84,7 @@ trait GSignalReceiver {
   )
 
 
-  final def connect1(signal: CString, handler: Function1[Ptr[Byte],Unit])(implicit refZone: RefZone): gulong = GSignalReceiver.ext.g_signal_connect_data(
+  final def connect1[R](signal: CString, handler: Function1[Ptr[Byte],R])(implicit refZone: RefZone): gulong = GSignalReceiver.ext.g_signal_connect_data(
     this.__ptr,
     signal,
     new CFuncPtr2[RawPtr,RawPtr,Unit] { override def apply(ctx: RawPtr, arg1: RawPtr): Unit =
@@ -95,6 +95,32 @@ trait GSignalReceiver {
     GConnectFlags.SWAPPED
   )
 
+  final def connect2[R](signal: CString, handler: Function2[Ptr[Byte],Ptr[Byte],R])(implicit refZone: RefZone): gulong = GSignalReceiver.ext.g_signal_connect_data(
+    this.__ptr,
+    signal,
+    new CFuncPtr3[RawPtr,RawPtr,RawPtr,Unit] { override def apply(ctx: RawPtr, arg1: RawPtr, arg2: RawPtr): Unit =
+      Intrinsics.castRawPtrToObject(ctx).asInstanceOf[Function2[Ptr[Byte],Ptr[Byte],Unit]].apply(runtime.fromRawPtr[Byte](arg2), runtime.fromRawPtr[Byte](arg1))
+    },
+    refZone.export(handler),
+    null,
+    GConnectFlags.SWAPPED
+  )
+
+  /**
+   * Blocks a signal handler for this instance so it will not be called during any signal emissions unless it is unblocked again.
+   *
+   * @param handlerId handler ID returned by the `connect` call.
+   */
+  @name("g_signal_handler_block")
+  def blockHandler(handlerId: gulong): Unit = extern
+
+  /**
+   * Undoes the effect of a previous [[blockHandler()]] call.
+   *
+   * @param handlerId handler ID returned by the `connect` call.
+   */
+  @name("g_signal_handler_unblock")
+  def unblockHandler(handlerId : gulong): Unit = extern
 }
 
 object GSignalReceiver {
@@ -102,5 +128,6 @@ object GSignalReceiver {
   object ext {
     def g_signal_connect_data(obj: Ptr[Byte], signal: CString, handler: CFuncPtr1[RawPtr,Unit], data: RawPtr, destroyData: GClosureNotify, connectFlags: GConnectFlags): gulong = extern
     def g_signal_connect_data(obj: Ptr[Byte], signal: CString, handler: CFuncPtr2[RawPtr,RawPtr,Unit], data: RawPtr, destroyData: GClosureNotify, connectFlags: GConnectFlags): gulong = extern
+    def g_signal_connect_data(obj: Ptr[Byte], signal: CString, handler: CFuncPtr3[RawPtr,RawPtr,RawPtr,Unit], data: RawPtr, destroyData: GClosureNotify, connectFlags: GConnectFlags): gulong = extern
   }
 }
