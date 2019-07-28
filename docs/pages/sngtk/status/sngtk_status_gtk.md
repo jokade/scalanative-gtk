@@ -65,7 +65,7 @@ partial: <i class="fa fa-adjust" style="color:orange"></i>
 | gtkcolorchooserdialog.h     | {{page.missing}} |               |       |
 | gtkcolorchooserwidget.h     | {{page.missing}} |               |       |
 | gtkcolorutils.h             | {{page.missing}} |               |       |
-| gtkcombobox.h               | {{page.missing}} |               |       |
+| gtkcombobox.h               | {{page.partial}} | `GtkComboBox` |       |
 | gtkcomboboxtext.h           | {{page.missing}} |               |       |
 | gtkcontainer.h              | {{page.partial}} | `GtkContainer` |       |
 | gtkcssprovider.h            | {{page.missing}} |               |       |

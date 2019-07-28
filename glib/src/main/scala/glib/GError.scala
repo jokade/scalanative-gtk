@@ -2,6 +2,7 @@
 package glib
 
 import de.surfice.smacrotools.debug
+import glib.GError.GErrorStruct
 
 import scalanative._
 import cobj._
@@ -15,7 +16,6 @@ import unsafe._
 // TODO: add CVararg* (currently crashes due to https://github.com/scala-native/scala-native/issues/1142)
 @CObj
 class GError extends CObject with GAllocated {
-  type GErrorStruct = CStruct3[GQuark,gint,CString]
 
   @inline def __struct: Ptr[GErrorStruct] = __ptr.asInstanceOf[Ptr[GErrorStruct]]
 
@@ -39,6 +39,8 @@ class GError extends CObject with GAllocated {
 
 object GError {
 
+  type GErrorStruct = CStruct3[GQuark,gint,CString]
+
   /**
    * Creates a new GError instance.
    *
@@ -50,12 +52,19 @@ object GError {
   def apply(domain: GQuark, code: gint, format: Ptr[gchar]): GError = extern
   //def NULL: GError = new GError(null)
 
-  def apply[R](f: Out[GError]=>R)(onError: GError=>R): R = PoolZone{ implicit z =>
-    val err = Out.alloc[GError]
+  def apply[R](f: ResultPtr[GError]=>R)(onError: GError=>R): R = PoolZone{ implicit z =>
+    val err = ResultPtr.alloc[GError]
     val result = f(err)
     if(err.isDefined)
-      onError(err.value)
+      onError(err.wrappedValue)
     else
       result
+  }
+
+  @inline final def free(ptr: Ptr[GErrorStruct]): Unit = ext.g_error_free(ptr)
+
+  @extern
+  object ext {
+    def g_error_free(ptr: Ptr[GErrorStruct]): Unit = extern
   }
 }

@@ -33,6 +33,7 @@ class GtkEntry extends GtkWidget {
    * Retrieves the contents of the entry widget.
    */
   def text: String = fromCString(getText())
+  def text_=(s: String): Unit = setStringProp(c"text",s)
 
   /**
    * Returns the current length of the text entry.

@@ -30,6 +30,9 @@ class GtkBox extends GtkContainer {
    */
   @inline def packStart(child: GtkWidget, expand: gboolean, fill: gboolean, padding: guint): Unit = extern
 
+  def packStart(child: GtkWidget, expand: gboolean = false, fill: gboolean = false, padding: Int = 0): Unit =
+    packStart(child,expand,fill,padding.toUInt)
+
   /**
    * Adds `child` to this box, packed with reference to the end of the box.
    * The child is packed after (away from end of) any other child packed with reference to the end of this box .
@@ -45,6 +48,9 @@ class GtkBox extends GtkContainer {
    *                then padding pixels are also put between child and the reference edge of the box.
    */
   @inline def packEnd(child: GtkWidget, expand: gboolean, fill: gboolean, padding: guint): Unit = extern
+
+  def packEnd(child: GtkWidget, expand: gboolean = false, fill: gboolean = false, padding: Int = 0): Unit =
+    packEnd(child,expand,fill,padding.toUInt)
 
   /**
    * Returns whether the box is homogeneous (all children are the same size).
@@ -74,4 +80,7 @@ class GtkBox extends GtkContainer {
 object GtkBox {
   @name("gtk_box_new")
   def apply(orientation: GtkOrientation, spacing: gint): GtkBox = extern
+
+  def vertical(spacing: Int = 0): GtkBox = apply(GtkOrientation.VERTICAL,spacing)
+  def horizontal(spacing: Int = 0): GtkBox = apply(GtkOrientation.HORIZONTAL,spacing)
 }

@@ -27,7 +27,7 @@ object GdkPixbuf {
    */
   @nullable
   @name("gdk_pixbuf_new_from_stream")
-  def fromStream(stream: GInputStream, cancelable: GCancellable)(implicit error: Out[GError]): GdkPixbuf = extern
+  def fromStream(stream: GInputStream, cancelable: GCancellable)(implicit error: ResultPtr[GError]): GdkPixbuf = extern
 
   /**
    * Creates a new pixbuf by loading an image from an input stream.
@@ -42,5 +42,5 @@ object GdkPixbuf {
    */
   @nullable
   @name("gdk_pixbuf_new_from_stream_at_scale")
-  def fromStreamAtScale(stream: GInputStream, width: gint, height: gint, preserveAspectRatio: gboolean, cancellable: GCancellable)(implicit error: Out[GError]): GdkPixbuf = extern
+  def fromStreamAtScale(stream: GInputStream, width: gint, height: gint, preserveAspectRatio: gboolean, cancellable: GCancellable)(implicit error: ResultPtr[GError]): GdkPixbuf = extern
 }

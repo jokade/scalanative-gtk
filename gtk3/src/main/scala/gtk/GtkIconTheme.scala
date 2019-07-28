@@ -32,7 +32,7 @@ class GtkIconTheme extends GObject {
    * @param flags flags modifying the behaviour of the icon lookup
    * @param err location to store error information on failure, or null
    */
-  def loadIcon(name: CString, size: gint, flags: GtkIconLookupFlags)(implicit err: Out[GError]): GdkPixbuf = extern
+  def loadIcon(name: CString, size: gint, flags: GtkIconLookupFlags)(implicit err: ResultPtr[GError]): GdkPixbuf = extern
 
   /**
    * Returns the specified icon, scaled to the given size.

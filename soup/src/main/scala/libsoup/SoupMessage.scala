@@ -15,7 +15,7 @@ import cobj._
  * @see [[https://developer.gnome.org/libsoup/stable/SoupMessage.html]]
  */
 @CObj
-class SoupMessage(method: CString, uriString: CString) extends GObject {
+class SoupMessage extends GObject {
 
   def setRequest(contentType: CString, reqUse: SoupMemoryUse, reqBody: CString, reqLength: gsize): Unit = extern
 

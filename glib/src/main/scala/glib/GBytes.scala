@@ -22,7 +22,7 @@ class GBytes extends CObject with GRefCounter {
    * @param size location where size of data is returned
    * @return pointer to the bytes data. May be null, if size=0 (not guaranteed)
    */
-  @inline def getData(implicit size: Out[gsize]): gconstpointer = extern
+  @inline def getData(implicit size: ResultPtr[gsize]): gconstpointer = extern
 
   /**
    * Returns the size of the byte data in this object.

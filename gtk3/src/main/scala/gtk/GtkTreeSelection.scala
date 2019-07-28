@@ -47,7 +47,7 @@ class GtkTreeSelection extends GObject {
    * @param iter the iterator to use (may be null, if you only wnat to test if there is a selected row)
    * @return true if there is a selected node
    */
-  def getSelected(implicit model: Out[GtkTreeModel], iter: GtkTreeIter): gboolean = extern
+  def getSelected(implicit model: ResultPtr[GtkTreeModel], iter: GtkTreeIter): gboolean = extern
 
   /**
    * Returns the current selection mode.

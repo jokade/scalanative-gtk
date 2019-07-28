@@ -1,6 +1,7 @@
 // Copyright (c) 2018. Distributed under the MIT License (see included LICENSE file).
 package glib.json
 
+import glib.utils.GZone
 import glib.{GError, gboolean, gssize}
 import gobject.GObject
 
@@ -25,7 +26,16 @@ class JsonParser extends GObject {
    * @param error return location for a GError, or null
    * @return true if the buffer was successfully parsed.
    */
-  def loadFromData(data: CString, length: gssize)(implicit error: Out[GError]): gboolean = extern
+  def loadFromData(data: CString, length: gssize)(implicit error: ResultPtr[GError]): gboolean = extern
+
+  /**
+   * Loads a JSON stream from the content of `filename`.
+   *
+   * @param filename
+   * @param error return location for a GError, or null
+   * @return true if the buffer was successfully parsed.
+   */
+  def loadFromFile(filename: CString)(implicit error: ResultPtr[GError]): gboolean = extern
 
   /**
    * Retrieves the top level node from the parsed JSON stream.
@@ -54,6 +64,17 @@ object JsonParser {
     val parser = JsonParser()
     GError[Try[JsonParser]]{ implicit err =>
       parser.loadFromData(data,length)
+      Success(parser)
+    } { err =>
+      parser.free()
+      Failure(ParseError(err))
+    }
+  }
+
+  def fromFile(filename: String): Try[JsonParser] = GZone{ implicit z =>
+    val parser = JsonParser()
+    GError[Try[JsonParser]]{ implicit err =>
+      parser.loadFromFile(toCString(filename))
       Success(parser)
     } { err =>
       parser.free()

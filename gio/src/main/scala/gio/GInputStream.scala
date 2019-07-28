@@ -28,7 +28,7 @@ class GInputStream extends GObject {
    *
    * @see [[https://developer.gnome.org/gio/stable/GInputStream.html#g-input-stream-read]]
    */
-  def read(buffer: Ptr[Byte], count: gsize, cancellable: GCancellable)(implicit error: Out[GError]): gssize = extern
+  def read(buffer: Ptr[Byte], count: gsize, cancellable: GCancellable)(implicit error: ResultPtr[GError]): gssize = extern
 
   /**
    * Like [[read]], this tries to read count bytes from the stream in a blocking fashion.
@@ -42,7 +42,7 @@ class GInputStream extends GObject {
    *
    * @see [[https://developer.gnome.org/gio/stable/GInputStream.html#g-input-stream-read-bytes]]
    */
-  def readBytes(count: gsize, cancellable: GCancellable)(implicit error: Out[GError]): GBytes = extern
+  def readBytes(count: gsize, cancellable: GCancellable)(implicit error: ResultPtr[GError]): GBytes = extern
 
   /**
    * Closes the stream, releasing resources related to it.
@@ -51,5 +51,5 @@ class GInputStream extends GObject {
    * @param error location to store an occurring error, null to ignore
    * @return
    */
-  def close(cancellable: GCancellable)(implicit error: Out[GError]): gboolean = extern
+  def close(cancellable: GCancellable)(implicit error: ResultPtr[GError]): gboolean = extern
 }

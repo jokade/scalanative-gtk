@@ -4,7 +4,7 @@ import de.surfice.smacrotools.debug
 import glib.utils.GZone
 import glib.{gboolean, gint, gulong}
 import gobject.{GObject, GSignalReceiver}
-import gtk.gdk.GdkWindow
+import gtk.gdk.{GdkEvent, GdkWindow}
 
 import scalanative._
 import unsafe._
@@ -238,6 +238,9 @@ class GtkWidget extends GObject with GtkBuildable {
 
   def onDrawRaw(handler: Function2[Ptr[Byte],Ptr[Byte],gboolean])(implicit refZone: RefZone): gulong =
     connect2(c"draw",(arg1: Ptr[Byte], arg2: Ptr[Byte]) => handler(arg1,arg2))
+
+  def onKeyPress(handler: Function1[GdkEvent,Unit])(implicit refZone: RefZone): gulong =
+    connect1(c"key-press-event",(arg1: Ptr[Byte]) => handler(arg1))
 }
 
 object GtkWidget {

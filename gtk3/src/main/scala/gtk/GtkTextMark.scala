@@ -17,7 +17,7 @@ import cobj._
  * @param leftGravity whether the mark should have left gravity
  */
 @CObj
-class GtkTextMark(name: CString, leftGravity: gboolean) extends GObject {
+class GtkTextMark extends GObject {
 
   /**
    * Sets the visibility of the this mark.

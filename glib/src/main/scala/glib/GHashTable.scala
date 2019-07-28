@@ -80,7 +80,7 @@ class GHashTable[K<:CObject,V<:CObject] extends GRefCounter {
   @nullable
   def lookup(key: K)(implicit wrapper: CObjectWrapper[V]): V = extern
 
-  def lookupExtended(lookupKey: K)(implicit origKey: Out[V], value: Out[V]): gboolean = extern
+  def lookupExtended(lookupKey: K)(implicit origKey: ResultPtr[V], value: ResultPtr[V]): gboolean = extern
 
   /**
    * Checks if the key is in this hashtable.
@@ -114,6 +114,7 @@ class GHashTable[K<:CObject,V<:CObject] extends GRefCounter {
 }
 
 object GHashTable {
+
   @name("g_hash_table_new")
   def apply[K<:CObject,V<:CObject](hashFunc: GHashFunc, keyEqualFunc: GEqualFunc): GHashTable[K,V] = extern
 
@@ -130,4 +131,5 @@ object GHashTable {
 
   @name("g_hash_table_iter_next")
   private def iterNext(iter: Ptr[GHashTableIter], key: Ptr[gpointer], value: Ptr[gpointer]): gboolean = extern
+
 }

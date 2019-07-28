@@ -24,7 +24,7 @@ object GTimeout {
   private def addRaw(interval: guint, function: CFuncPtr1[RawPtr,Boolean], data: RawPtr): guint = extern
 
   /**
-   * Calls the provied function at regular intervals, with the default priority.
+   * Calls the provided function at regular intervals, with the default priority.
    * The function is called repeatedly until it returns `false`.
    *
    * @param interval the time between calls to the function

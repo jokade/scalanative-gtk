@@ -3,7 +3,7 @@ package glib.json
 
 import de.surfice.smacrotools.debug
 import glib.{GAllocated, gboolean, gdouble, gint64}
-import gobject.GBoxed
+import gobject.{GBoxed, GType}
 
 import scalanative._
 import unsafe._
@@ -50,5 +50,8 @@ class JsonNode extends CObject with GBoxed with GAllocated {
    * Returns the double value stored inside this node.
    */
   def getDouble(): gdouble = extern
+
+  def valueType: GType = extern
+
 }
 

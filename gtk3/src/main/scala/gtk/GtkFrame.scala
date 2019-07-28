@@ -47,7 +47,7 @@ class GtkFrame extends GtkBin {
    */
   def getLabel(): CString = extern
 
-  def getLabelAlign(xalign: Out[gfloat], yalign: Out[gfloat]): Unit = extern
+  def getLabelAlign(xalign: ResultPtr[gfloat], yalign: ResultPtr[gfloat]): Unit = extern
 
   @nullable
   def getLabelWidget(): GtkWidget = extern

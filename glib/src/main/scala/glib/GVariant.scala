@@ -184,7 +184,7 @@ class GVariant extends CObject with GRefCounter {
    *
    * @param length location to store the length of the string, or null
    */
-  @inline def dupString()(length: Out[gsize]): CString = extern
+  @inline def dupString()(length: ResultPtr[gsize]): CString = extern
 
   /**
    * Unboxes this GVariant.

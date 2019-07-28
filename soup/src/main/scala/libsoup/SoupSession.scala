@@ -23,10 +23,10 @@ class SoupSession extends GObject {
   def addFeature(feature: SoupSessionFeature): Unit = extern
 
   def sendMessage(msg: SoupMessage): guint = extern
-  def send(msg: SoupMessage, cancellable: GCancellable)(implicit error: Out[GError]): GInputStream = extern
+  def send(msg: SoupMessage, cancellable: GCancellable)(implicit error: ResultPtr[GError]): GInputStream = extern
   def queueMessage(msg: SoupMessage, callback: CFuncPtr3[Ptr[Byte],Ptr[Byte],Ptr[Byte],_], data: Ptr[Byte]): Unit = extern
   def sendAsync(msg: SoupMessage, cancellable: GCancellable, callback: GAsyncReadyCallback, data: gpointer): Unit = extern
-  def sendFinish(result: GAsyncResult)(implicit error: Out[GError]): GInputStream = extern
+  def sendFinish(result: GAsyncResult)(implicit error: ResultPtr[GError]): GInputStream = extern
 
   def queueMessage(msg: SoupMessage): Future[SoupMessage] = {
     val promise = Promise[SoupMessage]()

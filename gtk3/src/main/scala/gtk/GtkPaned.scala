@@ -15,7 +15,7 @@ import cobj._
  * @param orientation the paned's orientation
  */
 @CObj
-class GtkPaned(orientation: GtkOrientation) extends GtkContainer {
+class GtkPaned extends GtkContainer {
 
   /**
    * Adds a child to the top or left pane with default parameters.
