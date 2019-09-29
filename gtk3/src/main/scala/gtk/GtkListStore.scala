@@ -1,5 +1,6 @@
 package gtk
 
+import de.surfice.smacrotools.debug
 import glib.utils.GZone
 import glib.{gboolean, gdouble, gint, gpointer}
 import gobject.{GObject, GType}
@@ -7,6 +8,7 @@ import gobject.{GObject, GType}
 import scalanative._
 import unsafe._
 import cobj._
+import scala.scalanative.runtime.Intrinsics
 
 /**
  * A list-like data structure that can be used with the [[GtkTreeView]]
@@ -14,6 +16,7 @@ import cobj._
  * @see [[https://developer.gnome.org/gtk3/stable/GtkListStore.html]]
  */
 @CObj
+@debug
 class GtkListStore extends GtkTreeModel {
 
   /**
@@ -23,7 +26,9 @@ class GtkListStore extends GtkTreeModel {
    */
   def append(implicit iter: GtkTreeIter): Unit = extern
 
-  def set(column: Int, value: CString)(implicit iter: GtkTreeIter): Unit = GtkListStore.ext.gtk_list_store_set(__ptr,iter.__ptr,column,value,-1)
+  def set(column: Int, value: CString)(implicit iter: GtkTreeIter): Unit = {
+    GtkListStore.ext.gtk_list_store_set(__ptr,iter.__ptr,column,value,-1)
+  }
   def set(column: Int, value: String)(implicit iter: GtkTreeIter): Unit = GZone{ implicit z => set(column,toCString(value))}
   def set(column: Int, value: Int)(implicit iter: GtkTreeIter): Unit = GtkListStore.ext.gtk_list_store_set(__ptr,iter.__ptr,column,value,-1)
   def set(column: Int, value: Double)(implicit iter: GtkTreeIter): Unit = GtkListStore.ext.gtk_list_store_set(__ptr,iter.__ptr,column,value,-1)
@@ -37,13 +42,14 @@ class GtkListStore extends GtkTreeModel {
   def appendRow(values: Any*)(implicit iter: GtkTreeIter): Unit = {
     append
     values.zipWithIndex foreach {
-//      case (s:Ptr[_],idx) => set(idx,s.asInstanceOf[CString])
+      case (s:Ptr[_],idx) => set(idx,s.asInstanceOf[CString])
       case (s: String, idx) => set(idx,s)
       case (i: Int, idx)    => set(idx,i)
       case (b: Boolean, idx)=> set(idx,b)
       case (d: Double, idx) => set(idx,d)
+      case (s: CString, idx) => set(idx,s)
       case (p,idx) => set(idx,p.asInstanceOf[Object].asInstanceOf[Ptr[Byte]])
-//      case _ => throw new IllegalArgumentException("GtkListStore.appendRow(): received unsupported value type")
+      case _ => throw new IllegalArgumentException("GtkListStore.appendRow(): received unsupported value type")
     }
   }
 }

@@ -26,8 +26,8 @@ object GtkTreeIter {
    * @param zone
    */
   def alloc(implicit zone: Zone): GtkTreeIter = {
-    val iter = scalanative.unsafe.alloc[GtkTreeIterStruct]
-    new GtkTreeIter(iter.asInstanceOf[Ptr[Byte]])
+    val iter = scalanative.unsafe.alloc[Byte](sizeof[GtkTreeIterStruct]) //[GtkTreeIterStruct]
+    new GtkTreeIter(iter)
   }
 
   def apply[R](f: GtkTreeIter=>R): R = GZone{ implicit z =>

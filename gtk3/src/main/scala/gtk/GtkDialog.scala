@@ -86,7 +86,6 @@ class GtkDialog extends GtkWindow {
    */
   def getHeaderBar(): GtkWidget = extern
 
-
 }
 
 object GtkDialog {

@@ -186,6 +186,21 @@ package object gtk {
     val NONE = 2
   }
 
+  type GtkResponseType = Int
+  object GtkResponseType {
+    val NONE         = -1
+    val REJECT       = -2
+    val ACCEPT       = -3
+    val DELETE_EVENT = -4
+    val OK           = -5
+    val CANCEL       = -6
+    val CLOSE        = -7
+    val YES          = -8
+    val NO           = -9
+    val APPLY        = -10
+    val HELP         = -11
+  }
+
   type GtkScrollType = Int
   object GtkScrollType {
     val NONE = 0

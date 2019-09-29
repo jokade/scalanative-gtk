@@ -43,6 +43,8 @@ class GtkWidget extends GObject with GtkBuildable {
    */
   @inline def destroy(): Unit = extern
 
+  override def free(): Unit = destroy()
+
   /**
    * Flags a widget to be displayed.
    * Any widget that isn’t shown will not appear on the screen. If you want to show all the widgets in a container,

@@ -1,6 +1,6 @@
 package gtk
 
-import glib.{gint, guint}
+import glib.{gboolean, gint, guint}
 
 import scalanative._
 import unsafe._
@@ -109,6 +109,23 @@ class GtkGrid extends GtkContainer {
    */
   @inline def getColumnSpacing(): guint = extern
 
+  /**
+   * If true, the rows are all the same height.
+   */
+  def rowHomogeneous: gboolean = getBooleanProp(c"row-homogeneous")
+  def rowHomogeneous_=(flag: gboolean): Unit = setBooleanProp(c"row-homogeneous",flag)
+
+  /**
+   * If true, the columns are all the same height.
+   */
+  def columnHomogeneous: gboolean = getBooleanProp(c"column-homogeneous")
+  def columnHomogeneous_=(flag: gboolean): Unit = setBooleanProp(c"column-homogeneous",flag)
+
+  def rowSpacing: Int = getIntProp(c"row-spacing")
+  def rowSpacing_=(spacing: Int): Unit = setIntProp(c"row-spacing",spacing)
+
+  def columnSpacing: Int = getIntProp(c"column-spacing")
+  def columnSpacing_=(spacing: Int): Unit = setIntProp(c"column-spacing",spacing)
 }
 
 object GtkGrid {
