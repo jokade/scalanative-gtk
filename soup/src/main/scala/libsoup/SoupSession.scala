@@ -9,6 +9,7 @@ import scalanative._
 import unsafe._
 import cobj._
 import scala.concurrent.{ExecutionContext, Future, Promise}
+import scala.scalanative.runtime.{Intrinsics, RawPtr}
 import scala.util.Try
 
 /**
@@ -24,14 +25,14 @@ class SoupSession extends GObject {
 
   def sendMessage(msg: SoupMessage): guint = extern
   def send(msg: SoupMessage, cancellable: GCancellable)(implicit error: ResultPtr[GError]): GInputStream = extern
-  def queueMessage(msg: SoupMessage, callback: CFuncPtr3[Ptr[Byte],Ptr[Byte],Ptr[Byte],_], data: Ptr[Byte]): Unit = extern
+  def queueMessage(msg: SoupMessage, callback: CFuncPtr3[Ptr[Byte],Ptr[Byte],RawPtr,_], data: RawPtr): Unit = extern
   def sendAsync(msg: SoupMessage, cancellable: GCancellable, callback: GAsyncReadyCallback, data: gpointer): Unit = extern
   def sendFinish(result: GAsyncResult)(implicit error: ResultPtr[GError]): GInputStream = extern
 
   def queueMessage(msg: SoupMessage): Future[SoupMessage] = {
     val promise = Promise[SoupMessage]()
 //    _queued += promise
-    queueMessage(msg,SoupSession.callbackPtr, promise.asInstanceOf[Ptr[Byte]])
+    queueMessage(msg,SoupSession.callbackPtr, Intrinsics.castObjectToRawPtr(promise))
     promise.future
   }
 
@@ -59,13 +60,13 @@ object SoupSession {
   @name("soup_session_new")
   def apply(): SoupSession = extern
 
-  private def callback(pSession: Ptr[Byte], pMsg: Ptr[Byte], pData: Ptr[Byte]): Unit = {
+  private def callback(pSession: Ptr[Byte], pMsg: Ptr[Byte], pData: RawPtr): Unit = {
     val msg = new SoupMessage(pMsg)
-    val promise = pData.asInstanceOf[Promise[SoupMessage]]
+    val promise = Intrinsics.castRawPtrToObject(pData).asInstanceOf[Promise[SoupMessage]]
     promise.success(msg)
   }
-  private val callbackPtr = new CFuncPtr3[Ptr[Byte],Ptr[Byte],Ptr[Byte],Unit] {
-    override def apply(arg1: Ptr[CSignedChar], arg2: Ptr[CSignedChar], arg3: Ptr[CSignedChar]): Unit = callback(arg1,arg2,arg3)
+  private val callbackPtr = new CFuncPtr3[Ptr[Byte],Ptr[Byte],RawPtr,Unit] {
+    override def apply(arg1: Ptr[CSignedChar], arg2: Ptr[CSignedChar], arg3: RawPtr): Unit = callback(arg1,arg2,arg3)
   }
 
   private def asyncCallback(pSession: Ptr[Byte], pResult: Ptr[Byte], pData: Ptr[Byte]): Unit = {

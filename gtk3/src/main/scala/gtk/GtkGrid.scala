@@ -131,4 +131,7 @@ class GtkGrid extends GtkContainer {
 object GtkGrid {
   @name("gtk_grid_new")
   def apply(): GtkGrid = extern
+
+  @name("gtk_grid_new")
+  def newRaw(): Ptr[Byte] = extern
 }

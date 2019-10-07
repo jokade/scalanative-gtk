@@ -47,3 +47,4 @@ object GList {
 
   def apply[T<:CObject](xs: TraversableOnce[T]): GList[T] = new GList( appendAll(null,xs) )
 }
+

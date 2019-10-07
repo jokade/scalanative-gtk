@@ -26,6 +26,18 @@ object GLib {
   @inline final def free(ptr: Ptr[Byte]): Unit = extern
 
   /**
+   * Converts the specified CString into a String and then calls g_free() on the pointer.
+   *
+   * @param s
+   * @return
+   */
+  def toStringAndFree(s: CString): String = {
+    val str = fromCString(s)
+    free(s)
+    str
+  }
+
+  /**
    * Frees a null-terminated array of strings, as well as each string it contains.
    *
    * @param str_array array to be freed

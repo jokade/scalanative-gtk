@@ -7,6 +7,9 @@ import gobject.GBoxed
 import scalanative._
 import unsafe._
 import cobj._
+import scala.collection.mutable
+import scala.scalanative.runtime.{Intrinsics, RawPtr}
+import scala.scalanative.unsafe.Tag.CFuncPtr4
 
 /**
  * A JSON object representation.
@@ -86,8 +89,31 @@ class JsonObject extends CObject with GBoxed with GRefCounter {
    */
   def obj(name: CString): Option[JsonObject] = member(name).map(_.getObject())
 
+  def foreachMember(f: CFuncPtr4[Ptr[Byte],Ptr[Byte],Ptr[Byte],RawPtr,Unit], data: RawPtr): Unit = extern
+  def foreachMember(f: Function2[CString,JsonNode,Unit]): Unit = {
+    val fPtr = Intrinsics.castObjectToRawPtr(f)
+    foreachMember(JsonObject.foreachCB,fPtr)
+  }
+
+  def mapMembers[T](f: (String,JsonNode) => T): Iterable[T] = {
+    val buf = mutable.UnrolledBuffer.empty[Any]
+    foreachMember((name,node) => {
+      buf += f(fromCString(name),node)
+    })
+    buf.asInstanceOf[mutable.Iterable[T]]
+  }
+
   @returnsThis
   override def ref(): this.type = extern
   override def unref(): Unit = extern
   override def free(): Unit = unref()
+}
+object JsonObject {
+  private val foreachCB = new CFuncPtr4[Ptr[Byte],Ptr[Byte],Ptr[Byte],RawPtr,Unit]{
+    override def apply(obj: Ptr[Byte], name: CString, nodePtr: Ptr[Byte], fPtr: RawPtr): Unit = {
+      val f = Intrinsics.castRawPtrToObject(fPtr).asInstanceOf[Function2[CString,JsonNode,Unit]]
+      val node = new JsonNode(nodePtr)
+      f(name,node)
+    }
+  }
 }

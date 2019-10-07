@@ -246,6 +246,9 @@ class GtkWidget extends GObject with GtkBuildable {
 }
 
 object GtkWidget {
+
+  @name("gtk_widget_new")
+  def newRaw(): Ptr[Byte] = extern
 //  @inline def destroy: CFunctionPtr1[CObj.Ref[Byte],Unit] = CFunctionPtr.fromFunction1(__ext.gtk_widget_destroy)
 
 //  /**

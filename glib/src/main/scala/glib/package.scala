@@ -44,6 +44,7 @@ package object glib {
 
   type GDestroyNotify = CFuncPtr1[gpointer,Unit]
 
+
   /**
    * A type in the GVariant type system.
    *
