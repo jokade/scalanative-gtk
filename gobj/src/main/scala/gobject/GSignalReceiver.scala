@@ -1,15 +1,13 @@
 package gobject
 
 import de.surfice.smacrotools.debug
-import glib.{gpointer, gulong}
+import glib.gulong
 
-import scalanative._
-import unsafe._
-import unsigned._
-import cobj._
+import scala.scalanative._
+import scala.scalanative.cobj._
 import scala.scalanative.interop.RefZone
-import scala.scalanative.libc.stdio
-import scala.scalanative.runtime.{Intrinsics, RawPtr}
+import scala.scalanative.runtime.RawPtr
+import scala.scalanative.unsafe._
 
 @CObj("g_signal_")
 @debug
@@ -74,54 +72,54 @@ trait GSignalReceiver {
 //  def connectData[R](detailedSignal: CString, cHandler: CFuncPtr0[Unit], data: RawPtr, destroyData: GClosureNotify, connectFlags: GConnectFlags): gulong = extern
 //  def connectData[T1,R](detailedSignal: CString, cHandler: CFuncPtr1[T1,R], data: RawPtr, destroyData: GClosureNotify, connectFlags: GConnectFlags): gulong = extern
 
-  final def connect0[R](signal: CString, handler: Function0[R])(implicit refZone: RefZone): gulong = GSignalReceiver.ext.g_signal_connect_data(
+  final def connect0[R](signal: CString, handler: Function0[R])(implicit refZone: RefZone): gulong = GSignalReceiverExtern.g_signal_connect_data(
     this.__ptr,
     signal,
-    new CFuncPtr1[RawPtr,Unit] { override def apply(ctx: RawPtr): Unit = Intrinsics.castRawPtrToObject(ctx).asInstanceOf[Function0[Unit]].apply() },
+    new CFuncPtr1[RawPtr,Unit] { override def apply(ctx: RawPtr): Unit = interop.rawPtrToObject(ctx).asInstanceOf[Function0[Unit]].apply() },
     refZone.export(handler),
     null,
     GConnectFlags.SWAPPED
   )
 
 
-  final def connect1[R](signal: CString, handler: Function1[Ptr[Byte],R])(implicit refZone: RefZone): gulong = GSignalReceiver.ext.g_signal_connect_data(
+  final def connect1[R](signal: CString, handler: Function1[Ptr[Byte],R])(implicit refZone: RefZone): gulong = GSignalReceiverExtern.g_signal_connect_data(
     this.__ptr,
     signal,
     new CFuncPtr2[RawPtr,RawPtr,Unit] { override def apply(ctx: RawPtr, arg1: RawPtr): Unit =
-      Intrinsics.castRawPtrToObject(ctx).asInstanceOf[Function1[Ptr[Byte],Unit]].apply(runtime.fromRawPtr[Byte](arg1))
+      interop.rawPtrToObject(ctx).asInstanceOf[Function1[Ptr[Byte],Unit]].apply(interop.ptrFromRawPtr[Byte](arg1))
     },
     refZone.export(handler),
     null,
     GConnectFlags.SWAPPED
   )
 
-  final def connect2[R](signal: CString, handler: Function2[Ptr[Byte],Ptr[Byte],R])(implicit refZone: RefZone): gulong = GSignalReceiver.ext.g_signal_connect_data(
+  final def connect2[R](signal: CString, handler: Function2[Ptr[Byte],Ptr[Byte],R])(implicit refZone: RefZone): gulong = GSignalReceiverExtern.g_signal_connect_data(
     this.__ptr,
     signal,
     new CFuncPtr3[RawPtr,RawPtr,RawPtr,Unit] { override def apply(ctx: RawPtr, arg1: RawPtr, arg2: RawPtr): Unit =
-      Intrinsics.castRawPtrToObject(ctx).asInstanceOf[Function2[Ptr[Byte],Ptr[Byte],Unit]].apply(runtime.fromRawPtr[Byte](arg2), runtime.fromRawPtr[Byte](arg1))
+      interop.rawPtrToObject(ctx).asInstanceOf[Function2[Ptr[Byte],Ptr[Byte],Unit]].apply(interop.ptrFromRawPtr[Byte](arg2), interop.ptrFromRawPtr[Byte](arg1))
     },
     refZone.export(handler),
     null,
     GConnectFlags.SWAPPED
   )
 
-  final def connect3[R](signal: CString, handler: Function3[Ptr[Byte],Ptr[Byte],Ptr[Byte],R])(implicit refZone: RefZone): gulong = GSignalReceiver.ext.g_signal_connect_data(
+  final def connect3[R](signal: CString, handler: Function3[Ptr[Byte],Ptr[Byte],Ptr[Byte],R])(implicit refZone: RefZone): gulong = GSignalReceiverExtern.g_signal_connect_data(
     this.__ptr,
     signal,
     new CFuncPtr4[RawPtr,RawPtr,RawPtr,RawPtr,Unit] { override def apply(ctx: RawPtr, arg1: RawPtr, arg2: RawPtr, arg3: RawPtr): Unit =
-      Intrinsics.castRawPtrToObject(ctx).asInstanceOf[Function3[Ptr[Byte],Ptr[Byte],Ptr[Byte],Unit]].apply(runtime.fromRawPtr[Byte](arg3),runtime.fromRawPtr[Byte](arg1), runtime.fromRawPtr[Byte](arg2))
+      interop.rawPtrToObject(ctx).asInstanceOf[Function3[Ptr[Byte],Ptr[Byte],Ptr[Byte],Unit]].apply(interop.ptrFromRawPtr[Byte](arg3),interop.ptrFromRawPtr[Byte](arg1), interop.ptrFromRawPtr[Byte](arg2))
     },
     refZone.export(handler),
     null,
     GConnectFlags.SWAPPED
   )
 
-  final def connect4[R](signal: CString, handler: Function4[Ptr[Byte],Ptr[Byte],Ptr[Byte],Ptr[Byte],R])(implicit refZone: RefZone): gulong = GSignalReceiver.ext.g_signal_connect_data(
+  final def connect4[R](signal: CString, handler: Function4[Ptr[Byte],Ptr[Byte],Ptr[Byte],Ptr[Byte],R])(implicit refZone: RefZone): gulong = GSignalReceiverExtern.g_signal_connect_data(
     this.__ptr,
     signal,
     new CFuncPtr5[RawPtr,RawPtr,RawPtr,RawPtr,RawPtr,Unit] { override def apply(ctx: RawPtr, arg1: RawPtr, arg2: RawPtr, arg3: RawPtr, arg4: RawPtr): Unit =
-      Intrinsics.castRawPtrToObject(ctx).asInstanceOf[Function4[Ptr[Byte],Ptr[Byte],Ptr[Byte],Ptr[Byte],Unit]].apply(runtime.fromRawPtr[Byte](arg4),runtime.fromRawPtr[Byte](arg1), runtime.fromRawPtr[Byte](arg2), runtime.fromRawPtr[Byte](arg3))
+      interop.rawPtrToObject(ctx).asInstanceOf[Function4[Ptr[Byte],Ptr[Byte],Ptr[Byte],Ptr[Byte],Unit]].apply(interop.ptrFromRawPtr[Byte](arg4),interop.ptrFromRawPtr[Byte](arg1), interop.ptrFromRawPtr[Byte](arg2), interop.ptrFromRawPtr[Byte](arg3))
     },
     refZone.export(handler),
     null,
@@ -145,13 +143,3 @@ trait GSignalReceiver {
   def unblockHandler(handlerId : gulong): Unit = extern
 }
 
-object GSignalReceiver {
-  @extern
-  object ext {
-    def g_signal_connect_data(obj: Ptr[Byte], signal: CString, handler: CFuncPtr1[RawPtr,Unit], data: RawPtr, destroyData: GClosureNotify, connectFlags: GConnectFlags): gulong = extern
-    def g_signal_connect_data(obj: Ptr[Byte], signal: CString, handler: CFuncPtr2[RawPtr,RawPtr,Unit], data: RawPtr, destroyData: GClosureNotify, connectFlags: GConnectFlags): gulong = extern
-    def g_signal_connect_data(obj: Ptr[Byte], signal: CString, handler: CFuncPtr3[RawPtr,RawPtr,RawPtr,Unit], data: RawPtr, destroyData: GClosureNotify, connectFlags: GConnectFlags): gulong = extern
-    def g_signal_connect_data(obj: Ptr[Byte], signal: CString, handler: CFuncPtr4[RawPtr,RawPtr,RawPtr,RawPtr,Unit], data: RawPtr, destroyData: GClosureNotify, connectFlags: GConnectFlags): gulong = extern
-    def g_signal_connect_data(obj: Ptr[Byte], signal: CString, handler: CFuncPtr5[RawPtr,RawPtr,RawPtr,RawPtr,RawPtr,Unit], data: RawPtr, destroyData: GClosureNotify, connectFlags: GConnectFlags): gulong = extern
-  }
-}

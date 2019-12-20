@@ -28,24 +28,30 @@ lazy val nativeSettings = Seq(
 )
 
 lazy val scalanativeGtk = project.in(file("."))
-  .enablePlugins(ScalaNativePlugin)
-  .aggregate(glib,gobj,gio,gtk3,ui,json,soup) //,sourceview,tepl)
+  .aggregate(glibJVM, glibNative,
+             gobjJVM, gobjNative,
+             gioJVM,  gioNative,
+             //gtk3JVM, gtk3Native,
+             jsonJVM, jsonNative)
   .settings(commonSettings ++ dontPublish:_*)
   .settings(
     name := "scalanative-gtk-bindings"
     )
 
-lazy val glib = project
-  .enablePlugins(ScalaNativePlugin)
-  .settings(commonSettings ++ nativeSettings ++ publishingSettings:_*)
+lazy val glib = crossProject(JVMPlatform, NativePlatform)
+  .crossType(CrossType.Pure)
+  .settings(commonSettings ++ publishingSettings:_*)
   .settings(
     name := "scalanative-glib"
   )
+  .nativeSettings(nativeSettings:_*)
+lazy val glibJVM = glib.jvm
+lazy val glibNative = glib.native
 
 
-lazy val gobj = project
+lazy val gobj = crossProject(JVMPlatform, NativePlatform)
+  .crossType(CrossType.Pure)
   .dependsOn(glib)
-  .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings ++ publishingSettings:_*)
   .settings(
     name := "scalanative-gobj",
@@ -53,25 +59,33 @@ lazy val gobj = project
 //      "de.surfice" %% "smacrotools" % Version.smacrotools
     )
   )
+lazy val gobjJVM = gobj.jvm
+lazy val gobjNative = gobj.native
 
 
-lazy val gio = project
+lazy val gio = crossProject(JVMPlatform, NativePlatform)
+  .crossType(CrossType.Pure)
   .dependsOn(gobj)
-  .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings ++ publishingSettings:_*)
   .settings(
     name := "scalanative-gio"
   )
+lazy val gioJVM = gio.jvm
+lazy val gioNative = gio.native
 
 
-lazy val gtk3 = project
+lazy val gtk3 = crossProject(JVMPlatform, NativePlatform)
+  .crossType(CrossType.Pure)
   .dependsOn(gio)
   .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings ++ publishingSettings:_*)
   .settings(
     name := "scalanative-gtk3"
   )
+lazy val gtk3JVM = gtk3.jvm
+lazy val gtk3Native = gtk3.native
 
+/*
 lazy val ui = project
   .dependsOn(gtk3)
   .enablePlugins(ScalaNativePlugin)
@@ -95,15 +109,18 @@ lazy val tepl = project
   .settings(
     name := "scalanative-tepl"
   )
-
-lazy val json = project
+*/
+lazy val json = crossProject(JVMPlatform, NativePlatform)
+  .crossType(CrossType.Pure)
   .dependsOn(glib,gobj)
-  .enablePlugins(ScalaNativePlugin)
   .settings(commonSettings ++ publishingSettings:_*)
   .settings(
     name := "scalanative-json-glib"
   )
+lazy val jsonJVM = json.jvm
+lazy val jsonNative = json.native
 
+/*
 lazy val soup = project
   .dependsOn(gio)
   .enablePlugins(ScalaNativePlugin)
@@ -128,7 +145,7 @@ lazy val gtkTest = project
     //nativeLinkingOptions ++= nbhNativeLinkingOptions.value
     //nativeLinkingOptions ++= Seq("-lgtk-3.0","-lglib-2.0")
   )
-  
+*/  
 
 lazy val dontPublish = Seq(
   publish := {},

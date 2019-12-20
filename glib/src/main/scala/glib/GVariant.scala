@@ -264,7 +264,7 @@ class GVariant extends CObject with GRefCounter {
   /**
    * Returns a pointer to the serialised form of this GVariant instance.
    */
-  @inline def getDataAsBytes(): GBytes = extern
+//  @inline def getDataAsBytes(): GBytes = extern
 
   /**
    * Stores the serialised form of this GVariant at `data`.
@@ -559,6 +559,6 @@ object GVariant {
    * @param bytes the serialised GVariant data
    * @param trusted if the contents of `bytes` are trusted
    */
-  @name("g_variant_new_from_bytes")
-  @inline def fromBytes(tpe: GVariantType, bytes: GBytes, trusted: gboolean): GVariant = extern
+//  @name("g_variant_new_from_bytes")
+//  @inline def fromBytes(tpe: GVariantType, bytes: GBytes, trusted: gboolean): GVariant = extern
 }

@@ -3,12 +3,13 @@ package gobject
 
 import de.surfice.smacrotools.debug
 import glib._
+import glib.utils.GZone
 
 import scalanative._
 import unsafe._
 import unsigned._
+import interop._
 import cobj._
-import scala.scalanative.interop.PoolZone
 
 @CObj
 class GObject extends GRefCounter with GSignalReceiver {
@@ -20,7 +21,7 @@ class GObject extends GRefCounter with GSignalReceiver {
    */
   def getIntProp(propName: CString): gint = {
     val v = stackalloc[gint]
-    !v = 0
+    v := 0
     GObject.ext.g_object_getInt(__ptr,propName,v, null)
     !v
   }
@@ -40,7 +41,7 @@ class GObject extends GRefCounter with GSignalReceiver {
    */
   def getUIntProp(propName: CString): guint = {
     val v = stackalloc[guint]
-    !v = 0.toUInt
+    v := 0.toUInt
     GObject.ext.g_object_get(__ptr,propName,v.asInstanceOf[Ptr[Ptr[Byte]]], null)
     !v
   }
@@ -60,7 +61,7 @@ class GObject extends GRefCounter with GSignalReceiver {
    */
   def getFloatProp(propName: CString): gfloat = {
     val v = stackalloc[gfloat]
-    !v = 0.0f
+    v := 0.0f
     GObject.ext.g_object_getFloat(__ptr,propName,v, null)
     !v
   }
@@ -80,7 +81,7 @@ class GObject extends GRefCounter with GSignalReceiver {
    */
   def getBooleanProp(propName: CString): gboolean = {
     val v = stackalloc[gboolean]
-    !v = false
+    v := false
     GObject.ext.g_object_getBoolean(__ptr,propName,v.asInstanceOf[Ptr[CBool]], null)
     !v
   }
@@ -100,7 +101,7 @@ class GObject extends GRefCounter with GSignalReceiver {
    */
   def getCStringProp(propName: CString): CString = {
     val v = stackalloc[CString]
-    !v = null
+    v := null
     GObject.ext.g_object_get(__ptr,propName,v,null)
     !v
   }
@@ -115,7 +116,7 @@ class GObject extends GRefCounter with GSignalReceiver {
    */
   def setStringProp(propName: CString, value: CString): Unit = GObject.ext.g_object_set(__ptr,propName,value.asInstanceOf[Ptr[Byte]],null)
 
-  def setStringProp(propName: CString, value: String): Unit = PoolZone{ implicit z => setStringProp(propName,toCString(value))}
+  def setStringProp(propName: CString, value: String): Unit = GZone{ implicit z => setStringProp(propName,toCString(value))}
 
   /**
    * Returns the value of the specified object property (i.e. a pointer to the object, or null).
@@ -124,7 +125,7 @@ class GObject extends GRefCounter with GSignalReceiver {
    */
   def getObjectProp(propName: CString): Ptr[Byte] = {
     val v = stackalloc[Ptr[Byte]]
-    !v = null
+    v := null
     GObject.ext.g_object_get(__ptr,propName,v,null)
     !v
   }
@@ -144,6 +145,7 @@ class GObject extends GRefCounter with GSignalReceiver {
 object GObject {
 
  @extern
+ @external
  object ext {
    def g_object_get(self: Ptr[Byte], name: CString, ptr: Ptr[Ptr[Byte]], last: Ptr[Byte]): Unit = extern
    @name("g_object_get")

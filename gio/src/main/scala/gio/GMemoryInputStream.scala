@@ -28,7 +28,7 @@ class GMemoryInputStream extends GInputStream {
    *
    * @param bytes
    */
-  def addBytes(bytes: GBytes): Unit = extern
+  def addBytes(bytes: GBytes[Byte]): Unit = extern
 }
 
 object GMemoryInputStream {
@@ -54,5 +54,5 @@ object GMemoryInputStream {
    * @param bytes
    */
   @name("g_memory_input_stream_new_from_bytes")
-  def fromBytes(bytes: GBytes): GMemoryInputStream = extern
+  def fromBytes(bytes: GBytes[Byte]): GMemoryInputStream = extern
 }

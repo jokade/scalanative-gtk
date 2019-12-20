@@ -11,7 +11,7 @@ package object gio {
     val argvPtr = alloc[Ptr[CString]]
     !argvPtr = argv
     for (i <- args.indices) {
-      !(argv + i) = toCString(args(i))
+      argv(i) = toCString(args(i))
     }
     argv
   }

@@ -3,10 +3,10 @@ package glib
 
 import de.surfice.smacrotools.debug
 import glib.GError.GErrorStruct
+import glib.utils.GZone
 
 import scalanative._
 import cobj._
-import scala.scalanative.interop.PoolZone
 import unsafe._
 //import Implicits._
 
@@ -15,24 +15,30 @@ import unsafe._
  */
 // TODO: add CVararg* (currently crashes due to https://github.com/scala-native/scala-native/issues/1142)
 @CObj
+@debug
 class GError extends CObject with GAllocated {
 
-  @inline def __struct: Ptr[GErrorStruct] = __ptr.asInstanceOf[Ptr[GErrorStruct]]
+  @inline final def __struct: Ptr[GErrorStruct] = __ptr.asInstanceOf[Ptr[GErrorStruct]]
 
   /**
    * Error domain, e.g. `G_FILE_ERROR`
    */
-//  def domain: GQuark = !__struct._1
+  @inline final def domain: GQuark = __struct._1
 
   /**
    * Error code, e.g. `G_FILE_ERROR_NOENT`
    */
-//  def code: gint = !__struct._2
+  @inline final def code: gint = __struct._2
 
   /**
    * Human-readable error message
    */
-//  def message: CString = !__struct._3
+  @inline final def cmessage: CString = __struct._3
+
+  /**
+   * Human-readable error message
+   */
+  @inline final def message: String = fromCString(cmessage)
 
   def free(): Unit = extern
 }
@@ -49,10 +55,11 @@ object GError {
    * @param format
    */
   @name("g_error_new")
-  def apply(domain: GQuark, code: gint, format: Ptr[gchar]): GError = extern
+  def apply(domain: GQuark, code: gint, format: CString): GError = extern
   //def NULL: GError = new GError(null)
 
-  def apply[R](f: ResultPtr[GError]=>R)(onError: GError=>R): R = PoolZone{ implicit z =>
+
+  def apply[R](f: ResultPtr[GError]=>R)(onError: GError=>R): R = GZone{ implicit z =>
     val err = ResultPtr.alloc[GError]
     val result = f(err)
     if(err.isDefined)
@@ -60,6 +67,8 @@ object GError {
     else
       result
   }
+
+
 
   @inline final def free(ptr: Ptr[GErrorStruct]): Unit = ext.g_error_free(ptr)
 

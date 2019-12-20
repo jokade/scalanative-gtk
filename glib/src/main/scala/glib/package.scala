@@ -26,8 +26,8 @@ package object glib {
   type guint16  = CUnsignedShort
   type gint32   = CInt
   type guint32  = CUnsignedInt
-  type gint64   = CLong
-  type guint64  = CUnsignedLong
+  type gint64   = CLongLong
+  type guint64  = CUnsignedLongLong
 
   type gsize    = CSize
   type gssize   = CSSize

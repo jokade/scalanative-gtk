@@ -8,7 +8,6 @@ import scalanative._
 import unsafe._
 import cobj._
 import scala.scalanative.interop.RefZone
-import scala.scalanative.runtime.{Intrinsics, RawPtr}
 
 /**
  * Core application class.

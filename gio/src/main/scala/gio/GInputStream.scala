@@ -42,7 +42,7 @@ class GInputStream extends GObject {
    *
    * @see [[https://developer.gnome.org/gio/stable/GInputStream.html#g-input-stream-read-bytes]]
    */
-  def readBytes(count: gsize, cancellable: GCancellable)(implicit error: ResultPtr[GError]): GBytes = extern
+  def readBytes(count: gsize, cancellable: GCancellable)(implicit error: ResultPtr[GError]): GBytes[Byte] = extern
 
   /**
    * Closes the stream, releasing resources related to it.

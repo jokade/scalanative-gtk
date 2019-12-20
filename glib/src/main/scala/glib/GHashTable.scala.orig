@@ -91,13 +91,14 @@ class GHashTable[K<:CObject,V<:CObject] extends GRefCounter {
   def contains(key: K): gboolean = extern
 
   def foreach(f: Function2[K,V,Unit])(implicit kWrapper: CObjectWrapper[K], vWrapper: CObjectWrapper[V]): Unit = {
-    val iter = stackalloc[GHashTableIter]
-    val key = stackalloc[gpointer]
-    val value = stackalloc[gpointer]
-    GHashTable.iterInit(iter,this.__ptr)
-    while( GHashTable.iterNext(iter,key,value) ) {
-      f(kWrapper.wrap(!key),vWrapper.wrap(!value))
-    }
+    ???
+//    val iter = stackalloc[GHashTableIter]
+//    val key = stackalloc[gpointer]
+//    val value = stackalloc[gpointer]
+//    GHashTable.iterInit(iter,this.__ptr)
+//    while( GHashTable.iterNext(iter,key,value) ) {
+//      f(kWrapper.wrap(!key),vWrapper.wrap(!value))
+//    }
   }
 
   /**

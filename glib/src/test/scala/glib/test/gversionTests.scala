@@ -3,10 +3,12 @@ package glib.test
 
 import glib.GLib
 import utest._
+
 import scalanative._
 import unsigned._
 
-object gversionTests extends TestSuite {
+object gversionTests extends GlibTestSuite {
+
   val tests = Tests {
     'checkVersion-{
       'success-{

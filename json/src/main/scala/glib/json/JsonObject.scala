@@ -8,8 +8,7 @@ import scalanative._
 import unsafe._
 import cobj._
 import scala.collection.mutable
-import scala.scalanative.runtime.{Intrinsics, RawPtr}
-import scala.scalanative.unsafe.Tag.CFuncPtr4
+import scala.scalanative.runtime.RawPtr
 
 /**
  * A JSON object representation.
@@ -91,7 +90,7 @@ class JsonObject extends CObject with GBoxed with GRefCounter {
 
   def foreachMember(f: CFuncPtr4[Ptr[Byte],Ptr[Byte],Ptr[Byte],RawPtr,Unit], data: RawPtr): Unit = extern
   def foreachMember(f: Function2[CString,JsonNode,Unit]): Unit = {
-    val fPtr = Intrinsics.castObjectToRawPtr(f)
+    val fPtr = interop.objectToRawPtr(f)
     foreachMember(JsonObject.foreachCB,fPtr)
   }
 
@@ -111,7 +110,7 @@ class JsonObject extends CObject with GBoxed with GRefCounter {
 object JsonObject {
   private val foreachCB = new CFuncPtr4[Ptr[Byte],Ptr[Byte],Ptr[Byte],RawPtr,Unit]{
     override def apply(obj: Ptr[Byte], name: CString, nodePtr: Ptr[Byte], fPtr: RawPtr): Unit = {
-      val f = Intrinsics.castRawPtrToObject(fPtr).asInstanceOf[Function2[CString,JsonNode,Unit]]
+      val f = interop.rawPtrToObject(fPtr).asInstanceOf[Function2[CString,JsonNode,Unit]]
       val node = new JsonNode(nodePtr)
       f(name,node)
     }

@@ -1,11 +1,9 @@
 package glib.utils
 
-import glib.GSlice
-
 import scala.scalanative._
 import scala.scalanative.interop.PoolZone
 import scala.scalanative.libc.stdlib
-import unsafe._
+import scala.scalanative.unsafe.{Ptr, _}
 
 trait GZone extends Zone {
   def totalSize: CSize

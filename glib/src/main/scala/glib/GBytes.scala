@@ -9,7 +9,7 @@ import cobj._
  * @see [[https://developer.gnome.org/glib/stable/glib-Byte-Arrays.html]]
  */
 @CObj
-class GBytes extends CObject with GRefCounter {
+class GBytes[T] extends CObject with GRefCounter {
 
   @returnsThis
   @inline def ref(): this.type = extern
@@ -23,6 +23,13 @@ class GBytes extends CObject with GRefCounter {
    * @return pointer to the bytes data. May be null, if size=0 (not guaranteed)
    */
   @inline def getData(implicit size: ResultPtr[gsize]): gconstpointer = extern
+
+  /**
+   * Returns the pointer to the data in this object.
+   *
+   * @return
+   */
+  @inline final def data: Ptr[T] = getData(null).asInstanceOf[Ptr[T]]
 
   /**
    * Returns the size of the byte data in this object.
@@ -41,5 +48,6 @@ object GBytes {
    * @param size the size of data
    */
   @name("g_bytes_new")
-  def apply(data: gconstpointer, size: gsize): GBytes = extern
+  def apply[T](data: Ptr[T], size: gsize): GBytes[T] = extern
+
 }
