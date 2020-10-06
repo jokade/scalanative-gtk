@@ -16,7 +16,6 @@ import scala.scalanative.runtime.Intrinsics
  * @see [[https://developer.gnome.org/gtk3/stable/GtkListStore.html]]
  */
 @CObj
-@debug
 class GtkListStore extends GtkTreeModel {
 
   /**

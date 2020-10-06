@@ -4,6 +4,6 @@ import scalanative._
 import cobj._
 
 @CObj
-class GAsyncResult {
+class GAsyncResult extends CObject {
 
 }

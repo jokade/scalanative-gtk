@@ -33,6 +33,7 @@ object Wrappers {
   class ListWrapper[T](val wrapped: GListLike[T])(implicit val valueWrapper: CObjectWrapper[T]) extends AbstractSeq[T] with GAllocated {
 
     override def __ptr: Ptr[Byte] = wrapped.__ptr
+    override def __ptr_=(ptr: Ptr[Byte]) = ???
 
 //    override def update(idx: Int, elem: T): Unit = ???
 

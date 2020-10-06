@@ -13,7 +13,7 @@ import cobj._
  * @see [[https://developer.gnome.org/gobject/stable/gobject-Boxed-Types.html]]
  */
 @CObj
-trait GBoxed {
+trait GBoxed extends CObject {
   def free(): Unit = extern
   def copy(): gpointer = extern
 }

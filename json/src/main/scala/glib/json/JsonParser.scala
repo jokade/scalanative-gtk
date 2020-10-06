@@ -48,7 +48,7 @@ class JsonParser extends GObject {
 object JsonParser {
   class ParseError(msg: String) extends scala.Error(msg)
   object ParseError {
-    def apply(err: GError): ParseError = ??? //new ParseError(fromCString(err.message))
+    def apply(err: GError): ParseError = new ParseError(err.message)
   }
 
   @name("json_parser_new")

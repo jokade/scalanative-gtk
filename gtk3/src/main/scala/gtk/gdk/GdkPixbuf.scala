@@ -11,7 +11,7 @@ import cobj._
  * Image data.
  */
 @CObj
-class GdkPixbuf {
+class GdkPixbuf extends CObject {
 
 }
 

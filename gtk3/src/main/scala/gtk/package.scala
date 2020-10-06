@@ -294,6 +294,29 @@ package object gtk {
     val TTB :GtkPackDirection = 2
     val BTT :GtkPackDirection = 3
   }
+
+  type GtkFileChooserAction = Int
+  object GtkFileChooserAction {
+    val OPEN         : GtkFileChooserAction = 0
+    val SAVE         : GtkFileChooserAction = 1
+    val SELECT_FOLDER: GtkFileChooserAction = 2
+    val CREATE_FOLDER: GtkFileChooserAction = 3
+  }
+
+  type GtkResponse = Int
+  object GtkResponse {
+    val NONE         :GtkResponse = -1
+    val REJECT       :GtkResponse = -2
+    val ACCEPT       :GtkResponse = -3
+    val DELETE_EVENT :GtkResponse = -4
+    val OK           :GtkResponse = -5
+    val CANCEL       :GtkResponse = -6
+    val CLOSE        :GtkResponse = -7
+    val YES          :GtkResponse = -8
+    val NO           :GtkResponse = -9
+    val APPLY        :GtkResponse = -10
+    val HELP         :GtkResponse = -11
+  }
 //  type GtkStockId = CString
 //  object GtkStockId {
 //

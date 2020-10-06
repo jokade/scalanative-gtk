@@ -15,24 +15,25 @@ lazy val commonSettings = Seq(
   scalacOptions ++= Seq("-deprecation","-unchecked","-feature","-language:implicitConversions","-Xlint"),
   addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
   libraryDependencies ++= Seq(
-    "de.surfice" %%% "swog-cobj" % Version.swog,
-    "com.lihaoyi" %%% "utest" % Version.utest % "test"
+    "de.surfice" %%% "swog-cobj" % Version.swog
+    //"com.lihaoyi" %%% "utest" % Version.utest % "test"
     ),
-  resolvers += Opts.resolver.sonatypeSnapshots,
-  testFrameworks += new TestFramework("utest.runner.Framework")
+  resolvers += Opts.resolver.sonatypeSnapshots
+  //testFrameworks += new TestFramework("utest.runner.Framework")
   )
 
 lazy val nativeSettings = Seq(
-  nativeLinkingOptions ++= Seq("-lglib-2.0","-lgtk-3.0","-lgobject-2.0"),
+  nativeLinkingOptions ++= Seq("-lglib-2.0","-lgtk-3.0","-lgobject-2.0","-ljson-glib-1.0"),
   nativeLinkStubs := true
 )
 
 lazy val scalanativeGtk = project.in(file("."))
-  .aggregate(glibJVM, glibNative,
-             gobjJVM, gobjNative,
-             gioJVM,  gioNative,
-             //gtk3JVM, gtk3Native,
-             jsonJVM, jsonNative)
+  .aggregate(glibNative //, glibJVM
+             ,gobjNative //, gobjJVM
+             ,gioNative //, gioJVM
+             ,gtk3Native //, gtk3JVM
+             ,jsonNative //, jsonJVM
+             )
   .settings(commonSettings ++ dontPublish:_*)
   .settings(
     name := "scalanative-gtk-bindings"
@@ -45,7 +46,7 @@ lazy val glib = crossProject(JVMPlatform, NativePlatform)
     name := "scalanative-glib"
   )
   .nativeSettings(nativeSettings:_*)
-lazy val glibJVM = glib.jvm
+//lazy val glibJVM = glib.jvm
 lazy val glibNative = glib.native
 
 
@@ -59,7 +60,7 @@ lazy val gobj = crossProject(JVMPlatform, NativePlatform)
 //      "de.surfice" %% "smacrotools" % Version.smacrotools
     )
   )
-lazy val gobjJVM = gobj.jvm
+//lazy val gobjJVM = gobj.jvm
 lazy val gobjNative = gobj.native
 
 
@@ -70,7 +71,7 @@ lazy val gio = crossProject(JVMPlatform, NativePlatform)
   .settings(
     name := "scalanative-gio"
   )
-lazy val gioJVM = gio.jvm
+//lazy val gioJVM = gio.jvm
 lazy val gioNative = gio.native
 
 
@@ -82,7 +83,7 @@ lazy val gtk3 = crossProject(JVMPlatform, NativePlatform)
   .settings(
     name := "scalanative-gtk3"
   )
-lazy val gtk3JVM = gtk3.jvm
+//lazy val gtk3JVM = gtk3.jvm
 lazy val gtk3Native = gtk3.native
 
 /*
@@ -117,7 +118,8 @@ lazy val json = crossProject(JVMPlatform, NativePlatform)
   .settings(
     name := "scalanative-json-glib"
   )
-lazy val jsonJVM = json.jvm
+  .nativeSettings(nativeSettings:_*)
+//lazy val jsonJVM = json.jvm
 lazy val jsonNative = json.native
 
 /*
@@ -150,8 +152,8 @@ lazy val gtkTest = project
 lazy val dontPublish = Seq(
   publish := {},
   publishLocal := {},
-  com.typesafe.sbt.pgp.PgpKeys.publishSigned := {},
-  com.typesafe.sbt.pgp.PgpKeys.publishLocalSigned := {},
+  //com.typesafe.sbt.pgp.PgpKeys.publishSigned := {},
+  //com.typesafe.sbt.pgp.PgpKeys.publishLocalSigned := {},
   publishArtifact := false,
   publishTo := Some(Resolver.file("Unused transient repository",file("target/unusedrepo")))
 )

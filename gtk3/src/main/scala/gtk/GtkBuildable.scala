@@ -8,6 +8,6 @@ import cobj._
  * Interface for objects that can be build by GtkBuilder
  */
 @CObj
-trait GtkBuildable {
+trait GtkBuildable extends CObject {
 
 }

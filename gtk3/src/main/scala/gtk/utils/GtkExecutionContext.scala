@@ -9,6 +9,7 @@ import scala.concurrent.ExecutionContext
 /**
  * An ExecutionContext that is integrated with the Gtk main event loop
  */
+@deprecated("Use GMainLoop.executionContext instead","0.0.2")
 class GtkExecutionContext extends ExecutionContext {
   private var _active = true
   private val _queue: ListBuffer[Runnable] = new ListBuffer

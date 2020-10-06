@@ -15,7 +15,6 @@ import unsafe._
  */
 // TODO: add CVararg* (currently crashes due to https://github.com/scala-native/scala-native/issues/1142)
 @CObj
-@debug
 class GError extends CObject with GAllocated {
 
   @inline final def __struct: Ptr[GErrorStruct] = __ptr.asInstanceOf[Ptr[GErrorStruct]]
@@ -47,6 +46,8 @@ object GError {
 
   type GErrorStruct = CStruct3[GQuark,gint,CString]
 
+  @inline def alloc(implicit zone: Zone): ResultPtr[GError] = ResultPtr.alloc[GError]
+
   /**
    * Creates a new GError instance.
    *
@@ -59,8 +60,8 @@ object GError {
   //def NULL: GError = new GError(null)
 
 
-  def apply[R](f: ResultPtr[GError]=>R)(onError: GError=>R): R = GZone{ implicit z =>
-    val err = ResultPtr.alloc[GError]
+  def apply[R](f: ResultPtr[GError]=>R)(onError: GError=>R): R = {
+    val err = ResultPtr.stackalloc[GError]
     val result = f(err)
     if(err.isDefined)
       onError(err.wrappedValue)

@@ -11,7 +11,7 @@ import scala.scalanative.unsafe._
 
 @CObj("g_signal_")
 @debug
-trait GSignalReceiver {
+trait GSignalReceiver extends CObject {
 
   /**
    * Connects a GCallback function to a signal received by this object.

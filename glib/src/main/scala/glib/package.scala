@@ -53,10 +53,29 @@ package object glib {
    */
   type GVariantType = CString
 
+  type GType = CUnsignedLong
+
   type GHashTableIter = CStruct6[gpointer,gpointer,gpointer,CInt,gboolean,gpointer]
   type GHashFunc = CFuncPtr1[gconstpointer,guint]
   type GEqualFunc = CFuncPtr2[gconstpointer,gconstpointer,gboolean]
 
   type GSourceFunc = CFuncPtr1[gpointer,gboolean]
+
+  type GKeyFileFlags = Int
+  object GKeyFileFlags {
+    val NONE: GKeyFileFlags = 0
+    val KEEP_COMMENTS: GKeyFileFlags = 1 << 0
+    val KEEP_TRANSLATIONS: GKeyFileFlags = 1 << 1
+  }
+
+  type GKeyFileError = Int
+  object GKeyFileError {
+    val UNKNOWN_ENCODING: GKeyFileError = 0
+    val PARSE: GKeyFileError = 1
+    val NOT_FOUND: GKeyFileError = 2
+    val KEY_NOT_FOUND: GKeyFileError = 3
+    val GROUP_NOT_FOUND: GKeyFileError = 4
+    val INVALID_VALUE: GKeyFileError = 5
+  }
 
 }

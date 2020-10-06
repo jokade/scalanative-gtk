@@ -24,25 +24,35 @@ class GtkWindow extends GtkBin {
    */
   def setDefaultSize(width: gint, height: gint): Unit = extern
 
-  /**
-   * Sets the title of the window.
-   *
-   * @param title title of the window
-   */
-  def setTitle(title: CString): Unit = extern
+//  /**
+//   * Sets the title of the window.
+//   *
+//   * @param title title of the window
+//   */
+//  def setTitle(title: CString): Unit = extern
 
   def title_=(title: String): Unit = setStringProp(c"title",title)
   def title: String = getStringProp(c"title")
 
+  def isMaximized: gboolean = getBooleanProp(c"is-maximized")
+
   def modal: gboolean = getBooleanProp(c"modal")
-  def modal_=(setting: gboolean): Unit = setBooleanProp(c"modal",setting)
+  def modal_=(f: gboolean): Unit = setBooleanProp(c"modal",f)
 
   def resizable: gboolean = getBooleanProp(c"resizable")
   def resizable_=(setting: gboolean): Unit = setBooleanProp(c"resizable",setting)
 
+  def iconName: String = getStringProp(c"icon-name")
+  def iconName_=(name: String): Unit = setStringProp(c"icon-name",name)
+
   def getIcon(): GdkPixbuf = extern
   def setIcon(icon: GdkPixbuf): Unit = extern
 
+  def setTitlebar(titlebar: GtkWidget): Unit = extern
+  def getTitlebar(): GtkWidget = extern
+
+  def setTransientFor(parent: GtkWindow): Unit = extern
+  def getTransientFor(): GtkWindow = extern
   /**
    * Resizes the window as if the user had done so.
    *
@@ -59,18 +69,6 @@ class GtkWindow extends GtkBin {
    */
   def present(): Unit = extern
 
-  /**
-   * Sets whether the user can resize this window.
-   * Windows are user resizable by default.
-   *
-   * @param resizable true, if the user can resize the window
-   */
-//  @inline def setResizable(resizable: gboolean): Unit = extern
-
-  /**
-   * Returns true if this window is resizable by the user.
-   */
-//  @inline def getResizable(): gboolean = extern
 }
 
 object GtkWindow {

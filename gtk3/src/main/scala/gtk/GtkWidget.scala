@@ -230,6 +230,9 @@ class GtkWidget extends GObject with GtkBuildable {
   def tooltipText: String = getStringProp(c"tooltip-text")
   def tooltipText_=(tooltip: String): Unit = setStringProp(c"tooltip-text",tooltip)
 
+  def onDeleteEvent(handler: Function0[Boolean])(implicit refZone: RefZone): gulong =
+    connect0(c"delete-event",handler)
+
   def onDestroy(handler: Function0[Unit])(implicit refZone: RefZone): gulong = connect0(c"destroy",handler)
 
   def onRealize[T<:GtkWidget](handler: Function1[T,Unit])(implicit refZone: RefZone,wrapper: CObjectWrapper[T]): gulong =

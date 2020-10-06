@@ -9,6 +9,7 @@ import unsafe._
 import cobj._
 import scala.collection.mutable
 import scala.scalanative.runtime.RawPtr
+import scala.util.{Failure, Success, Try}
 
 /**
  * A JSON object representation.
@@ -46,12 +47,19 @@ class JsonObject extends CObject with GBoxed with GRefCounter {
     case m => Some(m)
   }
 
+  def tryMember(name: CString): Try[JsonNode] = getMember(name) match {
+    case null => Failure(new RuntimeException("JSON object has no member '"+fromCString(name)+"'"))
+    case m => Success(m)
+  }
+
   /**
    * Retrieves the string value of the specified member.
    *
    * @param name member name
    */
   def string(name: CString): Option[String] = member(name).map(m => fromCString(m.getString()))
+
+  def tryString(name: CString): Try[String] = tryMember(name).map(m => fromCString(m.getString()))
 
   /**
    * Retrieves the int value of the specified member.
@@ -60,12 +68,16 @@ class JsonObject extends CObject with GBoxed with GRefCounter {
    */
   def int(name: CString): Option[Int] = member(name).map( _.getInt().toInt )
 
+  def tryInt(name: CString): Try[Int] = tryMember(name).map(_.getInt().toInt )
+
   /**
    * Retrieves the boolean value of the specified member.
    *
    * @param name member name
    */
   def boolean(name: CString): Option[Boolean] = member(name).map(_.getBoolean())
+
+  def tryBoolean(name: CString): Try[Boolean] = tryMember(name).map(_.getBoolean())
 
   /**
    * Retrieves the double value of the specified member.
@@ -74,6 +86,8 @@ class JsonObject extends CObject with GBoxed with GRefCounter {
    */
   def double(name: CString): Option[Double] = member(name).map(_.getDouble())
 
+  def tryDouble(name: CString): Try[Double] = tryMember(name).map(_.getDouble())
+
   /**
    * Retrieves the specified member as an array.
    *
@@ -81,12 +95,16 @@ class JsonObject extends CObject with GBoxed with GRefCounter {
    */
   def array(name: CString): Option[JsonArray] = member(name).map(_.getArray())
 
+  def tryArray(name: CString): Try[JsonArray] = tryMember(name).map(_.getArray())
+
   /**
    * Retrieves the specified member as an object.
    *
    * @param name member name
    */
   def obj(name: CString): Option[JsonObject] = member(name).map(_.getObject())
+
+  def tryObj(name: CString): Try[JsonObject] = tryMember(name).map(_.getObject())
 
   def foreachMember(f: CFuncPtr4[Ptr[Byte],Ptr[Byte],Ptr[Byte],RawPtr,Unit], data: RawPtr): Unit = extern
   def foreachMember(f: Function2[CString,JsonNode,Unit]): Unit = {
